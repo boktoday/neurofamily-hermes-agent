@@ -5,11 +5,12 @@ This folder holds the templates for the ecosystem's shared context: the files in
 ## Set up
 
 1. Create the family folder: `mkdir -p ~/neurofamily`
-2. Copy each template in, dropping `.template`:
+2. Run the setup script from the repo root:
    ```bash
-   for f in *.template.md; do cp "$f" ~/neurofamily/; done
-   cd ~/neurofamily && for f in *.template.md; do mv "$f" "${f%.template.md}.md"; done
+   python scripts/setup-family-folder.py
+   # or: python scripts/setup-family-folder.py --target /path/to/family/folder
    ```
+   It copies every template, dropping the `.template` suffix. Safe to re-run: existing files are left alone.
 3. The Family Navigator fills them in during family onboarding.
 
 ## The files
@@ -23,6 +24,8 @@ This folder holds the templates for the ecosystem's shared context: the files in
 | `family-calendar.md` | Appointments, school meetings, reviews, deadlines |
 | `agent-coordination.md` | Which specialist has been working on what |
 | `connections.md` | Optional: connected calendar/mail services and their IDs (never keys) |
+| `crisis-card.md` | Printable emergency one-pager: contacts, medications, what helps |
+| `communication-passport.md` | One page about the child for new teachers, carers and sitters |
 
 ## What stays out
 

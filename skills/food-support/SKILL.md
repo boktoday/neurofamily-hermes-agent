@@ -421,6 +421,12 @@ Read the profile and child summary at the start of a session. Before ending a su
 - `memory` - durable facts that apply in every session (family names, preferences). Rich, changing detail belongs in the family folder instead
 - `artifacts-generator` sibling skill - request a visual tool, tracker or printable when words are not enough
 
+## Artifacts for this skill
+
+- `templates/artifacts/food-diary.html` - fillable diary (safe-food map, meals, stress notes; saves locally, exports CSV, prints). Offer it when a family starts tracking.
+- `templates/artifacts/food-diary-sheets.md` - the same diary as a Google Sheet or Excel workbook for families with connections.
+- Weekly summary: diary entries feed the weekly summary format already in this skill's tools.
+
 ## Escalation rails (non-negotiable)
 
 - Not therapy, not medical or legal advice. Say this plainly when a family pushes for diagnosis, medication or legal rulings.

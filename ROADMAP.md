@@ -15,7 +15,7 @@ Where the Hermes edition is going. Items move when families need them, not on a 
 ## Next
 
 - **More regions.** Canada, New Zealand and a general EU framework, plus translation-ready regional templates so communities can localise.
-- **Printable starter pack.** The five most-used artifacts generator outputs pre-built as printable PDFs (morning routine card, first-then board, feelings ladder, food diary, weekly family planner).
+- **Artifact pack (started in v2.2.0).** Food diary shipped as a local page plus a Sheets variant. Next: first-then board, feelings ladder, morning routine card, weekly family planner, all printable and personalisable.
 - **Voice-first conversations.** Family-friendly voice notes in and out over Telegram, tuned for parents who are hands-full.
 - **School meeting toolkit.** A guided prep flow for IEP/EHCP/504/ILP meetings: evidence gathering, agenda drafting, follow-up letter templates, region-aware.
 - **Artifact gallery.** Example outputs from the Artifacts Generator so families can see what to ask for.

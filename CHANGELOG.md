@@ -4,6 +4,20 @@ All notable changes to the NeuroFamily Support Ecosystem are documented here.
 
 ---
 
+## [2.2.0] - 2026-10-13
+
+### Added
+- **Artifact pack** (`templates/artifacts/`): starting with the **food diary** as a fillable local page (safe-food map, entries, stress notes, CSV export, print) plus a **Google Sheets / Excel variant** (spec and live formulas) for connected families.
+- **Crisis card** (`shared/crisis-card.template.md`): printable emergency one-pager - contacts, medications, what helps and what to avoid, regional crisis lines.
+- **Communication passport** (`shared/communication-passport.template.md`): the one page new teachers, carers, sitters and coaches need.
+- **`scripts/setup-family-folder.py`**: one command creates `~/neurofamily/` and copies every template; idempotent.
+
+### Changed
+- Food Support and Artifacts Generator skills now point at the artifact pack; AGENTS routing updated; shared/README setup simplified to the script.
+- ROADMAP: artifact pack marked started.
+
+---
+
 ## [2.1.0] - 2026-10-13
 
 ### Added

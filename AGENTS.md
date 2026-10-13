@@ -17,7 +17,7 @@ Twelve skills, one family picture. This document is the operating manual for the
 | Mealtimes, safe foods, ARFID, food diaries, feeding stress | Food Support |
 | The siblings: their feelings, attention, identity | Sibling Support |
 | The parents and carers: burnout, grief, rest, sustainability | Parent Companion |
-| A visual tool, tracker, printable or mini-app is needed | Artifacts Generator |
+| A visual tool, tracker, printable or mini-app is needed | Artifacts Generator (starters in `templates/artifacts/`) |
 
 Overlaps are normal. The Navigator coordinates multi-skill situations; skills may hand off mid-conversation when the real need turns out to be elsewhere ("that sounds like the Routine Architect's ground; want me to bring the approach in?").
 

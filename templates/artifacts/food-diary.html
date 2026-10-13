@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Food Diary</title>
+<style>
+  :root { --ink: #2b2b2b; --paper: #faf7f2; --line: #e4ddd2; --accent: #a3542f; --good: #5a7d5a; }
+  * { box-sizing: border-box; }
+  body { font-family: system-ui, -apple-system, sans-serif; background: var(--paper); color: var(--ink); margin: 0; padding: 16px; line-height: 1.5; }
+  .wrap { max-width: 760px; margin: 0 auto; }
+  h1 { font-size: 1.5rem; margin: 0 0 4px; }
+  .sub { color: #777; font-size: 0.9rem; margin-bottom: 16px; }
+  section { background: #fff; border: 1px solid var(--line); border-radius: 10px; padding: 14px; margin-bottom: 14px; }
+  h2 { font-size: 1rem; margin: 0 0 10px; }
+  label { display: block; font-size: 0.85rem; color: #666; margin-bottom: 3px; }
+  input, select, textarea { width: 100%; padding: 10px; border: 1px solid var(--line); border-radius: 8px; font: inherit; background: #fff; }
+  textarea { min-height: 90px; }
+  .row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px; }
+  .row3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 10px; }
+  @media (max-width: 560px) { .row, .row3 { grid-template-columns: 1fr; } }
+  button { font: inherit; padding: 11px 16px; border-radius: 8px; border: 1px solid var(--accent); background: var(--accent); color: #fff; cursor: pointer; margin: 4px 6px 4px 0; }
+  button.ghost { background: #fff; color: var(--accent); }
+  table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+  th, td { text-align: left; padding: 8px 6px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { color: #666; font-weight: 600; }
+  .tag { display: inline-block; padding: 2px 8px; border-radius: 99px; font-size: 0.78rem; }
+  .tag.safe { background: #e8f0e8; color: var(--good); }
+  .tag.new { background: #fdf0e3; color: var(--accent); }
+  .tag.refused { background: #f4e8e8; color: #8d4a4a; }
+  .del { color: #a33; cursor: pointer; border: none; background: none; font-size: 0.85rem; }
+  .foot { color: #999; font-size: 0.8rem; margin-top: 8px; }
+  @media print { button, .noprint { display: none; } body { background: #fff; padding: 0; } section { border: none; padding: 0; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Food Diary</h1>
+  <div class="sub">Part of the NeuroFamily support team. Saves in this browser only. Use Export CSV or Print to share with a dietitian, doctor or the Food Support skill.</div>
+
+  <section class="noprint">
+    <label for="who">Whose diary is this?</label>
+    <input id="who" placeholder="Name" oninput="saveProfile()">
+  </section>
+
+  <section>
+    <h2>Safe food map</h2>
+    <label for="safeList">Foods that are always okay. One per line. This is the foundation, never the problem.</label>
+    <textarea id="safeList" oninput="saveProfile()" placeholder="e.g. plain pasta&#10;toast with butter cut off&#10;strawberry yoghurt (one brand only)"></textarea>
+  </section>
+
+  <section class="noprint">
+    <h2>Add an entry</h2>
+    <div class="row3">
+      <div><label for="date">Date</label><input type="date" id="date"></div>
+      <div><label for="meal">Meal</label>
+        <select id="meal"><option>Breakfast</option><option>Morning snack</option><option>Lunch</option><option>Afternoon snack</option><option>Dinner</option><option>Evening snack</option><option>Drink</option></select>
+      </div>
+      <div><label for="status">Status</label>
+        <select id="status"><option value="safe">Safe food</option><option value="new">New food tried</option><option value="refused">Refused</option></select>
+      </div>
+    </div>
+    <div class="row">
+      <div><label for="foods">What was eaten (or offered)</label><input id="foods" placeholder="Foods"></div>
+      <div><label for="amount">Amount</label><input id="amount" placeholder="e.g. most of it, few bites, none"></div>
+    </div>
+    <div class="row">
+      <div><label for="stress">Mealtime stress (1 calm - 10 very hard)</label><input id="stress" type="number" min="1" max="10" placeholder="1-10"></div>
+      <div><label for="context">Context</label><input id="context" placeholder="who was there, where, anything unusual"></div>
+    </div>
+    <button onclick="addEntry()">Add entry</button>
+    <button class="ghost" onclick="window.print()">Print</button>
+    <button class="ghost" onclick="exportCsv()">Export CSV</button>
+  </section>
+
+  <section>
+    <h2>Entries</h2>
+    <table id="table">
+      <thead><tr><th>Date</th><th>Meal</th><th>Foods</th><th>Amount</th><th>Status</th><th>Stress</th><th>Context</th><th class="noprint"></th></tr></thead>
+      <tbody id="tbody"></tbody>
+    </table>
+    <div class="foot" id="count"></div>
+  </section>
+</div>
+
+<script>
+var KEY = "neurofamily-food-diary-v1";
+var data = { who: "", safeList: "", entries: [] };
+
+function load() {
+  try {
+    var raw = localStorage.getItem(KEY);
+    if (raw) { data = JSON.parse(raw); }
+  } catch (e) { data = { who: "", safeList: "", entries: [] }; }
+  document.getElementById("who").value = data.who || "";
+  document.getElementById("safeList").value = data.safeList || "";
+  render();
+}
+
+function persist() { try { localStorage.setItem(KEY, JSON.stringify(data)); } catch (e) {} }
+
+function saveProfile() {
+  data.who = document.getElementById("who").value;
+  data.safeList = document.getElementById("safeList").value;
+  persist();
+}
+
+function addEntry() {
+  var e = {
+    date: document.getElementById("date").value || new Date().toISOString().slice(0, 10),
+    meal: document.getElementById("meal").value,
+    foods: document.getElementById("foods").value.trim(),
+    amount: document.getElementById("amount").value.trim(),
+    status: document.getElementById("status").value,
+    stress: document.getElementById("stress").value,
+    context: document.getElementById("context").value.trim()
+  };
+  if (!e.foods) { alert("Add what was eaten or offered first."); return; }
+  data.entries.push(e);
+  persist(); render();
+  ["foods", "amount", "stress", "context"].forEach(function (id) { document.getElementById(id).value = ""; });
+}
+
+function del(i) { data.entries.splice(i, 1); persist(); render(); }
+
+function esc(s) {
+  return String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+}
+
+function render() {
+  var tb = document.getElementById("tbody");
+  var html = "";
+  var list = data.entries.slice().sort(function (a, b) { return (b.date || "").localeCompare(a.date || ""); });
+  for (var i = 0; i < list.length; i++) {
+    var e = list[i];
+    var idx = data.entries.indexOf(e);
+    var tag = e.status === "safe" ? "safe" : (e.status === "new" ? "new" : "refused");
+    var label = e.status === "safe" ? "Safe" : (e.status === "new" ? "New" : "Refused");
+    html += "<tr><td>" + esc(e.date) + "</td><td>" + esc(e.meal) + "</td><td>" + esc(e.foods) + "</td><td>" + esc(e.amount) + "</td><td><span class='tag " + tag + "'>" + label + "</span></td><td>" + esc(e.stress) + "</td><td>" + esc(e.context) + "</td><td class='noprint'><button class='del' onclick='del(" + idx + ")'>delete</button></td></tr>";
+  }
+  tb.innerHTML = html;
+  document.getElementById("count").textContent = data.entries.length + " entries";
+}
+
+function exportCsv() {
+  var rows = [["date", "meal", "foods", "amount", "status", "stress", "context"]];
+  data.entries.forEach(function (e) { rows.push([e.date, e.meal, e.foods, e.amount, e.status, e.stress, e.context]); });
+  var csv = rows.map(function (r) {
+    return r.map(function (c) { return '"' + String(c == null ? "" : c).replace(/"/g, '""') + '"'; }).join(",");
+  }).join("\n");
+  var blob = new Blob([csv], { type: "text/csv" });
+  var a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = (data.who ? data.who.replace(/[^a-z0-9]+/gi, "-").toLowerCase() + "-" : "") + "food-diary.csv";
+  a.click();
+}
+
+document.getElementById("date").value = new Date().toISOString().slice(0, 10);
+load();
+</script>
+</body>
+</html>

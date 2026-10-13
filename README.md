@@ -106,6 +106,8 @@ AGENTS.md          how the team works together
 INSTALL.md         full setup guide (including fully-offline local models)
 PROFILE_BUILDER.md the guided family onboarding
 config.yaml        example Hermes configuration
+templates/         starter artifacts (food diary and friends)
+scripts/           setup-family-folder.py - one-command family folder setup
 docs/              design document + connections and models guides
 ```
 
