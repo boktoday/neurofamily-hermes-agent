@@ -1,0 +1,27 @@
+# Hermes runtime
+.env
+.env.*
+!.env.example
+*.swp
+.DS_Store
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# Editor
+.vscode/
+.idea/
+
+# Logs
+*.log
+
+# Local-only skill caches
+skills/.cache/
+
+# Family data if ever kept inside the repo (default lives in ~/neurofamily/)
+family/
+neurofamily/

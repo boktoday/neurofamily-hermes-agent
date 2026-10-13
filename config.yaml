@@ -1,0 +1,31 @@
+# NeuroFamily Support Ecosystem - example Hermes configuration.
+# No credentials included. After copying this into your profile, set your
+# provider key in .env (see .env.example), or run `hermes setup`.
+#
+# Default: openrouter with a fast low-cost model. One key unlocks a large
+# catalogue including free-tier models that rotate monthly. For fully
+# offline operation see the local models section of INSTALL.md.
+_config_version: 33
+model:
+  default: deepseek-v4-flash
+  provider: openrouter
+compression:
+  enabled: true
+  threshold: 0.85
+  target_ratio: 0.7
+  protect_last_n: 50
+  protect_first_n: 3
+memory:
+  memory_enabled: true
+  user_profile_enabled: true
+  write_approval: true
+  memory_char_limit: 1100
+  user_char_limit: 700
+onboarding:
+  profile_build: ask
+  seen: {}
+platforms:
+  api_server:
+    enabled: false
+  telegram:
+    enabled: false
