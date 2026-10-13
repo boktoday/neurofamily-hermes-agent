@@ -103,6 +103,29 @@ Local models are less capable than the frontier models, and that is fine for thi
 
 ---
 
+## Step 5b: Optional - connect the family's calendar and mail
+
+With a free Maton account, the team can work with the family's real Google or
+Microsoft calendar, mail, tasks and files (read-first; writes always need the
+family's yes in the moment). Full details in `docs/connections.md`. Skip this
+step entirely if the family prefers everything to stay inside the family folder.
+
+---
+
+## Step 5c: Models and voice - the recommended setup
+
+**Everyday:** the config default is DeepSeek Flash via OpenRouter: fast, inexpensive, and right for most family conversations.
+
+**Complex work:** the same OpenRouter key unlocks frontier models. When a job needs heavier reasoning (an advocacy letter, a tangled support plan), ask the agent to switch, or let it propose the switch.
+
+**Schedules on a local model:** the check-ins are simple by design, so run them on a small local model (LM Studio or Ollama) and the unattended, around-the-clock part costs nothing and stays private. The agent can pin a cron job's model and provider when it creates it.
+
+**Voice both ways, locally:** local `faster-whisper` transcribes incoming voice notes; local **Piper** speaks replies (`pip install piper-tts`). Voice note in, voice note out, no cloud involved, on whichever channel the family uses.
+
+Full detail, including what each tier costs: `docs/models.md`.
+
+---
+
 ## Step 6: First conversation (family onboarding)
 
 Start Hermes and say:
@@ -127,7 +150,22 @@ Or simply tell the agent: "Set up the weekly family check-in from the schedules 
 
 ## Step 8: Channels (optional)
 
-Telegram is the recommended channel: easy bots, a good audio player, and it works on every phone in the family. Create a bot with @BotFather, put the token in `.env`, and enable the Telegram platform in your profile config. Other channels (WhatsApp, Signal, Discord and more) are supported by Hermes; see the Hermes docs for current status. A shared family group chat with the assistant can work well, with the rule that the young person can also talk one-to-one where that makes sense.
+**WhatsApp is the primary shared group.** Hermes ships a built-in WhatsApp bridge (it links like a device on WhatsApp Web, via QR pairing). It supports group chats, voice messages, and scheduled messages at any hour with no restrictions, which matters because the team's check-ins must deliver reliably.
+
+Recommendations for a family setup:
+
+| Setting | Recommendation |
+|---|---|
+| Number | A dedicated SIM or eSIM for the bot (do not link the family's personal number); small account-restriction risk exists with any linked-device bridge |
+| The group | One WhatsApp group: the family + the bot number. Everyone can talk to the team there |
+| One-to-one | Optional: a young person can also message the bot privately where the family agrees, with the consent rules in AGENTS.md |
+| Always-on | The bridge lives on the family's machine; keep it running on whatever schedule the family is comfortable with |
+| Setup | `hermes whatsapp` - pick the bot mode, scan the QR from the bot phone, add the numbers that may talk to it |
+
+Telegram also works well (free bots, excellent audio, our own recommended alternative) if the family already lives there. The official WhatsApp Cloud API path exists but currently supports direct messages only in v1 and restricts out-of-window sends, so it is not the right path for a scheduled-check-in family group.
+
+
+
 
 ---
 

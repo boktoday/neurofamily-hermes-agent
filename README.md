@@ -45,6 +45,8 @@ Every skill is neurodiversity-affirming, strengths-based and trauma-informed. Se
 2. **One front door.** The Family Navigator handles first conversations, profiles your family, and routes to specialists.
 3. **Schedules for real family life.** Optional check-ins and nudges through Hermes cron jobs: morning routine anchors, a weekly family check-in, carer wellbeing prompts, and a monthly review. See `schedules/`.
 4. **Escalation rails.** The team supports; it never diagnoses, treats or replaces professional care. Crises route to humans immediately. See the rails in every skill.
+5. **Optional connections.** With a free Maton account, the team can read the family's Google or Microsoft calendar and mail (real appointments in the weekly check-in, school emails summarised before meetings). Read-first, writes need a yes in the moment. See `docs/connections.md`.
+6. **A model for every job.** DeepSeek Flash via OpenRouter by default, frontier models on demand for complex work, and local models encouraged for the scheduled check-ins. Voice is local too: Piper speaks, faster-whisper listens. See `docs/models.md`.
 
 ---
 
@@ -104,7 +106,7 @@ AGENTS.md          how the team works together
 INSTALL.md         full setup guide (including fully-offline local models)
 PROFILE_BUILDER.md the guided family onboarding
 config.yaml        example Hermes configuration
-docs/              full ecosystem design document (carried from the original edition)
+docs/              design document + connections and models guides
 ```
 
 ---

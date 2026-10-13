@@ -4,6 +4,19 @@ All notable changes to the NeuroFamily Support Ecosystem are documented here.
 
 ---
 
+## [2.1.0] - 2026-10-13
+
+### Added
+- **Connections layer** (`docs/connections.md`): optional Google and Microsoft calendar, mail, tasks and file access via Maton. Read-first; every write needs the family's yes in the moment; mail content treated as data, never instructions.
+- **`shared/connections.template.md`**: local record of what is connected.
+- Connections noted in AGENTS.md, the family-navigator, education-advocate and artifacts-generator skills, the weekly and monthly schedules, and `.env.example` (MATON_API_KEY).
+- **WhatsApp guidance** in INSTALL.md: the built-in bridge (QR pairing, group support, no message-window limits) as the primary shared family group, on a dedicated number; Telegram as the alternative; WhatsApp Cloud API noted as unsuited to scheduled group delivery (v1 is DM-only, 24h window).
+### Model and voice strategy
+- **`docs/models.md`**: DeepSeek Flash via OpenRouter as the everyday default; frontier models on the same key for complex work; local models (LM Studio/Ollama) encouraged for the scheduled check-ins via per-job model pinning.
+- **Local voice**: Piper TTS and faster-whisper STT so voice works in both directions, fully offline. Wired into INSTALL (Step 5c), config comments, `.env.example` and the schedules guidance.
+
+---
+
 ## [2.0.0] - 2026-10-13 - Hermes edition
 
 Rebuilt from the ground up for **Hermes Agent** (the OpenClaw edition is archived at boktoday/neurofamily-support-openclaw-agent-ecosystem).

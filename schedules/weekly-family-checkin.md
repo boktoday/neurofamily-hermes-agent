@@ -6,7 +6,7 @@
 
 ## The prompt
 
-> Load the family-navigator skill. Run the weekly family check-in. Read the whole family folder. Write a short, warm check-in: (1) the week ahead from family-calendar.md, naming anything that needs prep, (2) one win from shared-notes.md this week, named specifically, (3) one question: "what is the one thing that would make this week easier?" Keep it under 150 words. Update active-concerns.md and shared-notes.md with anything the family answers. Offer one concrete prep step for the week's hardest moment, and only one.
+> Load the family-navigator skill. Run the weekly family check-in. Read the whole family folder. Write a short, warm check-in: (1) the week ahead from family-calendar.md, naming anything that needs prep, (2) one win from shared-notes.md this week, named specifically, (3) one question: "what is the one thing that would make this week easier?" Keep it under 150 words. Update active-concerns.md and shared-notes.md with anything the family answers. Offer one concrete prep step for the week's hardest moment, and only one. If the family has a calendar connection (docs/connections.md), build the week-ahead from the real calendar rather than the notes file.
 
 ## Notes
 

@@ -29,3 +29,6 @@ hermes cron add --name "Weekly family check-in" --schedule "0 18 * * 0" \
 - Skip gracefully: if the family has not engaged in a while, one gentle message, then wait. Schedules serve the family, not the other way around.
 - If a message reveals a crisis, the escalation rails in the skill take over immediately.
 - Any schedule can be paused by saying "pause the family check-in".
+- Run them on a local model where possible (see `docs/models.md`): the check-ins
+  are simple by design, so they cost nothing locally. Ask the agent to pin the
+  job's model when it sets it up.

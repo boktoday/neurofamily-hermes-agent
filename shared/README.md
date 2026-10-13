@@ -22,6 +22,7 @@ This folder holds the templates for the ecosystem's shared context: the files in
 | `shared-notes.md` | Dated notes any skill adds after a substantive session |
 | `family-calendar.md` | Appointments, school meetings, reviews, deadlines |
 | `agent-coordination.md` | Which specialist has been working on what |
+| `connections.md` | Optional: connected calendar/mail services and their IDs (never keys) |
 
 ## What stays out
 

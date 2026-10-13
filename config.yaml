@@ -2,9 +2,10 @@
 # No credentials included. After copying this into your profile, set your
 # provider key in .env (see .env.example), or run `hermes setup`.
 #
-# Default: openrouter with a fast low-cost model. One key unlocks a large
-# catalogue including free-tier models that rotate monthly. For fully
-# offline operation see the local models section of INSTALL.md.
+# Model strategy: DeepSeek Flash via OpenRouter is the everyday default.
+# For complex jobs switch up to a frontier model on the same key; for the
+# scheduled check-ins a small local model (LM Studio / Ollama) is encouraged.
+# Full strategy, voice setup and the offline story: docs/models.md.
 _config_version: 33
 model:
   default: deepseek-v4-flash
