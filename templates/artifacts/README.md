@@ -6,6 +6,7 @@ Ready-made tools the Artifacts Generator can personalise and deliver. Family-saf
 |---|---|---|
 | `food-diary.html` | Fillable local diary: safe-food map, meal entries, stress notes, CSV export, print | Food Support families, ARFID tracking, showing patterns to a dietitian |
 | `food-diary-sheets.md` | The same diary as a Google Sheet / Excel workbook (spec + formulas) | Families with connections set up; multi-carer households |
+| `iep-companion.html` | The school's plan as an interactive companion: goals in plain words, sparks and badges, kid-friendly themes, meeting questions, words to know, attendance check-ins, print view | Every IEP/EHCP family; preparing for reviews; helping the child understand their own plan |
 
 ## How to deliver one
 
