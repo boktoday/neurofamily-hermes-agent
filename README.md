@@ -50,6 +50,16 @@ Every skill is neurodiversity-affirming, strengths-based and trauma-informed. Se
 
 ---
 
+## Starter artifacts
+
+Beyond the conversations, the team builds things your family can hold onto: single-file tools that open in any browser, save on your own device and never send data anywhere. The Artifacts Generator personalises each one for your family, and two are ready to start from today.
+
+**Food Diary** (`templates/artifacts/food-diary.html`) - a gentle daily food log for ARFID and low-stress mealtimes: a safe-food map, meal entries, stress notes, and a CSV export you can hand to a dietitian.
+
+**IEP Companion** (`templates/artifacts/iep-companion.html`) - the school's plan, turned from a printed document into something a child can actually use. Each goal is re-written in plain words ("what this really means"), with how you practise it and who helps. Every practice session earns a spark, sparks earn badges, and the child picks their own theme (dinosaur jungle included). It also holds the questions to ask at the next review, a words-to-know glossary for plan jargon, day-by-day check-ins against the school term dates, and a print view for meetings. Everything stays in the browser on your own device, and backups export to a file you keep. The agent fills it in from your family profile, and the child's copy can live on their own phone or tablet.
+
+---
+
 ## Install
 
 See `INSTALL.md`. Short version:
@@ -108,7 +118,7 @@ AGENTS.md          how the team works together
 INSTALL.md         full setup guide (including fully-offline local models)
 PROFILE_BUILDER.md the guided family onboarding
 config.yaml        example Hermes configuration
-templates/         starter artifacts (food diary and friends)
+templates/         starter artifacts (food diary, IEP Companion and friends)
 scripts/           setup-family-folder.py - one-command family folder setup
 docs/              design document + connections, models and local-models guides
 ```
