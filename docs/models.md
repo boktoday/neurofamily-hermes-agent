@@ -2,6 +2,8 @@
 
 The ecosystem runs on whatever model the family points it at. This is the recommended setup: fast and cheap by default, local where it makes sense, and voice that works fully offline.
 
+Not sure what your machine can run? [local-models.md](local-models.md) has a tier-by-tier shortlist and the checkers that rank current options.
+
 ## The recommended tiering
 
 | Tier | What runs there | Model | Why |

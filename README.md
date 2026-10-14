@@ -108,7 +108,7 @@ PROFILE_BUILDER.md the guided family onboarding
 config.yaml        example Hermes configuration
 templates/         starter artifacts (food diary and friends)
 scripts/           setup-family-folder.py - one-command family folder setup
-docs/              design document + connections and models guides
+docs/              design document + connections, models and local-models guides
 ```
 
 ---
