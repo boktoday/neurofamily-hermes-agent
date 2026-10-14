@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IEP Companion</title>
+<!--
+  IEP Companion - a NeuroFamily starter artifact.
+  Personalise this for the family: set the child's name, paste the school's plan
+  into "The full plan", and turn each goal from the plan into a Goal Card in
+  plain, warm language (use the child's own words where you can). Set the theme
+  to something they love. Everything saves in the browser only; no data leaves
+  the device. See templates/artifacts/README.md for the delivery steps.
+-->
+<style>
+  :root {
+    --paper:#faf7f2; --card:#ffffff; --ink:#2b2b2b; --soft:#6f675c; --line:#e4ddd2;
+    --accent:#a3542f; --accent-soft:#f6e8dd; --good:#5a7d5a; --warn:#b5852d; --rose:#a3545f;
+    --mint:#e8f0e8; --base-size:16px;
+  }
+  [data-theme="jungle"] { --paper:#f2f7ef; --card:#ffffff; --ink:#26351f; --soft:#5f6f52; --line:#d8e4cd; --accent:#3e7a3e; --accent-soft:#e4f0dc; --good:#3e7a3e; --mint:#e6f1df; }
+  [data-theme="ocean"] { --paper:#f0f6f8; --card:#ffffff; --ink:#1f333d; --soft:#5a707c; --line:#d2e2e8; --accent:#2b6d8c; --accent-soft:#ddedf4; --good:#2b7d6d; --mint:#e0f0ee; }
+  [data-theme="cosmos"] { --paper:#f4f2fa; --card:#ffffff; --ink:#2a254d; --soft:#655f86; --line:#dedaf0; --accent:#5b4bb8; --accent-soft:#eae6fa; --good:#4b6db8; --mint:#e8e6f6; }
+  [data-theme="berry"] { --paper:#faf3f6; --card:#ffffff; --ink:#3d2432; --soft:#7c5a6b; --line:#ecd8e2; --accent:#a3477c; --accent-soft:#f6e3ee; --good:#7d4a72; --mint:#f4e4ee; }
+  * { box-sizing:border-box; }
+  html { font-size:var(--base-size); }
+  body { font-family:system-ui,-apple-system,"Segoe UI",sans-serif; background:var(--paper); color:var(--ink); margin:0; padding:16px; line-height:1.55; }
+  .wrap { max-width:800px; margin:0 auto; }
+  h1 { font-size:1.6rem; margin:0 0 4px; }
+  .sub { color:var(--soft); font-size:0.9rem; margin-bottom:16px; }
+  section { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:16px; margin-bottom:14px; }
+  h2 { font-size:1.05rem; margin:0 0 10px; }
+  label { display:block; font-size:0.85rem; color:var(--soft); margin-bottom:3px; }
+  input,select,textarea { width:100%; padding:10px; border:1px solid var(--line); border-radius:8px; font:inherit; background:var(--card); color:var(--ink); }
+  textarea { min-height:80px; resize:vertical; }
+  .row { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:10px; }
+  .row3 { display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; margin-bottom:10px; }
+  button { font:inherit; padding:11px 16px; border-radius:9px; border:1px solid var(--accent); background:var(--accent); color:#fff; cursor:pointer; margin:4px 6px 4px 0; }
+  button.ghost { background:var(--card); color:var(--accent); }
+  button.tiny { padding:5px 10px; font-size:0.85rem; margin:2px 4px 2px 0; }
+  .muted { color:var(--soft); font-size:0.88rem; }
+  .goal { border:1px solid var(--line); border-radius:12px; padding:14px; margin-bottom:12px; background:var(--card); }
+  .goal h3 { margin:0 0 8px; font-size:1.05rem; }
+  .goal .field { margin-bottom:8px; }
+  .progress { height:12px; background:var(--accent-soft); border-radius:99px; overflow:hidden; margin:6px 0; }
+  .progress > div { height:100%; background:var(--accent); border-radius:99px; transition:width .25s; }
+  .sparkrow { display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
+  .badges { display:flex; gap:8px; flex-wrap:wrap; margin-top:8px; }
+  .badge { padding:4px 10px; border-radius:99px; background:var(--accent-soft); font-size:0.85rem; }
+  .badge.off { opacity:0.35; }
+  .themes { display:flex; gap:10px; flex-wrap:wrap; }
+  .swatch { width:44px; height:44px; border-radius:12px; border:2px solid var(--line); cursor:pointer; }
+  .swatch.sel { border-color:var(--accent); }
+  details { border-top:1px solid var(--line); padding-top:10px; margin-top:10px; }
+  summary { cursor:pointer; color:var(--accent); font-weight:600; }
+  .strip { display:flex; gap:4px; flex-wrap:wrap; margin-top:8px; }
+  .day { width:22px; height:22px; border-radius:5px; background:var(--line); }
+  .day.made { background:var(--good); } .day.part { background:var(--warn); } .day.home { background:var(--rose); }
+  .qitem, .word { display:flex; justify-content:space-between; gap:10px; align-items:baseline; border-bottom:1px dashed var(--line); padding:6px 0; }
+  .del { color:var(--rose); cursor:pointer; border:none; background:none; font-size:0.85rem; padding:0; margin:0; }
+  .foot { color:var(--soft); font-size:0.8rem; margin-top:10px; }
+  .fonts { display:flex; gap:6px; align-items:center; }
+  .fonts button { padding:4px 10px; }
+  .celebrate { display:none; text-align:center; font-size:1.1rem; margin-top:8px; color:var(--accent); }
+  @media (max-width:560px) { .row,.row3 { grid-template-columns:1fr; } }
+  @media print {
+    button,.noprint { display:none !important; }
+    body { background:#fff; padding:0; }
+    section,.goal { border:1px solid #ccc; page-break-inside:avoid; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1 id="pageTitle">Plan Companion</h1>
+  <div class="sub">Part of the NeuroFamily support team. Your child's plan, made friendly. Saves in this browser only; nothing leaves this device.</div>
+
+  <section class="noprint">
+    <div class="row">
+      <div>
+        <label for="childName">Whose plan is this?</label>
+        <input id="childName" placeholder="First name" oninput="save()">
+      </div>
+      <div>
+        <label for="yearLevel">Year level</label>
+        <input id="yearLevel" placeholder="e.g. Year 4" oninput="save()">
+      </div>
+    </div>
+    <div class="row">
+      <div>
+        <label for="planName">What your school calls the plan</label>
+        <input id="planName" placeholder="IEP" value="IEP" oninput="save(); retitle()">
+      </div>
+      <div>
+        <label>Text size</label>
+        <div class="fonts">
+          <button class="ghost tiny" onclick="setSize(-1)" aria-label="Smaller text">A&minus;</button>
+          <button class="ghost tiny" onclick="setSize(1)" aria-label="Bigger text">A+</button>
+        </div>
+      </div>
+    </div>
+    <label>Pick a theme</label>
+    <div class="themes" id="themes"></div>
+  </section>
+
+  <section>
+    <h2>About me</h2>
+    <label for="aboutMe">My strengths and the things I love. This is what we build on.</label>
+    <textarea id="aboutMe" placeholder="e.g. Kind to animals. Loves Minecraft and drawing. Remembers every dinosaur name." oninput="save()"></textarea>
+  </section>
+
+  <section>
+    <h2>My goals</h2>
+    <p class="muted">Each goal from the plan, in plain words. Every practice session earns a spark. Sparks add up to badges.</p>
+    <div id="goals"></div>
+    <button class="ghost noprint" onclick="addGoal()">+ Add a goal</button>
+    <div class="badges" id="badges"></div>
+    <div class="celebrate" id="celebrate" role="status"></div>
+  </section>
+
+  <section>
+    <h2>Questions for my next meeting</h2>
+    <p class="muted">Things to ask or say at the next review. Nothing is too small.</p>
+    <div id="questions"></div>
+    <div class="row noprint" style="margin-top:8px;">
+      <input id="newQuestion" placeholder="e.g. Can we try movement breaks before maths?" onkeydown="if(event.key==='Enter')addQuestion()">
+      <button class="ghost" onclick="addQuestion()">Add question</button>
+    </div>
+  </section>
+
+  <section>
+    <h2>Words to know</h2>
+    <p class="muted">The plan words, explained simply. Add your own as they come up.</p>
+    <div id="words"></div>
+  </section>
+
+  <section>
+    <h2>Days I made it</h2>
+    <div class="row3">
+      <div><label for="termStart">Term start</label><input id="termStart" type="date" oninput="save()"></div>
+      <div><label for="termEnd">Term end</label><input id="termEnd" type="date" oninput="save()"></div>
+      <div><label for="country">Country</label><input id="country" placeholder="e.g. Australia" oninput="save()"></div>
+    </div>
+    <div class="noprint" style="margin:8px 0;">
+      <button onclick="logDay('made')">Made it</button>
+      <button class="ghost" onclick="logDay('part')">Part day</button>
+      <button class="ghost" onclick="logDay('home')">Home day</button>
+    </div>
+    <div class="strip" id="strip"></div>
+    <p class="foot">Green: full day &middot; Amber: part day &middot; Rose: home day. Check your school's term dates; they vary by country and state.</p>
+  </section>
+
+  <section>
+    <h2>The full plan</h2>
+    <details>
+      <summary>Open the school's plan, word for word</summary>
+      <p class="muted">Paste the plan here so everything lives in one place. It stays in this file, on this device.</p>
+      <textarea id="fullPlan" style="min-height:160px" placeholder="Paste the plan text here..." oninput="save()"></textarea>
+    </details>
+  </section>
+
+  <section class="noprint">
+    <h2>Keep it safe</h2>
+    <div>
+      <button class="ghost" onclick="exportBackup()">Export backup</button>
+      <button class="ghost" onclick="document.getElementById('importFile').click()">Restore backup</button>
+      <button class="ghost" onclick="window.print()">Print for a meeting</button>
+      <button class="ghost" onclick="clearAll()">Clear everything</button>
+      <input type="file" id="importFile" accept="application/json" style="display:none" onchange="importBackup(event)">
+    </div>
+    <p class="foot">Backups save as a file you keep. Restoring replaces what is in this browser.</p>
+  </section>
+
+  <p class="foot">Made with care for neurodiverse families. This tool supports the plan; it does not replace teachers, therapists or the plan itself.</p>
+</div>
+
+<script>
+var KEY = "iep-companion-v1";
+var THEMES = [
+  { id:"paper",  name:"Warm paper", col:"#a3542f" },
+  { id:"jungle", name:"Dinosaur jungle", col:"#3e7a3e" },
+  { id:"ocean",  name:"Deep ocean", col:"#2b6d8c" },
+  { id:"cosmos", name:"Cosmos", col:"#5b4bb8" },
+  { id:"berry",  name:"Berry bush", col:"#a3477c" }
+];
+var BADGES = [
+  { at:5,  icon:"\u2B50", label:"First sparks" },
+  { at:15, icon:"\uD83C\uDF1F", label:"Spark shower" },
+  { at:30, icon:"\uD83D\uDCAB", label:"Spark storm" },
+  { at:60, icon:"\uD83C\uDFC6", label:"Champion" }
+];
+var DEFAULT_WORDS = [
+  ["IEP (or EHCP)", "The written plan of the support your child gets at school."],
+  ["Baseline", "Where your child is starting from, before new practice."],
+  ["Goal", "One thing we are working on, written so we can tell when it is easier."],
+  ["Review", "The meeting where the team checks how the plan is going."],
+  ["Adjustments", "The practical changes that help, like extra time or a quiet space."],
+  ["OT", "Occupational therapist. Helps with everyday skills and sensory needs."],
+  ["Speech (SLT)", "Speech and language therapist. Helps with talking and understanding."]
+];
+
+var state = load();
+var size = state.size || 0;
+
+function load() {
+  try { return JSON.parse(localStorage.getItem(KEY)) || {}; } catch (e) { return {}; }
+}
+function save() {
+  state.childName = val("childName"); state.yearLevel = val("yearLevel");
+  state.planName = val("planName"); state.aboutMe = val("aboutMe");
+  state.termStart = val("termStart"); state.termEnd = val("termEnd");
+  state.country = val("country"); state.fullPlan = val("fullPlan");
+  localStorage.setItem(KEY, JSON.stringify(state));
+  retitle();
+}
+function val(id) { var el = document.getElementById(id); return el ? el.value : ""; }
+function set(id, v) { var el = document.getElementById(id); if (el) el.value = v || ""; }
+
+function retitle() {
+  var name = (state.childName || "").trim();
+  var plan = (state.planName || "IEP").trim() || "IEP";
+  document.getElementById("pageTitle").textContent = name ? name + "'s " + plan + " Companion" : plan + " Companion";
+  document.title = document.getElementById("pageTitle").textContent;
+}
+
+/* ---- goals ---- */
+function addGoal() {
+  state.goals = state.goals || [];
+  state.goals.push({ id: Date.now() + "" + Math.floor(Math.random() * 999), title: "", plain: "", how: "", who: "", review: "", sparks: 0 });
+  save(); renderGoals();
+}
+function delGoal(id) { state.goals = (state.goals || []).filter(function (g) { return g.id !== id; }); save(); renderGoals(); }
+function editGoal(id, field, value) {
+  (state.goals || []).forEach(function (g) { if (g.id === id) g[field] = value; });
+  save(); renderBadges();
+}
+function spark(id, n) {
+  (state.goals || []).forEach(function (g) { if (g.id === id && g.sparks + n >= 0) g.sparks += n; });
+  save(); renderGoals(); renderBadges(n);
+}
+function renderGoals() {
+  var host = document.getElementById("goals");
+  var goals = state.goals || [];
+  host.innerHTML = "";
+  if (!goals.length) { host.innerHTML = "<p class='muted'>No goals yet. Add the first one from the plan, in your child's own words.</p>"; return; }
+  goals.forEach(function (g) {
+    var pct = Math.min(100, g.sparks * 5);
+    var el = document.createElement("div");
+    el.className = "goal";
+    el.innerHTML =
+      "<h3>" + (g.title ? esc(g.title) : "Goal") + "</h3>" +
+      "<div class='field'><label>In plain words, what this really means</label><textarea oninput=\"editGoal('" + g.id + "','plain',this.value)\">" + esc(g.plain) + "</textarea></div>" +
+      "<div class='field'><label>How we practise</label><input value=\"" + esc(g.how).replace(/"/g, "&quot;") + "\" oninput=\"editGoal('" + g.id + "','how',this.value)\"></div>" +
+      "<div class='row'><div class='field'><label>Who helps</label><input value=\"" + esc(g.who).replace(/"/g, "&quot;") + "\" oninput=\"editGoal('" + g.id + "','who',this.value)\"></div>" +
+      "<div class='field'><label>Review date</label><input type='date' value=\"" + esc(g.review) + "\" oninput=\"editGoal('" + g.id + "','review',this.value)\"></div></div>" +
+      "<div class='progress'><div style='width:" + pct + "%'></div></div>" +
+      "<div class='sparkrow'><span class='muted'>" + g.sparks + " spark" + (g.sparks === 1 ? "" : "s") + "</span>" +
+      "<button class='tiny' onclick=\"spark('" + g.id + "',1)\">+ Practised</button>" +
+      "<button class='ghost tiny' onclick=\"spark('" + g.id + "',-1)\">\u2212</button>" +
+      "<button class='del' onclick=\"delGoal('" + g.id + "')\">delete</button></div>" +
+      "<details><summary>Rename goal</summary><input value=\"" + esc(g.title).replace(/"/g, "&quot;") + "\" oninput=\"renameGoal('" + g.id + "',this.value,this)\" placeholder='Goal title'></details>";
+    host.appendChild(el);
+  });
+}
+function renameGoal(id, v, el) { (state.goals || []).forEach(function (g) { if (g.id === id) g.title = v; }); save(); if (el) el.closest('.goal').querySelector('h3').textContent = v || 'Goal'; }
+
+function totalSparks() { return (state.goals || []).reduce(function (s, g) { return s + (g.sparks || 0); }, 0); }
+function renderBadges(justEarned) {
+  var total = totalSparks();
+  var host = document.getElementById("badges");
+  host.innerHTML = BADGES.map(function (b) {
+    return "<span class='badge" + (total >= b.at ? "" : " off") + "'>" + b.icon + " " + b.label + "</span>";
+  }).join("") + "<span class='badge' style='background:var(--mint)'>" + total + " sparks in total</span>";
+  if (justEarned && justEarned > 0) {
+    BADGES.forEach(function (b) {
+      if (total === b.at) {
+        var c = document.getElementById("celebrate");
+        c.textContent = "\uD83C\uDF89 " + b.label + "! Badge unlocked.";
+        c.style.display = "block";
+        setTimeout(function () { c.style.display = "none"; }, 4000);
+      }
+    });
+  }
+}
+
+/* ---- questions ---- */
+function addQuestion() {
+  var input = document.getElementById("newQuestion");
+  var t = (input.value || "").trim();
+  if (!t) return;
+  state.questions = state.questions || [];
+  state.questions.push(t);
+  input.value = "";
+  save(); renderQuestions();
+}
+function delQuestion(i) { state.questions.splice(i, 1); save(); renderQuestions(); }
+function renderQuestions() {
+  var host = document.getElementById("questions");
+  var qs = state.questions || [];
+  host.innerHTML = qs.length ? qs.map(function (q, i) {
+    return "<div class='qitem'><span>" + esc(q) + "</span><button class='del noprint' onclick='delQuestion(" + i + ")'>remove</button></div>";
+  }).join("") : "<p class='muted'>Nothing here yet. Add the first question.</p>";
+}
+
+/* ---- words ---- */
+function delWord(i) { state.words.splice(i, 1); save(); renderWords(); }
+function addWord() {
+  state.words = state.words || DEFAULT_WORDS.map(function (w) { return { t: w[0], d: w[1] }; });
+  state.words.push({ t: "New word", d: "Meaning..." });
+  save(); renderWords();
+}
+function renderWords() {
+  if (!state.words) state.words = DEFAULT_WORDS.map(function (w) { return { t: w[0], d: w[1] }; });
+  var host = document.getElementById("words");
+  host.innerHTML = state.words.map(function (w, i) {
+    return "<div class='word'><span><strong>" + esc(w.t) + ":</strong> " + esc(w.d) + "</span><button class='del noprint' onclick='delWord(" + i + ")'>remove</button></div>";
+  }).join("") + "<button class='ghost tiny noprint' style='margin-top:8px' onclick='addWord()'>+ Add a word</button>";
+}
+
+/* ---- attendance ---- */
+function logDay(status) {
+  state.days = state.days || [];
+  var d = new Date().toISOString().slice(0, 10);
+  state.days = state.days.filter(function (x) { return x.d !== d; });
+  state.days.push({ d: d, s: status });
+  save(); renderDays();
+}
+function renderDays() {
+  var host = document.getElementById("strip");
+  var days = (state.days || []).slice(-20);
+  host.innerHTML = days.length ? days.map(function (x) {
+    return "<span class='day " + (x.s === "made" ? "made" : x.s === "part" ? "part" : "home") + "' title='" + x.d + " " + x.s + "'></span>";
+  }).join("") : "<span class='muted'>No check-ins yet.</span>";
+}
+
+/* ---- themes + size ---- */
+function renderThemes() {
+  var host = document.getElementById("themes");
+  host.innerHTML = THEMES.map(function (t) {
+    return "<button class='swatch" + (state.theme === t.id || (!state.theme && t.id === "paper") ? " sel" : "") + "' style='background:" + t.col + "' title=\"" + t.name + "\" onclick=\"setTheme('" + t.id + "')\" aria-label=\"" + t.name + "\"></button>";
+  }).join("") + "<span class='muted' id='themeName'></span>";
+}
+function setTheme(id) { state.theme = id; save(); applyTheme(); renderThemes(); }
+function applyTheme() { document.documentElement.setAttribute("data-theme", state.theme || "paper"); }
+function setSize(dir) { size = Math.max(-2, Math.min(4, size + dir)); state.size = size; localStorage.setItem(KEY, JSON.stringify(state)); applySize(); }
+function applySize() { document.documentElement.style.setProperty("--base-size", (16 + size * 2) + "px"); }
+
+/* ---- backup ---- */
+function exportBackup() {
+  save();
+  var blob = new Blob([JSON.stringify(state, null, 2)], { type: "application/json" });
+  var a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = ((state.childName || "plan").replace(/[^a-z0-9]+/gi, "-").toLowerCase()) + "-companion-backup.json";
+  a.click();
+}
+function importBackup(ev) {
+  var f = ev.target.files[0];
+  if (!f) return;
+  var r = new FileReader();
+  r.onload = function () {
+    try { state = JSON.parse(r.result) || {}; localStorage.setItem(KEY, JSON.stringify(state)); boot(); }
+    catch (e) { alert("That file could not be read as a backup."); }
+  };
+  r.readAsText(f);
+}
+function clearAll() {
+  if (!confirm("Clear everything? The companion will be empty again. Export a backup first if unsure.")) return;
+  localStorage.removeItem(KEY);
+  state = {}; boot();
+}
+
+function esc(s) { return String(s == null ? "" : s).replace(/[&<>]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;" }[c]; }); }
+
+function boot() {
+  set("childName", state.childName); set("yearLevel", state.yearLevel);
+  set("planName", state.planName || "IEP"); set("aboutMe", state.aboutMe);
+  set("termStart", state.termStart); set("termEnd", state.termEnd);
+  set("country", state.country); set("fullPlan", state.fullPlan);
+  applyTheme(); applySize(); renderThemes();
+  renderGoals(); renderBadges(); renderQuestions(); renderWords(); renderDays(); retitle();
+}
+boot();
+</script>
+</body>
+</html>
