@@ -8,7 +8,7 @@ A multi-agent support ecosystem for families raising neurodiverse children. Buil
 
 ## What this is
 
-Twelve specialist support skills that run on **[Hermes Agent](https://hermes-agent.nousresearch.com/docs)**, your own personal AI assistant. Install it once, and the family has a complete support team through the chat app you already use (Telegram recommended).
+Fourteen specialist support skills that run on **[Hermes Agent](https://hermes-agent.nousresearch.com/docs)**, your own personal AI assistant. Install it once, and the family has a complete support team through the chat app you already use (Telegram recommended).
 
 Think of it as a multidisciplinary team in your pocket: a family coordinator, a school advocate, an OT for sensory and routines, a coach for emotional regulation, a feeding specialist, a carer wellbeing companion, and more, all working together and all sharing one picture of your family.
 
@@ -94,12 +94,14 @@ Full history: `CHANGELOG.md`. What's next: `ROADMAP.md`.
 - Not therapy, not medical or legal advice.
 - Not a replacement for your child's professionals. It helps you get more out of them: better questions, better records, better advocacy.
 - Not a companion or a friend substitute for any child. It is a support tool that works for the family.
+- **Not a crisis service, and it never pretends to be one.** In a hard moment it stops, responds with care, points to the family's verified local lines, and hands the matter to a real person. See `skills/hard-moments/`.
 
 ## Repository layout
 
 ```
-skills/            12 specialist skills (each SKILL.md)
-shared/            the shared brain: family folder templates + regional resources
+skills/            14 specialist skills (each SKILL.md), incl. hard-moments and local-support
+shared/            the shared brain: family folder templates, regional resources + verified
+                   local-support packs (crisis and service lists by country)
 schedules/         ready-to-install check-ins and nudges
 SOUL.md            the principles every skill lives by
 AGENTS.md          how the team works together
