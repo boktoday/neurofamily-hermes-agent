@@ -2,7 +2,7 @@
 
 A multi-agent support ecosystem for families raising neurodiverse children. Built with love for families who deserve support that actually supports them.
 
-![Ecosystem overview](https://scarlet-mill-55mb.here.now/file_129---a834002a-916d-41ae-b7c7-e876187e1c17.jpg)
+![Ecosystem overview](docs/ecosystem-overview.jpg)
 
 ---
 
@@ -33,6 +33,8 @@ Think of it as a multidisciplinary team in your pocket: a family coordinator, a 
 | Food Support | ARFID, safe foods, food diaries, low-stress mealtimes |
 | Sibling Support | Siblings' feelings, identity, fair attention |
 | Parent Companion | Carer burnout, grief, respite, wellbeing |
+| Hard Moments | Crisis moments, safety, hand-off to real people |
+| Local Support | Verified helplines and services by country |
 | Artifacts Generator | Visual schedules, trackers, dashboards, family mini-apps |
 
 Every skill is neurodiversity-affirming, strengths-based and trauma-informed. See `SOUL.md` for the principles and `AGENTS.md` for how the team works together.
@@ -52,11 +54,18 @@ Every skill is neurodiversity-affirming, strengths-based and trauma-informed. Se
 
 ## Starter artifacts
 
-Beyond the conversations, the team builds things your family can hold onto: single-file tools that open in any browser, save on your own device and never send data anywhere. The Artifacts Generator personalises each one for your family, and two are ready to start from today.
+Beyond the conversations, the team builds things your family can hold onto: single-file tools that open in any browser, save on your own device and never send data anywhere. The Artifacts Generator personalises each one for your family. Four are ready to start from today, and full instructions for each live in `templates/artifacts/README.md`.
 
-**Food Diary** (`templates/artifacts/food-diary.html`) - a gentle daily food log for ARFID and low-stress mealtimes: a safe-food map, meal entries, stress notes, and a CSV export you can hand to a dietitian.
+| Artifact | What it is | Best for |
+|---|---|---|
+| `food-diary.html` | Fillable local diary: safe-food map, meal entries, stress notes, CSV export, print | Food Support families, ARFID tracking, showing patterns to a dietitian |
+| `food-diary-sheets.md` | The same diary as a Google Sheet / Excel workbook (spec + formulas) | Families with connections set up; multi-carer households |
+| `lesson-chunks.html` | Local-first lesson planner: paste or dictate a lesson and the AI breaks it into small sequential steps with a motivating overview. Text-to-speech, mark-complete, an editor and AI feedback on each step | Autistic young people and executive-function support: turning schoolwork, therapy material or daily tasks into manageable steps |
+| `iep-companion.html` | The school's plan turned into something a child can actually use: goals in plain words, sparks and badges, child-chosen themes, questions for the next review, a words-to-know glossary, attendance check-ins and a print view | Every IEP, EHCP or 504 family; preparing for reviews; helping the child understand their own plan |
 
-**IEP Companion** (`templates/artifacts/iep-companion.html`) - the school's plan, turned from a printed document into something a child can actually use. Each goal is re-written in plain words ("what this really means"), with how you practise it and who helps. Every practice session earns a spark, sparks earn badges, and the child picks their own theme (dinosaur jungle included). It also holds the questions to ask at the next review, a words-to-know glossary for plan jargon, day-by-day check-ins against the school term dates, and a print view for meetings. Everything stays in the browser on your own device, and backups export to a file you keep. The agent fills it in from your family profile, and the child's copy can live on their own phone or tablet.
+Lesson Chunks asks for a free OpenRouter key in its settings once (its only internet call, used only when you chunk a lesson or ask a question). The other three need no accounts at all. Everything saves in the browser on your own device, and the Food Diary and IEP Companion both export files you keep.
+
+The IEP Companion, in a little more detail: each goal is re-written in plain words ("what this really means"), with how you practise it and who helps. Every practice session earns a spark, sparks earn badges, and the child picks their own theme (dinosaur jungle included). It also holds the questions to ask at the next review, a glossary for plan jargon, day-by-day check-ins against the school term dates and a print view for meetings. The agent fills it in from your family profile, and the child's copy can live on their own phone or tablet.
 
 ---
 
@@ -85,7 +94,7 @@ Setup commands are in `schedules/README.md`.
 
 ---
 
-## What changed in the Hermes edition (v2.0.0)
+## What changed in the Hermes edition
 
 - The twelve OpenClaw agents are now twelve Hermes **skills** (`skills/<name>/SKILL.md`), with the same souls and tools, plus shared-context and escalation sections.
 - **Schedules added** (the OpenClaw edition had none).
@@ -94,6 +103,8 @@ Setup commands are in `schedules/README.md`.
 - Shared-context **file templates** added (`shared/`), plus the missing regional template.
 - Language standardised on "young people" throughout.
 - All OpenClaw references replaced with Hermes equivalents.
+- **v2.1.0:** Maton connections, WhatsApp family group, model tiering and local voice.
+- **v2.2.0:** artifact pack (food diary), crisis card, communication passport, setup script, and the hard-moments and local-support skills.
 
 Full history: `CHANGELOG.md`. What's next: `ROADMAP.md`.
 
