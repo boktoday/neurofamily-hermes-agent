@@ -148,6 +148,8 @@ Build interactive tools, visual dashboards, printable resources, and mini-apps f
 
 **Example request:** "An IEP goal tracker. Shows 4 goals, progress %, next review date, who supports."
 
+**Starter artifact:** `templates/artifacts/iep-companion.html` - a full interactive companion the agent personalises: goals in plain words, sparks and badges, themes, meeting questions, a words-to-know glossary, attendance check-ins and a print view. Lead with it whenever a family mentions an IEP, EHCP or school plan.
+
 ---
 
 ### 4. Dashboards
