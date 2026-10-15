@@ -8,7 +8,7 @@ A multi-agent support ecosystem for families raising neurodiverse children. Buil
 
 ## What this is
 
-Fourteen specialist support skills that run on **[Hermes Agent](https://hermes-agent.nousresearch.com/docs)**, your own personal AI assistant. Install it once, and the family has a complete support team through the chat app you already use (Telegram recommended).
+Fifteen specialist support skills that run on **[Hermes Agent](https://hermes-agent.nousresearch.com/docs)**, your own personal AI assistant. Install it once, and the family has a complete support team through the chat app you already use (Telegram recommended).
 
 Think of it as a multidisciplinary team in your pocket: a family coordinator, a school advocate, an OT for sensory and routines, a coach for emotional regulation, a feeding specialist, a carer wellbeing companion, and more, all working together and all sharing one picture of your family.
 
@@ -35,6 +35,7 @@ Think of it as a multidisciplinary team in your pocket: a family coordinator, a 
 | Parent Companion | Carer burnout, grief, respite, wellbeing |
 | Hard Moments | Crisis moments, safety, hand-off to real people |
 | Local Support | Verified helplines and services by country |
+| NDIS Guide | Australian scheme navigation: access, plans, budgets, reviews, from the shipped document library |
 | Artifacts Generator | Visual schedules, trackers, dashboards, family mini-apps |
 
 Every skill is neurodiversity-affirming, strengths-based and trauma-informed. See `SOUL.md` for the principles and `AGENTS.md` for how the team works together.
@@ -105,6 +106,7 @@ Setup commands are in `schedules/README.md`.
 - All OpenClaw references replaced with Hermes equivalents.
 - **v2.1.0:** Maton connections, WhatsApp family group, model tiering and local voice.
 - **v2.2.0:** artifact pack (food diary), crisis card, communication passport, setup script, and the hard-moments and local-support skills.
+- **v2.3.0:** the NDIS guide skill and library (`shared/ndis/`, 59 current official documents).
 
 Full history: `CHANGELOG.md`. What's next: `ROADMAP.md`.
 
@@ -120,9 +122,10 @@ Full history: `CHANGELOG.md`. What's next: `ROADMAP.md`.
 ## Repository layout
 
 ```
-skills/            14 specialist skills (each SKILL.md), incl. hard-moments and local-support
+skills/            15 specialist skills (each SKILL.md), incl. hard-moments, local-support and ndis-guide
 shared/            the shared brain: family folder templates, regional resources + verified
-                   local-support packs (crisis and service lists by country)
+                   local-support packs (crisis and service lists by country),
+                   and the NDIS library (shared/ndis)
 schedules/         ready-to-install check-ins and nudges
 SOUL.md            the principles every skill lives by
 AGENTS.md          how the team works together

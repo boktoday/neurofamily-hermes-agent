@@ -4,6 +4,14 @@ All notable changes to the NeuroFamily Support Ecosystem are documented here.
 
 ---
 
+## [2.3.0] - 2026-10-15
+
+### Added
+- **NDIS guide** (`skills/ndis-guide/`): a new specialist skill for Australian families, backed by a shipped library of 59 official NDIS documents in `shared/ndis/`: all current operational guideline documents, the consolidated NDIS Act 2013 (as at 1 October 2026), the (Supports for Participants) Rules, the pricing schedule 2026-27, and the 2026 law-change briefings (Integrity and Safeguarding; Securing the NDIS for future generations). Answers quote the documents with source and fetch date, never model memory.
+- **`scripts/fetch-ndis-docs.py`**: one-command refresh of the NDIS library (documents and legislation download directly; the guideline web pages need a real browser, as the script explains).
+
+---
+
 ## [2.2.0] - 2026-10-13
 
 ### Added
