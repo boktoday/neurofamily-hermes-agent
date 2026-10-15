@@ -38,7 +38,7 @@ Every tag above runs in both Ollama and LM Studio (they are GGUF models under th
 
 ## Which jobs suit a local model
 
-- **Great fit:** daily anchors, weekly check-ins, short warm replies, folder reading and note taking. These are deliberately simple.
+- **Great fit, and the place to start: the repetitive work.** Cron jobs, scheduled check-ins, daily anchors, short warm replies, folder reading and note taking. Small, frequent and the same every day, which is exactly what a local model is for.
 - **Better on a bigger model:** advocacy letters, tangled support plans, big monthly reviews. A frontier model reached for occasionally is the pragmatic mix.
 - **The all-local setup:** a capable machine plus a good local model plus local voice (Piper and faster-whisper, see [models.md](models.md)) means the whole loop runs with nothing leaving the house.
 
