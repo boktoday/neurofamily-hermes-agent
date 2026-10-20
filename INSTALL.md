@@ -86,6 +86,8 @@ cp .env.example .env
 
 Everything in this ecosystem can run with no cloud at all, so nothing about your family leaves the machine. Two good paths:
 
+**First, check what your machine can actually run.** Open [canirun.ai](https://canirun.ai) in a desktop browser. It reads your processor, memory and graphics directly, ranks the open models that fit, and gives you the exact Ollama or LM Studio command for the one you pick. No account, nothing to install. Two more worth knowing: [localllm-advisor.com](https://localllm-advisor.com) works in both directions, model for your hardware or hardware for a model, and [localllm.run](https://localllm.run) walks goal, hardware, model and setup in order. Five minutes here saves a wasted 5GB download.
+
 **LM Studio (easiest, has a GUI)**
 
 1. Download from https://lmstudio.ai/ and install.
