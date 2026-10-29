@@ -1,7 +1,7 @@
 # NDIS pricing schedule 2026-27 (maximum price limits)
 
 > Source: https://www.ndis.gov.au/media/8841/download?attachment  
-> Fetched 15 October 2026 by the NeuroFamily agent project. © National Disability Insurance Agency (NDIA), or the Commonwealth of Australia, as marked at the source. Text reproduced for noncommercial family support use only. Always verify current rules at ndis.gov.au.
+> Fetched 30 October 2026 by the NeuroFamily NDIS library refresh. (c) National Disability Insurance Agency (NDIA), or the Commonwealth of Australia, as marked at the source. Reproduced for noncommercial family support use only. Always verify current rules at ndis.gov.au.
 
 National Disability Insurance Scheme
 Pricing Schedule 2026-27

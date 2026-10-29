@@ -9,6 +9,7 @@ Ready-to-install check-ins for real family life. Each schedule names the skill t
 | Carer wellbeing check-in | Wednesday, 20:00 | Parent Companion |
 | Sibling check-in | Fortnightly, Saturday morning | Sibling Support |
 | Monthly ecosystem review | First Sunday, 19:00 | Family Navigator |
+| NDIS rules watch | Every 14 days, 06:40, silent when nothing has moved | NDIS Guide |
 
 ## How to install one
 

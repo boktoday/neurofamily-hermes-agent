@@ -1,7 +1,7 @@
 # Therapy supports
 
 > Source: https://www.ndis.gov.au/media/8091/download?attachment  
-> Fetched 15 October 2026 by the NeuroFamily agent project. © National Disability Insurance Agency (NDIA), or the Commonwealth of Australia, as marked at the source. Text reproduced for noncommercial family support use only. Always verify current rules at ndis.gov.au.
+> Fetched 30 October 2026 by the NeuroFamily NDIS library refresh. (c) National Disability Insurance Agency (NDIA), or the Commonwealth of Australia, as marked at the source. Reproduced for noncommercial family support use only. Always verify current rules at ndis.gov.au.
 
 27 July 2026
 Therapy supports

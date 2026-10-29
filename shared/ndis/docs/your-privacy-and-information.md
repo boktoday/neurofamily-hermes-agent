@@ -1,7 +1,7 @@
 # Your privacy and information
 
 > Source: https://www.ndis.gov.au/media/7779/download?attachment  
-> Fetched 15 October 2026 by the NeuroFamily agent project. © National Disability Insurance Agency (NDIA), or the Commonwealth of Australia, as marked at the source. Text reproduced for noncommercial family support use only. Always verify current rules at ndis.gov.au.
+> Fetched 30 October 2026 by the NeuroFamily NDIS library refresh. (c) National Disability Insurance Agency (NDIA), or the Commonwealth of Australia, as marked at the source. Reproduced for noncommercial family support use only. Always verify current rules at ndis.gov.au.
 
 Your privacy and information
 Quick summary: we need to collect information about you when you deal with us. Your privacy is always important to us. We keep all your personal information safe and only collect what we need. We follow federal laws about how we collect, use, store and share your personal information. This guideline explains how we manage your information, including when we share it outside the National Disability Insurance Agency.

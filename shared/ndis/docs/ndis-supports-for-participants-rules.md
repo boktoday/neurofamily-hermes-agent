@@ -1,7 +1,7 @@
 # NDIS (Supports for Participants) Rules 2013 (current compilation)
 
 > Source: https://www.legislation.gov.au/F2013L01063/latest/downloads  
-> Current compilation of the Rules, fetched 15 October 2026. © Commonwealth of Australia. Reproduced for noncommercial family support use only.
+> Fetched 30 October 2026 by the NeuroFamily NDIS library refresh. (c) National Disability Insurance Agency (NDIA), or the Commonwealth of Australia, as marked at the source. Reproduced for noncommercial family support use only. Always verify current rules at ndis.gov.au.
 
 Prepared by the Office of Parliamentary Counsel, Canberra
 National Disability Insurance Scheme (Supports for

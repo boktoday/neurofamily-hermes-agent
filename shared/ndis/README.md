@@ -83,3 +83,19 @@ Run `python scripts/fetch-ndis-docs.py` from the repo root. The documents and le
 ## Using it
 
 `skills/ndis-guide/SKILL.md` is the front door: it maps family questions to documents and sets the citation, currency and boundary rules.
+
+## Keeping this current
+
+The NDIS moves its rules, price limits and guidelines on its own timetable, and a family agent quoting a
+superseded rule is worse than one that admits ignorance. Two scripts keep this honest:
+
+- `python scripts/ndis_watch.py` hashes ten official sources (the consolidated Act, pricing arrangements and
+  price limits, eligibility, what the NDIS is, reasonable and necessary, would we fund it, the early childhood
+  approach guide and partner page, and the news feed) plus every file in this library. It prints nothing when
+  nothing has changed and exits 0. When something has moved it writes a note in `changes/<date>.md` and exits 2.
+- `python scripts/fetch-ndis-docs.py` downloads the latest documents and legislation. `ndis_watch.py --refresh`
+  runs it for you after a change is detected.
+
+The schedule in `schedules/ndis-watch.md` runs the check every 14 days and speaks only when something moved.
+A blocked page is recorded as `blocked` and keeps its previous hash, so a bot wall can never overwrite a good
+source with an error page.

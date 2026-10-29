@@ -1,7 +1,7 @@
 # National Disability Insurance Scheme Act 2013 (consolidated, as at 1 October 2026)
 
 > Source: https://www.legislation.gov.au/C2013A00020/2026-10-01/2026-10-01/text/original/pdf  
-> This is the compilation of the Act in force on 1 October 2026, the most recent at the time of fetching (15 October 2026). © Commonwealth of Australia. Reproduced for noncommercial family support use only.
+> Fetched 30 October 2026 by the NeuroFamily NDIS library refresh. (c) National Disability Insurance Agency (NDIA), or the Commonwealth of Australia, as marked at the source. Reproduced for noncommercial family support use only. Always verify current rules at ndis.gov.au.
 
 Prepared by the Office of Parliamentary Counsel, Canberra
 

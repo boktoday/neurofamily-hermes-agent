@@ -1,7 +1,7 @@
 # Including specific types of supports in plans
 
 > Source: https://www.ndis.gov.au/media/8008/download?attachment  
-> Fetched 15 October 2026 by the NeuroFamily agent project. © National Disability Insurance Agency (NDIA), or the Commonwealth of Australia, as marked at the source. Text reproduced for noncommercial family support use only. Always verify current rules at ndis.gov.au.
+> Fetched 30 October 2026 by the NeuroFamily NDIS library refresh. (c) National Disability Insurance Agency (NDIA), or the Commonwealth of Australia, as marked at the source. Reproduced for noncommercial family support use only. Always verify current rules at ndis.gov.au.
 
 10 December 2025          Including specific types of supports in plans          Page 1 of 12
 This document is correct at the date of publication.

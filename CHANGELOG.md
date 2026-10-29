@@ -4,6 +4,12 @@ All notable changes to the NeuroFamily Support Ecosystem are documented here.
 
 ---
 
+## [2.4.0] - 2026-10-30
+
+### Added
+- **`scripts/ndis_watch.py`** and **`schedules/ndis-watch.md`**: a fortnightly watch over ten official NDIS sources plus the whole shipped library. Silent when nothing has moved; when a source changes it writes `shared/ndis/changes/<date>.md`, and `--refresh` pulls the latest library so the agent never quotes a superseded rule. Blocked pages are recorded as blocked and keep their previous hash.
+
+---
 ## [2.3.0] - 2026-10-15
 
 ### Added
