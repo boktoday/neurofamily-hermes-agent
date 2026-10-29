@@ -383,7 +383,9 @@ def main():
         except Exception as e:
             print(slug, "ERR", str(e)[:90])
     print()
-    print("Pages need a real browser (bot wall). Open each URL, save the article text over the matching file:")
+    print("The sixteen guideline pages are behind a bot wall. Run scripts/fetch-ndis-pages.py, which drives a real browser:
+    python scripts/fetch-ndis-pages.py --write
+To do it by hand instead, open each URL and save the article text over the matching file:")
     for slug, title, url in PAGES:
         print("  %s  <-  %s" % (slug + ".md", url))
     print()

@@ -93,7 +93,10 @@ superseded rule is worse than one that admits ignorance. Two scripts keep this h
   price limits, eligibility, what the NDIS is, reasonable and necessary, would we fund it, the early childhood
   approach guide and partner page, and the news feed) plus every file in this library. It prints nothing when
   nothing has changed and exits 0. When something has moved it writes a note in `changes/<date>.md` and exits 2.
-- `python scripts/fetch-ndis-docs.py` downloads the latest documents and legislation. `ndis_watch.py --refresh`
+- `python scripts/fetch-ndis-docs.py` downloads the latest documents and legislation. The sixteen
+  guideline pages sit behind a bot wall, so `python scripts/fetch-ndis-pages.py --write` fetches those with
+  a real browser. It refuses to overwrite a page with thinner text than the file already holds, because a
+  fresher-but-poorer capture is a regression in a library that gets quoted. `ndis_watch.py --refresh`
   runs it for you after a change is detected.
 
 The schedule in `schedules/ndis-watch.md` runs the check every 14 days and speaks only when something moved.
