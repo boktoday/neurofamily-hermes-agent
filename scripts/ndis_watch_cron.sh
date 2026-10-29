@@ -26,11 +26,12 @@ if [ -n "$(git status --porcelain)" ]; then
   git -c user.name="NeuroFamily NDIS watch" -c user.email="boktoday@gmail.com" \
       commit -q -m "NDIS watch: refresh library $(date +%F)"
   TOK=$(grep -o 'gh[pousr]_[A-Za-z0-9_]*' "$HOME/.git-credentials" 2>/dev/null | head -1)
-  if [ -n "$TOK" ]; then
+  SLUG=$(git config --get remote.origin.url | sed -E 's#.*github\.com[:/]([^/]+/[^/.]+)(\.git)?#\1#')
+  if [ -n "$TOK" ] && [ -n "$SLUG" ]; then
     GIT_TERMINAL_PROMPT=0 git -c credential.helper= \
-      push "https://x-access-token:$TOK@github.com/boktoday/neurofamily-hermes-agent.git" HEAD:main \
-      && echo "pushed to the repo"
+      push "https://x-access-token:$TOK@github.com/$SLUG.git" HEAD:main \
+      && echo "pushed to $SLUG"
   else
-    echo "no token found: commit made locally, push skipped"
+    echo "no token or remote found: commit made locally, push skipped"
   fi
 fi
