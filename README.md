@@ -70,6 +70,32 @@ The IEP Companion, in a little more detail: each goal is re-written in plain wor
 
 ---
 
+## The Morning Edition
+
+A printed page on the table before the day starts. Weekdays are a parent edition; Saturday and Sunday are a family edition. Black and white, one column, A4, cheap to print on any home printer.
+
+Every edition carries the **Today** block: the family's routine anchors, every appointment and deadline for the next seven days from `family-calendar.md`, and one question chosen by the date, so a rebuild on the same day produces the same paper. Then one rotating feature, set by weekday in `paper.json`:
+
+| Feature | What prints | Where it comes from |
+|---|---|---|
+| `news` | News that affects neurodivergent families | the newest brief filed in the family folder's `news/` |
+| `learn` | One thing to learn | a strategy bank drawn from this ecosystem's own skills |
+| `local` | Crisis lines and who to call | `shared/local-support/<country>.md`, with the family's own region |
+| `family` | One thing to do together, a table question, ten minutes for the sibling | built in |
+| `none` | nothing extra | a thin page is correct |
+
+Defaults: news on Monday, family edition on Saturday and Sunday, nothing on the other weekdays. The family edits `paper.json` to change the map, not the code. The region for local services is set by each family in their own instance; nothing about a suburb ships with the repo.
+
+```bash
+python scripts/build_paper.py --family ~/neurofamily            # build and print
+python scripts/build_paper.py --family ~/neurofamily --no-print # build only
+```
+
+It writes `<family>/paper/YYYY-MM-DD.html`, a PDF in `paper/editions/`, and `last-run.json` recording the date, edition, feature, pages and whether the printer accepted the file. The HTML builds with the standard library alone; the PDF step uses Playwright and printing uses SumatraPDF on Windows, and both are optional. Details in `skills/morning-edition/SKILL.md` and `schedules/morning-edition.md`.
+
+
+---
+
 ## Install
 
 See `INSTALL.md`. Short version:
@@ -90,6 +116,7 @@ See `INSTALL.md`. Short version:
 | Carer wellbeing check-in | Wednesday evening | Parent Companion: energy, support, one act of respite planning |
 | Sibling check-in | Fortnightly | Sibling Support: a moment that belongs to the sibling |
 | Monthly ecosystem review | Monthly | Look back across the team: what worked, what changes |
+| Morning Edition | Every morning, 07:15 | A printed A4 page: today's anchors, the week's appointments, one question, and the day's feature |
 
 Setup commands are in `schedules/README.md`.
 
@@ -107,6 +134,7 @@ Setup commands are in `schedules/README.md`.
 - **v2.1.0:** Maton connections, WhatsApp family group, model tiering and local voice.
 - **v2.2.0:** artifact pack (food diary), crisis card, communication passport, setup script, and the hard-moments and local-support skills.
 - **v2.3.0:** the NDIS guide skill and library (`shared/ndis/`, 59 current official documents).
+- **v2.4.0:** the Morning Edition paper (`scripts/build_paper.py`, `skills/morning-edition/`), with a `paper.json` template and a schedule doc.
 
 Full history: `CHANGELOG.md`. What's next: `ROADMAP.md`.
 
@@ -122,18 +150,19 @@ Full history: `CHANGELOG.md`. What's next: `ROADMAP.md`.
 ## Repository layout
 
 ```
-skills/            15 specialist skills (each SKILL.md), incl. hard-moments, local-support and ndis-guide
+skills/            16 specialist skills (each SKILL.md), incl. hard-moments, local-support,
+                   ndis-guide and morning-edition
 shared/            the shared brain: family folder templates, regional resources + verified
                    local-support packs (crisis and service lists by country),
                    and the NDIS library (shared/ndis)
-schedules/         ready-to-install check-ins and nudges
+schedules/         ready-to-install check-ins, nudges and the Morning Edition paper
 SOUL.md            the principles every skill lives by
 AGENTS.md          how the team works together
 INSTALL.md         full setup guide (including fully-offline local models)
 PROFILE_BUILDER.md the guided family onboarding
 config.yaml        example Hermes configuration
 templates/         starter artifacts (food diary, IEP Companion and friends)
-scripts/           setup-family-folder.py - one-command family folder setup
+scripts/           setup-family-folder.py (family folder setup) and build_paper.py (the Morning Edition)
 docs/              design document + connections, models and local-models guides
 ```
 
