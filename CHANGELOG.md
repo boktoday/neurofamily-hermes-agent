@@ -1,5 +1,12 @@
 # Changelog
 
+## Morning Edition paper
+
+- **New:** `scripts/build_paper.py` prints a black-and-white A4 page each morning from the family folder: routine anchors, appointments for the next seven days, one question chosen by date, plus one rotating feature per weekday.
+- **New:** `skills/morning-edition/SKILL.md` and `schedules/morning-edition.md`, with `shared/paper.template.json` for settings. Defaults: news on Monday, family edition on Saturday and Sunday, nothing else, because a thin page is the point.
+- Features available: `news` (newest brief in the family's news folder), `learn` (strategy bank drawn from the ecosystem's skills), `local` (crisis lines and services for the family's own country and region), `family` (weekend page). The region is the family's own setting, not shipped content.
+
+
 All notable changes to the NeuroFamily Support Ecosystem are documented here.
 
 ---

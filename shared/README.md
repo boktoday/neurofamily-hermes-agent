@@ -25,6 +25,7 @@ This folder holds the templates for the ecosystem's shared context: the files in
 | `agent-coordination.md` | Which specialist has been working on what |
 | `connections.md` | Optional: connected calendar/mail services and their IDs (never keys) |
 | `crisis-card.md` | Printable emergency one-pager: contacts, medications, what helps |
+| `paper.json` | Morning Edition settings: family name, country, region, which feature prints on which day |
 | `communication-passport.md` | One page about the child for new teachers, carers and sitters |
 
 ## What stays out

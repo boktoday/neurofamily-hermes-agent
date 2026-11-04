@@ -10,6 +10,7 @@ Ready-to-install check-ins for real family life. Each schedule names the skill t
 | Sibling check-in | Fortnightly, Saturday morning | Sibling Support |
 | Monthly ecosystem review | First Sunday, 19:00 | Family Navigator |
 | NDIS rules watch | Every 14 days, 06:40, silent when nothing has moved | NDIS Guide |
+| Morning Edition | Every morning, 07:15, printed A4 | Morning Edition |
 
 ## How to install one
 

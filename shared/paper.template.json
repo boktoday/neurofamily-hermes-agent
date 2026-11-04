@@ -1,0 +1,24 @@
+{
+  "family_name": "The O'Keefe family",
+  "edition_title": "Morning Edition",
+  "country": "AU",
+  "region": "",
+  "timezone": "Australia/Melbourne",
+  "print": true,
+  "weekday_features": {
+    "mon": "news",
+    "tue": "none",
+    "wed": "none",
+    "thu": "none",
+    "fri": "none",
+    "sat": "family",
+    "sun": "family"
+  },
+  "available_features": ["news", "learn", "local", "family"],
+  "anchors": {
+    "morning": "",
+    "after_school": "",
+    "evening": ""
+  },
+  "notes": "Edit this file to change the paper. weekday_features picks one feature per day: news, learn, local, family, or none. anchors are optional one-line routine reminders printed under Today."
+}

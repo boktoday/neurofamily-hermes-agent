@@ -25,3 +25,6 @@ skills/.cache/
 # Family data if ever kept inside the repo (default lives in ~/neurofamily/)
 family/
 neurofamily/
+
+# demo family folder and its built paper
+.demo-family/
