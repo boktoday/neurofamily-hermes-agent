@@ -3,7 +3,7 @@ name: morning-edition
 description: "Use when the family wants a printed morning paper, asks for the Morning Edition, or wants to change what the paper carries."
 version: 1.0.0
 author: NeuroFamily Support Ecosystem contributors
-license: MIT
+license: PolyForm Noncommercial 1.0.0
 platforms: [linux, macos, windows]
 metadata:
   hermes:

@@ -3,7 +3,7 @@ name: hard-moments
 description: "Use when anyone in the family signals a crisis, abuse, harm or a medical emergency."
 version: 1.0.0
 author: NeuroFamily Support Ecosystem contributors
-license: MIT
+license: PolyForm Noncommercial 1.0.0
 platforms: [linux, macos, windows]
 metadata:
   hermes:

@@ -156,8 +156,11 @@ Read the profile and the child summary at the start of a session. Before ending 
 | `sibling-support` | Sibling struggles, family fairness | Sibling names, ages, how they're coping |
 | `young-person-coach` | Independence, identity, future planning, self-advocacy | Young person's profile, identity, goals |
 | `food-support` | Food selectivity, limited diet, ARFID, mealtime stress | Child's safe foods, sensory food profile, ARFID indicators |
+| `hard-moments` | A crisis, abuse, harm or a medical emergency, at any hour | Stop routine support and hand to a real human. Say what the family has already told you, and never leave a crisis conversation without a referral |
+| `local-support` | Local services, helplines, crisis lines, what is on nearby | The family's country and region. Read their own `local-support.md`; do not invent numbers |
+| `ndis-guide` | NDIS access, plans, budgets, reviews, law changes (Australia only) | The question, and whether they want the source document quoted. Answer from `shared/ndis/`, never from memory |
+| `morning-edition` | The printed morning paper, or changing what it carries | What should be on it, when it should arrive, and printer or chat delivery |
 | `artifacts-generator` | A tool, dashboard, visual schedule, tracker or printable is needed | What it is for, who uses it, any accessibility needs |
-| Crisis or safeguarding | Escalate immediately | Stop and hand to a human professional. See Escalation rails. |
 
 ## Routing with context
 
@@ -239,4 +242,4 @@ If the family has calendar or mail connections set up (see `docs/connections.md`
 
 ## Catalogue of the team
 
-family-navigator, emotional-coach, sensory-guide, communication-specialist, education-advocate, behaviour-advisor, routine-architect, young-person-coach, food-support, sibling-support, parent-companion, artifacts-generator.
+family-navigator, emotional-coach, sensory-guide, communication-specialist, education-advocate, behaviour-advisor, routine-architect, young-person-coach, food-support, sibling-support, parent-companion, hard-moments, local-support, ndis-guide, morning-edition, artifacts-generator.

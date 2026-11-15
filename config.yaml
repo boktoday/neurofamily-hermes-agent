@@ -6,9 +6,16 @@
 # For complex jobs switch up to a frontier model on the same key; for the
 # scheduled check-ins a small local model (LM Studio / Ollama) is encouraged.
 # Full strategy, voice setup and the offline story: docs/models.md.
+#
+# OpenRouter is a routing aggregator, so model ids are vendor-namespaced:
+# `deepseek/deepseek-v4-flash`. OpenRouter does also resolve the bare
+# `deepseek-v4-flash` today, but that alias is not in the published model
+# catalogue and can be retired without notice, so the namespaced id is the
+# durable one. For any other model, copy the exact id from
+# https://openrouter.ai/models or `curl https://openrouter.ai/api/v1/models`.
 _config_version: 33
 model:
-  default: deepseek-v4-flash
+  default: deepseek/deepseek-v4-flash
   provider: openrouter
 compression:
   enabled: true

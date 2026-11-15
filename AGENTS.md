@@ -1,6 +1,6 @@
 # AGENTS.md - how the team works together
 
-Twelve skills, one family picture. This document is the operating manual for the ecosystem: routing, shared memory, session flow and privacy.
+Sixteen skills, one family picture. This document is the operating manual for the ecosystem: routing, shared memory, session flow and privacy.
 
 ## Routing: which skill for which need
 
@@ -17,6 +17,10 @@ Twelve skills, one family picture. This document is the operating manual for the
 | Mealtimes, safe foods, ARFID, food diaries, feeding stress | Food Support |
 | The siblings: their feelings, attention, identity | Sibling Support |
 | The parents and carers: burnout, grief, rest, sustainability | Parent Companion |
+| A crisis, abuse, harm, or a medical emergency, at any hour | Hard Moments (hand-off to a real human, never a conversation) |
+| Local services, helplines, crisis lines, whats-on-near-us | Local Support |
+| NDIS access, plans, budgets, reviews, law changes (Australia) | NDIS Guide (answer from `shared/ndis/`, never from memory) |
+| The printed morning paper, or changing what it carries | Morning Edition |
 | A visual tool, tracker, printable or mini-app is needed | Artifacts Generator (starters in `templates/artifacts/`) |
 
 Overlaps are normal. The Navigator coordinates multi-skill situations; skills may hand off mid-conversation when the real need turns out to be elsewhere ("that sounds like the Routine Architect's ground; want me to bring the approach in?").

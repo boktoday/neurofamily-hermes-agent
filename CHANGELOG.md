@@ -1,5 +1,19 @@
 # Changelog
 
+## Sixteen-skill catalogue unified, license and model drift fixed
+
+`AGENTS.md`, `profile.yaml`, `README.md` and the routing tables disagreed on how many skills exist, and four skills were invisible to the navigator.
+
+- **Count corrected to sixteen** in `AGENTS.md` ("Twelve skills" was the opening line), `profile.yaml` ("twelve specialist support skills") and `README.md`, which already said 16 in the directory map while its migration note said twelve. `profile.yaml` now also names all sixteen slugs so the profile is self-describing.
+- **The four missing skills are routable.** `hard-moments`, `local-support`, `ndis-guide` and `morning-edition` were absent from the `AGENTS.md` routing table, the `family-navigator` routing table and its catalogue line, and `morning-edition` was missing from the README skill table. All four now carry a slug, a trigger and what to hand over. The old bare "Crisis or safeguarding" row is replaced by the real `hard-moments` skill.
+- **`behaviour-advisor` collaboration points** gained `hard-moments` (crisis handover mid-behaviour-work), `ndis-guide` (behaviour support funding and restrictive-practice rules) and `local-support`.
+- **Licenses aligned.** Three skills declared MIT (`hard-moments`, `local-support`, `morning-edition`) against a root PolyForm Noncommercial LICENSE, and `ndis-guide` had no license field at all, nor author, platforms or metadata. All sixteen now read `license: PolyForm Noncommercial 1.0.0`, matching the root LICENSE title. `ndis-guide` also gained its missing author, platforms and tags.
+- **Phantom cross-reference removed:** `local-support` listed `health-appointments` in `related_skills`, which is not a skill in this repo. Replaced with `parent-companion`.
+- **`config.yaml` model id namespaced** to `deepseek/deepseek-v4-flash` with a comment on how OpenRouter resolves ids. Correction worth recording: the previous bare `deepseek-v4-flash` was **not** returning a 404. Tested against the live API, both forms answer HTTP 200, because OpenRouter resolves the bare name as an alias. The bare form is simply absent from the published catalogue at `/api/v1/models`, so it can be retired without notice. The namespaced id is the durable one, and the comment now says exactly that rather than overstating the risk.
+- Verified: all 16 skill directories are named in `README.md`, `AGENTS.md`, `profile.yaml` and `skills/family-navigator/SKILL.md`; `grep -rn "license:" skills/` returns 16 identical values; every `related_skills` entry resolves to a real skill; `config.yaml` and `profile.yaml` parse; the model id is present in the live OpenRouter catalogue.
+
+---
+
 ## Legacy OpenClaw paths removed from every skill
 
 Sweep of `skills/**/SKILL.md` for file paths left behind by the OpenClaw-to-Hermes migration. Conflicting paths made the agent spend tool calls looking for files that do not exist.

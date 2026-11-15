@@ -36,6 +36,7 @@ Think of it as a multidisciplinary team in your pocket: a family coordinator, a 
 | Hard Moments | Crisis moments, safety, hand-off to real people |
 | Local Support | Verified helplines and services by country |
 | NDIS Guide | Australian scheme navigation: access, plans, budgets, reviews, from the shipped document library |
+| Morning Edition | The printed A4 morning paper, and changing what it carries |
 | Artifacts Generator | Visual schedules, trackers, dashboards, family mini-apps |
 
 Every skill is neurodiversity-affirming, strengths-based and trauma-informed. See `SOUL.md` for the principles and `AGENTS.md` for how the team works together.
@@ -125,7 +126,7 @@ Setup commands are in `schedules/README.md`.
 
 ## What changed in the Hermes edition
 
-- The twelve OpenClaw agents are now twelve Hermes **skills** (`skills/<name>/SKILL.md`), with the same souls and tools, plus shared-context and escalation sections.
+- The twelve OpenClaw agents became twelve Hermes **skills** (`skills/<name>/SKILL.md`), keeping the same souls and tools, plus shared-context and escalation sections. Four more were added later in Hermes, making sixteen: `hard-moments`, `local-support`, `ndis-guide` and `morning-edition`.
 - **Schedules added** (the OpenClaw edition had none).
 - **LICENSE added** (PolyForm Noncommercial 1.0.0 with Required Notice). The previous repo had no license.
 - **Local models guide** added to `INSTALL.md` (offline setup via LM Studio or Ollama).

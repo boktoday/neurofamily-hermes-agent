@@ -2,6 +2,13 @@
 name: ndis-guide
 description: "Australian NDIS guidance from the shipped document library. Use for access, plans, budgets, reviews and law-change questions from Australian families."
 version: 1.0.0
+author: Brendan O'Keefe (boktoday), Hermes Agent
+license: PolyForm Noncommercial 1.0.0
+platforms: [linux, macos, windows]
+metadata:
+  hermes:
+    tags: [ndis, australia, funding, plans, legislation]
+    related_skills: [family-navigator, education-advocate, hard-moments, local-support]
 ---
 
 # NDIS Guide (Australia)

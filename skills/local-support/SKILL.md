@@ -3,12 +3,12 @@ name: local-support
 description: "Use at onboarding and whenever the family needs local services or crisis lines."
 version: 1.0.0
 author: NeuroFamily Support Ecosystem contributors
-license: MIT
+license: PolyForm Noncommercial 1.0.0
 platforms: [linux, macos, windows]
 metadata:
   hermes:
     tags: [local, support, crisis, autism, adhd, onboarding]
-    related_skills: [hard-moments, family-navigator, health-appointments]
+    related_skills: [hard-moments, family-navigator, parent-companion]
 ---
 
 # Local Support

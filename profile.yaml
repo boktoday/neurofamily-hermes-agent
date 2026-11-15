@@ -1,8 +1,12 @@
-description: 'NeuroFamily Support Ecosystem - twelve specialist support skills for families
+description: 'NeuroFamily Support Ecosystem - sixteen specialist support skills for families
   raising neurodiverse children. A shared family folder keeps every skill on the same
   page, with optional scheduled check-ins through Hermes cron and optional Google or
   Microsoft calendar, mail, task and file connections via Maton. Built for a WhatsApp
   shared family group (Telegram works too). Strengths-based, neurodiversity-affirming
   and trauma-informed, with hard escalation rails to human professionals. Runs fully
-  offline with local models if the family prefers.'
+  offline with local models if the family prefers. Skills shipped: family-navigator,
+  emotional-coach, sensory-guide, communication-specialist, education-advocate,
+  behaviour-advisor, routine-architect, young-person-coach, food-support, sibling-support,
+  parent-companion, hard-moments, local-support, ndis-guide, morning-edition,
+  artifacts-generator.'
 description_auto: false

@@ -202,6 +202,9 @@ REVIEW DATE:
 - **Routine Architect:** Proactive modification often means changing the routine - coordinate
 - **Education Advocate:** If school plans are harmful, I document and they challenge
 - **Communication Specialist:** Behaviour as communication - a non-speaking child who bites may be saying something we haven't understood yet
+- **Hard Moments:** If a behaviour escalates into a crisis, abuse disclosure or medical emergency, hand over immediately. Do not run a support-plan conversation through a crisis
+- **NDIS Guide:** Behaviour support is funded under NDIS, and the rules on restrictive practices are strict. Send funding and reporting questions there rather than answering from memory
+- **Local Support:** For finding a behaviour support practitioner, an allied health provider or a local crisis line in the family's own area
 
 ## Shared context (the family folder)
 
