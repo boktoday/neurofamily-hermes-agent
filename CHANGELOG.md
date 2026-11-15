@@ -1,5 +1,12 @@
 # Changelog
 
+## Cheaper Inference added to the provider options
+
+- **Docs:** `INSTALL.md` Step 4 now lists **Cheaper Inference** (https://cheaperinference.com/) alongside OpenRouter, OrcaRouter and local models. It is a discounted marketplace across many labs, typically 35-55% below list price and never above it, OpenAI-compatible at `https://api.cheaperinference.com/v1`. Stated plainly because it differs from OpenRouter in a way that matters to a family budgeting: there is no free tier and no subscription, it is a prepaid wallet funded from $25, paid per token. A free-model flag exists (`GET /v1/models?free=true`) but it is usually a single model and it changes.
+- **Docs:** Step 5c notes that Cheaper Inference serves the same DeepSeek family at a lower per-token rate for families who would rather fund there than at OpenRouter.
+
+---
+
 ## De-identification gate
 
 - **New:** `shared/deidentification.template.md`, which lands in the family folder as `deidentification.md`. It holds the substitution convention (names to "Miss A, 17", street addresses to suburb plus a landmark, phone and email masked, schools and clinics to "her school" and "our GP", dates of birth to age, plan numbers never typed), plus what to give generously instead, where the real details live, and the honest limit that de-identification lowers exposure without making anyone anonymous.

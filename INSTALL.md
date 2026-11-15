@@ -77,6 +77,7 @@ cp .env.example .env
 **Free and low-cost options:**
 
 - **OpenRouter** (https://openrouter.ai/) - one key unlocks a huge catalogue, including free-tier models that rotate monthly. Check the live catalogue for what is currently free.
+- **Cheaper Inference** (https://cheaperinference.com/) - a discounted marketplace across many labs, typically 35-55% below list price and never above it, with no separate routing surcharge. OpenAI-compatible at `https://api.cheaperinference.com/v1` with `ci_live_` keys. Note there is **no free tier and no subscription**: it is a prepaid wallet, fund from $25, paid per token. A free-model flag exists (`GET /v1/models?free=true`) but it is usually a single model and it changes.
 - **OrcaRouter** (https://orcarouter.ai/) - alternative router; model `orcarouter/auto` routes to the cheapest live model.
 - Local models - see Step 5. Completely free and completely private.
 
@@ -116,7 +117,7 @@ step entirely if the family prefers everything to stay inside the family folder.
 
 ## Step 5c: Models and voice - the recommended setup
 
-**Everyday:** the config default is DeepSeek Flash via OpenRouter: fast, inexpensive, and right for most family conversations.
+**Everyday:** the config default is DeepSeek Flash via OpenRouter: fast, inexpensive, and right for most family conversations. Cheaper Inference serves the same DeepSeek family at a lower per-token rate if you would rather fund there instead (see the options in Step 4).
 
 **Complex work:** the same OpenRouter key unlocks frontier models. When a job needs heavier reasoning (an advocacy letter, a tangled support plan), ask the agent to switch, or let it propose the switch.
 
