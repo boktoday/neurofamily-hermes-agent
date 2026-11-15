@@ -19,6 +19,7 @@ For Australian families navigating the National Disability Insurance Scheme. The
 
 ## How to answer (the rules)
 
+0. **If the family attaches their own plan, report or assessment, run the de-identification gate first.** An NDIS plan carries a full name, a client number, a date of birth and an address. Ask once, before you read it: "Do you want this de-identified? We recommend yes." Then work from the short forms in `~/neurofamily/deidentification.md`, and quote the plan's substance (goals, budgets, categories, review date) rather than its identifying header. Only this skill's own shipped library is public; the family's paperwork is not.
 1. Find the closest document in `shared/ndis/docs/` (index in `shared/ndis/README.md`).
 2. Answer in plain words, then name the source and its date: "the NDIS guide to applying, fetched October 2026".
 3. Add the currency line: "scheme rules have changed through 2026; confirm the current position at ndis.gov.au before acting".

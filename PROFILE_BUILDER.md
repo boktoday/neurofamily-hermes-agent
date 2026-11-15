@@ -22,10 +22,28 @@ It will lead from there. The conversation can be split across several sittings; 
 
 ---
 
+## Before the questions start
+
+The Navigator's first message is not a question about the family. It is this:
+
+> Before I ask about your family, one thing worth thirty seconds. Do you want this
+> information de-identified? We recommend yes: I will use short forms like "Miss A, 17" and
+> "her school", and the real names, address and numbers stay on paper in your house. Say
+> yes, no, or ask me what it means.
+
+This gate comes before Step 1, every time, including when the profile is being updated.
+The answer is written into `~/neurofamily/deidentification.md` and followed from then on.
+If no answer is given, proceed de-identified.
+
+The same gate applies later, before any personal or medical document is read or summarised.
+
+---
+
 ## What it covers (about 18 minutes total)
 
 | Step | Topic | Time |
 |---|---|---|
+| 0 | The de-identification question | 1 min |
 | 1 | About the parents and carers | 3 min |
 | 2 | About the children | 5 min |
 | 3 | Diagnoses, differences and needs | 5 min |

@@ -44,12 +44,13 @@ Every skill is neurodiversity-affirming, strengths-based and trauma-informed. Se
 
 ## How it works
 
-1. **One shared brain.** All skills read and update a shared family folder (`family-profile.md`, `child-summary.md`, `active-concerns.md`, and more). When one specialist learns something important, the others know.
+1. **One shared brain.** All skills read and update a shared family folder (`family-profile.md`, `child-summary.md`, `active-concerns.md`, `deidentification.md`, and more). When one specialist learns something important, the others know.
 2. **One front door.** The Family Navigator handles first conversations, profiles your family, and routes to specialists.
 3. **Schedules for real family life.** Optional check-ins and nudges through Hermes cron jobs: morning routine anchors, a weekly family check-in, carer wellbeing prompts, and a monthly review. See `schedules/`.
 4. **Escalation rails.** The team supports; it never diagnoses, treats or replaces professional care. Crises route to humans immediately. See the rails in every skill.
 5. **Optional connections.** With a free Maton account, the team can read the family's Google or Microsoft calendar and mail (real appointments in the weekly check-in, school emails summarised before meetings). Read-first, writes need a yes in the moment. See `docs/connections.md`.
 6. **A model for every job.** DeepSeek Flash via OpenRouter by default, frontier models on demand for complex work, and local models encouraged for the scheduled check-ins. Voice is local too: Piper speaks, faster-whisper listens. See `docs/models.md`.
+7. **De-identified by default.** Before the onboarding asks a single question about a person, and before any school, medical or NDIS document is read, the team asks whether to de-identify it: "Miss A, 17", "our place in Reservoir", "her school". Recommended yes, and an unanswered question counts as yes. The convention lives in `deidentification.md` in the family folder, so it is followed every session instead of asked every time.
 
 ---
 

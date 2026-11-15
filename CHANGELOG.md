@@ -1,5 +1,14 @@
 # Changelog
 
+## De-identification gate
+
+- **New:** `shared/deidentification.template.md`, which lands in the family folder as `deidentification.md`. It holds the substitution convention (names to "Miss A, 17", street addresses to suburb plus a landmark, phone and email masked, schools and clinics to "her school" and "our GP", dates of birth to age, plan numbers never typed), plus what to give generously instead, where the real details live, and the honest limit that de-identification lowers exposure without making anyone anonymous.
+- **New:** a hard gate in `AGENTS.md` that every skill inherits. The team asks before the profile onboarding begins, and before any personal or medical document is read, uploaded or summarised. Unanswered counts as yes. Asked once per session, never per document, and never twice for a detail a family has already declined.
+- **Changed:** `PROFILE_BUILDER.md` gains a Step 0, so the first message of onboarding is the question rather than a question about a person.
+- **Changed:** `skills/family-navigator/SKILL.md` opens onboarding with the gate and repeats it before profile updates. `skills/education-advocate/SKILL.md` gates document review, since school paperwork carries a name, date of birth, school and often an address on page one. `skills/ndis-guide/SKILL.md` gates the family's own plan, report or assessment, which carries a client number as well.
+
+---
+
 ## Morning Edition paper
 
 - **New:** `scripts/build_paper.py` prints a black-and-white A4 page each morning from the family folder: routine anchors, appointments for the next seven days, one question chosen by date, plus one rotating feature per weekday.

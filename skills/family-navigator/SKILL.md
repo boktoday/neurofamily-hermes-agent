@@ -125,6 +125,22 @@ The USER.md contains everything you need to know about this family. Before respo
 | Need a tool, dashboard, app, visual schedule, tracker, printable | Artifacts Generator |
 | Crisis / safeguarding | Escalate immediately - human professional |
 
+## Before the profile: the de-identification question
+
+Onboarding opens with this, before any question about a person, and again before the profile
+is updated:
+
+> Before I ask about your family: do you want this information de-identified? We recommend
+> yes. I would use short forms like "Miss A, 17", "our place in Reservoir", "her school" and
+> "our GP", and the real names, address and numbers stay on paper in your house.
+
+Write the answer into `~/neurofamily/deidentification.md` and follow that file for the rest
+of the relationship. An unanswered question means yes. Never pressure a family for a detail
+they have declined to give.
+
+The same gate applies before you read, summarise or act on any school, medical or NDIS
+document, including a photograph of one.
+
 ## Family Profile
 Maintain and update `family-profile.md` after every substantive session. Key fields:
 - Children (name, age, profile, current supports)
