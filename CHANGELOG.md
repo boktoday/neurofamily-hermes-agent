@@ -1,5 +1,13 @@
 # Changelog
 
+## Zero data retention compared across providers
+
+- **Docs:** `INSTALL.md` Step 4 gains a "What each one keeps" table after the provider list, because retention matters more than the discount for a family folder full of names, schools and diagnoses. The finding worth acting on: **Cheaper Inference retains a copy of request content by default** and zero data retention is a self-serve dashboard toggle (or a `zdr` request field) that may limit the model list and change the price. **OrcaRouter** stores only metadata by default and grants full zero retention per workspace against a signed DPA, available on every plan, after which it cannot be overridden and every response carries `X-Orca-ZDR: active`.
+- **Docs:** `shared/deidentification.template.md` gains "The other half: what the provider keeps", tying the typing convention to provider retention and pointing at local models as the only option that stores nothing anywhere.
+- Two cautions are stated rather than glossed: Cheaper Inference makes no universal zero-retention claim on its enterprise page, and zero retention stops storage, not the model seeing the data.
+
+---
+
 ## Cheaper Inference added to the provider options
 
 - **Docs:** `INSTALL.md` Step 4 now lists **Cheaper Inference** (https://cheaperinference.com/) alongside OpenRouter, OrcaRouter and local models. It is a discounted marketplace across many labs, typically 35-55% below list price and never above it, OpenAI-compatible at `https://api.cheaperinference.com/v1`. Stated plainly because it differs from OpenRouter in a way that matters to a family budgeting: there is no free tier and no subscription, it is a prepaid wallet funded from $25, paid per token. A free-model flag exists (`GET /v1/models?free=true`) but it is usually a single model and it changes.

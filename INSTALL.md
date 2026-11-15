@@ -81,6 +81,17 @@ cp .env.example .env
 - **OrcaRouter** (https://orcarouter.ai/) - alternative router; model `orcarouter/auto` routes to the cheapest live model.
 - Local models - see Step 5. Completely free and completely private.
 
+**What each one keeps.** This matters more than the discount for a family folder full of names, schools and diagnoses. Both paid routers offer zero data retention, but they do not default to it equally.
+
+| Provider | Out of the box | Zero data retention |
+|---|---|---|
+| OpenRouter | Check its own current terms; terms and default retention vary by upstream provider | Per-request or account-level where supported |
+| Cheaper Inference | **Retains a copy of request content** (prompts, instructions, files, images, audio and outputs) to operate, secure, troubleshoot and improve the service | A self-serve toggle in the dashboard Data Protection page, or a `zdr` field on a request. Routes only to zero-retention providers and disables caching. May limit which models you get and change the price. Metadata is kept either way. Turning it on does not delete anything already retained. |
+| OrcaRouter | Stores only request metadata (time, model, token counts, cost, latency, status). Bodies are stored only if a workspace owner switches on request logging, which is off by default | A per-workspace grant against a signed DPA, available on every plan. Once active it cannot be overridden: no logging, zero-retention upstreams only, no fallback, `X-Orca-ZDR: active` on every response. Metadata is still kept. It stops new content being stored; erase what came before from the console. |
+| Local model | Nothing leaves the machine | Not applicable |
+
+Two honest cautions. Cheaper Inference does not make a universal zero-retention claim on its enterprise page and says to confirm route and provider coverage before sending production data, so treat the toggle as a strong reduction rather than an absolute guarantee. And zero retention stops the provider storing your words; it does not stop the model seeing them, so the de-identification convention still does the other half of the work.
+
 ---
 
 ## Step 5: Optional - fully offline with local models

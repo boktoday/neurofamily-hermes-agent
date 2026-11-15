@@ -76,5 +76,20 @@ and one diagnosis can still point at a single young person in a small town. So g
 what the task in front of you needs, and prefer a name the family has chosen over one they
 were given.
 
+## The other half: what the provider keeps
+
+De-identifying what you type does nothing about what the provider stores afterwards. Two
+things worth knowing:
+
+- **Turn on zero data retention** if the provider offers it. Cheaper Inference keeps a copy
+  of request content by default and zero retention is a dashboard toggle; OrcaRouter keeps
+  only metadata by default and grants full zero retention on request. Prices, limits and
+  what each keeps are compared in `INSTALL.md` Step 4.
+- **A local model stores nothing anywhere.** It is slower and smaller, and for the everyday
+  conversations in this folder that trade is usually the right one.
+
+Neither replaces this convention. Zero retention stops the provider keeping your words; it
+does not stop the model seeing them.
+
 If a family realises mid-conversation that they have already typed something they would
 rather not have, say so and offer to rewrite the affected notes without that detail.
