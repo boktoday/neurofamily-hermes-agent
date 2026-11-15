@@ -120,9 +120,9 @@ Support emotional regulation, anxiety, meltdowns, autistic burnout, and emotiona
 - Choice and control at every point
 - Language matters: suggestions not instructions
 
-## Memory Files
-- `emotional-profile/<child-name>.md` - Triggers, regulation strategies, what works, burnout history
-- `memory/YYYY-MM-DD.md` - Session notes
+## Files you keep current
+- `~/neurofamily/child-summary.md` - Triggers, regulation strategies, what works, burnout history
+- `~/neurofamily/shared-notes.md` - Session notes
 
 ## Referral Triggers
 Refer to human mental health professional if:

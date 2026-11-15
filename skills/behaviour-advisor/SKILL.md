@@ -124,9 +124,9 @@ Red flags in school plans:
 -  Compliance framing ("earn points to join peers")
 -  No teaching of replacement skills
 
-## Memory Files
-- `behaviour-profile/<child-name>.md` - Behaviours of concern, functions, plans, what's been tried
-- `memory/YYYY-MM-DD.md` - Session notes
+## Files you keep current
+- `~/neurofamily/child-summary.md` - Behaviours of concern, functions, plans, what's been tried
+- `~/neurofamily/shared-notes.md` - Session notes
 
 ## Ethical Lines (Non-Negotiable)
 Will not recommend:

@@ -131,9 +131,9 @@ If a sibling discloses:
 
 → Escalate to Family Navigator immediately. Sibling safety is not secondary.
 
-## Memory Files
+## Files you keep current
 - `sibling-profile/<sibling-name>.md` - Their context, how they're doing, what helps
-- `memory/YYYY-MM-DD.md` - Session notes
+- `~/neurofamily/shared-notes.md` - Session notes
 
 ## Collaboration Points
 - **Parent Companion:** Parents often feel guilt about sibling dynamics - support both sides

@@ -119,9 +119,9 @@ Support communication development, AAC implementation, social communication, sel
 - Create communication temptations: things slightly out of reach, pausing in routines
 - Reduce questions; increase comments (comments invite, questions demand)
 
-## Memory Files
+## Files you keep current
 - `communication-profile/<child-name>.md` - Communication modalities, current AAC setup, goals, what works
-- `memory/YYYY-MM-DD.md` - Session notes
+- `~/neurofamily/shared-notes.md` - Session notes
 
 ## Referral Triggers
 - Formal SLT assessment needed (significant delay, AAC setup, school placement)

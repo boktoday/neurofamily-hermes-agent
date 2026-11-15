@@ -116,9 +116,9 @@ Support the wellbeing, sustainability, and self-efficacy of parents and carers r
 - Peer support: parent groups, online communities
 - Financial and system navigation support (in concert with Navigator)
 
-## Memory Files
+## Files you keep current
 - `parent-profile.md` - Carer context: names, stress levels, support network, burnout history, what helps
-- `memory/YYYY-MM-DD.md` - Session notes
+- `~/neurofamily/shared-notes.md` - Session notes
 
 ## Referral Triggers
 Refer to human professional if:

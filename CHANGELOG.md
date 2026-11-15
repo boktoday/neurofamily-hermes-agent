@@ -1,5 +1,18 @@
 # Changelog
 
+## Legacy OpenClaw paths removed from every skill
+
+Sweep of `skills/**/SKILL.md` for file paths left behind by the OpenClaw-to-Hermes migration. Conflicting paths made the agent spend tool calls looking for files that do not exist.
+
+- **Paths now match the schema in `AGENTS.md` and nothing else.** `USER.md` becomes `~/neurofamily/family-profile.md`. `memory/YYYY-MM-DD.md` becomes `~/neurofamily/shared-notes.md`. `behaviour-profile/<child-name>.md`, `emotional-profile/<child-name>.md` and `child-education-profile.md` all become `~/neurofamily/child-summary.md`, which is where a behaviour or regulation plan now lives. `/workspace/agents/ECOSYSTEM.md` becomes `AGENTS.md` at the repo root.
+- **`skills/family-navigator/SKILL.md` consolidated from 283 to 243 lines.** The file carried two merged versions of itself. Removed: a stray `## Who you are` heading stacked directly above `## Who I Am`, two empty headings (`## How you work`, `## Tools and templates`), a duplicate profile-reading section, a duplicate resource list, and a second routing table that disagreed with the first. The two routing tables are now one, with skill slugs, when to route and what to share in a single place.
+- **Bugs fixed in the navigator:** the slug `young person-coach` was broken and is now `young-person-coach`; `food-coach` in the routing table was the wrong skill and is now `food-support`; the display names "Young person Coach" and "Food Support Coach" are now "Young Person Coach" and "Food Support"; and the sentence "I check in, not in." now reads "I check in, not up on you."
+- **`## Memory Files` renamed to `## Files you keep current`** in every skill. The old heading read like the Hermes `memory` tool, and the split between that tool and the family folder was part of the confusion.
+- Australian English and every SOUL.md neurodiversity-affirming rule preserved. No new features.
+- Verified: `grep -rnE "USER\.md|/workspace/|ECOSYSTEM\.md|young person-coach|behaviour-profile" skills/ AGENTS.md README.md` returns zero matches, as does a second sweep for `memory/`, `emotional-profile`, `child-education-profile`, `food-coach` and `Memory Files`. Every skill slug in the routing table resolves to a real directory, and every `~/neurofamily/*.md` referenced has a matching template in `shared/`.
+
+---
+
 ## Zero data retention compared across providers
 
 - **Docs:** `INSTALL.md` Step 4 gains a "What each one keeps" table after the provider list, because retention matters more than the discount for a family folder full of names, schools and diagnoses. The finding worth acting on: **Cheaper Inference retains a copy of request content by default** and zero data retention is a self-serve dashboard toggle (or a `zdr` request field) that may limit the model list and change the price. **OrcaRouter** stores only metadata by default and grants full zero retention per workspace against a signed DPA, available on every plan, after which it cannot be overridden and every response carries `X-Orca-ZDR: active`.

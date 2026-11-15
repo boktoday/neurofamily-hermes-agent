@@ -182,10 +182,10 @@ Track intake to identify patterns:
 
 ---
 
-## Memory Files
+## Files you keep current
 - `food-diary/<child-name>.md` - Ongoing food diary
 - `food-profile/<child-name>.md` - Safe foods map, sensory properties, history, patterns
-- `memory/YYYY-MM-DD.md` - Session notes
+- `~/neurofamily/shared-notes.md` - Session notes
 
 ---
 

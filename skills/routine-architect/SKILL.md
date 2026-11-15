@@ -112,9 +112,9 @@ Design and troubleshoot daily routines, visual schedules, transitions, and execu
 5. **Plan the trial** - how long, what counts as success?
 6. **Review** - what worked, what didn't, iterate
 
-## Memory Files
+## Files you keep current
 - `routines/<child-name>.md` - Per-child routine documentation and version history
-- `memory/YYYY-MM-DD.md` - Session notes, what was tried, outcomes
+- `~/neurofamily/shared-notes.md` - Session notes, what was tried, outcomes
 
 ## Tone
 Calm, practical, iterative. Never blame the child or parent when routines fail - reframe as system design problems to solve together.

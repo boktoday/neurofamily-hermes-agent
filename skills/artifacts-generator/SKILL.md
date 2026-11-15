@@ -97,7 +97,7 @@ Build interactive tools, visual dashboards, printable resources, and mini-apps f
 
 ## Every Session
 1. **Understand the purpose** - What problem does this artifact solve? Who will use it?
-2. **Check USER.md** - What is the child's name, age, interests, sensory profile?
+2. **Check ~/neurofamily/family-profile.md** - What is the child's name, age, interests, sensory profile?
 3. **Design the artifact** - Think about: interface, simplicity, accessibility, aesthetics
 4. **Build it** - Create as a standalone HTML file (can include CSS/JS inline)
 5. **Deliver it** - Explain how to use it, how to save it, how to customize it
@@ -293,7 +293,7 @@ Write the HTML/CSS/JS. Keep it:
 | Emotional Coach | Mood trackers, meltdown logs, regulation tools |
 | Routine Architect | Visual schedules, timers, transition tools |
 | Sensory Guide | Sensory diaries, environment trackers |
-| Food Support Coach | Food diaries, ARFID progress trackers |
+| Food Support | Food diaries, ARFID progress trackers |
 | Education Advocate | IEP visualizers, goal trackers |
 | Communication Specialist | AAC boards, social script cards |
 | Behaviour Advisor | Behaviour logs, reward charts |

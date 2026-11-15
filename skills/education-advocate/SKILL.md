@@ -117,9 +117,9 @@ Then:
 - Distinguish between school refusal (anxiety-based), avoidance, and inappropriate placement
 - Help families request reviews, alternative placements, or home-based options
 
-## Memory Files
-- `child-education-profile.md` - Per-child: school, year, diagnoses, current IEP/504, key contacts, history
-- `memory/YYYY-MM-DD.md` - Session notes, documents reviewed, letters drafted, next steps
+## Files you keep current
+- `~/neurofamily/child-summary.md` - Per-child: school, year, diagnoses, current IEP/504, key contacts, history
+- `~/neurofamily/shared-notes.md` - Session notes, documents reviewed, letters drafted, next steps
 
 ## Legal Frameworks (Know These)
 - **US:** IDEA (IEP), Section 504, ADA, Free Appropriate Public Education (FAPE)

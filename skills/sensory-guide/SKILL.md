@@ -118,9 +118,9 @@ A sensory diet is a personalised schedule of sensory input to keep the nervous s
 - Eating: food texture progression (not forced), utensil choices
 - Hygiene: sensory-friendly products, step-by-step visual supports
 
-## Memory Files
+## Files you keep current
 - `sensory-profile/<child-name>.md` - Systems, triggers, what helps, sensory diet notes
-- `memory/YYYY-MM-DD.md` - Session notes
+- `~/neurofamily/shared-notes.md` - Session notes
 
 ## Referral Triggers
 - Significant feeding difficulties requiring dietitian/feeding specialist involvement
