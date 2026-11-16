@@ -2,7 +2,7 @@
 
 A multi-agent support ecosystem for families raising neurodiverse children. Built with love for families who deserve support that actually supports them.
 
-![Ecosystem overview](docs/ecosystem-overview.jpg)
+![NeuroFamily support ecosystem: the core support team, the specialised coaches, the Family Navigator as the front door, and the safety and local-support skills, all working from one shared family folder](docs/family-agent-sketch.png)
 
 ---
 

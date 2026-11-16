@@ -1,5 +1,13 @@
 # Changelog
 
+## The sketch replaces the old hero image
+
+- `docs/ecosystem-overview.jpg` is gone; `docs/family-agent-sketch.png` takes its place as the README's opening image, with alt text that describes what the sketch actually shows rather than "Ecosystem overview".
+- The new image is the source file from `neurodivergeagent.com/assets/family-agent-sketch.png`, byte-identical, 2560x1440, 431 KB.
+- **Two labels in the sketch do not match the repo, and the image was committed as supplied.** It reads "14 specialists + Navigator" and "5 reality-proof schedules". The repo has **fifteen** specialists plus the Navigator (sixteen skills), and **seven** schedules. `morning-edition` is not in the sketch at all, despite being one of the headline features and a full page in the workbook. Regenerating the sketch with those corrected would keep the image and the repo telling the same story.
+
+---
+
 ## One command, two questions, three minutes
 
 The setup was correct and complete, and it assumed the reader was comfortable in a terminal. Cloning, creating a profile by hand, editing a hidden `.env`, comparing three inference routers and buying a SIM card for WhatsApp is a lot to ask of a parent doing this at 11pm after a hard day. `scripts/quickstart.py` replaces all of it with one command and two questions.
