@@ -149,8 +149,8 @@ be the same person; ask which they prefer and keep one.
 
 **If a family has already attached the raw document**, say so plainly rather than carrying on:
 the file has left the machine, and no amount of subsequent care brings it back. Then offer the
-two real options: switch to a local model (`INSTALL.md` Step 5, nothing leaves the house), or
-turn on zero data retention with the provider (`INSTALL.md` Step 4) before continuing.
+two real options: switch to a local model (`docs/advanced-setup.md`, nothing leaves the house), or
+turn on zero data retention with the provider (`docs/advanced-setup.md`) before continuing.
 
 `redact_doc.py` covers NDIS participant numbers, Medicare, CRN, dates of birth, email, phone,
 Australian street addresses and postcodes, and any names you pass in. It misses things, so

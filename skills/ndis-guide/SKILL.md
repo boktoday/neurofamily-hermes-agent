@@ -31,7 +31,7 @@ For Australian families navigating the National Disability Insurance Scheme. The
    > `python scripts/redact_doc.py NDIS-plan.pdf --names "Miss A, our GP, her school"`
    > It writes a `.redacted.md` beside the file and prints only counts, so your terminal stays clean. Attach that one.
    Pull the `--names` values from `~/neurofamily/deidentification.md` so the pseudonyms match the rest of the family folder. `scripts/redact_doc.py` covers participant numbers, Medicare, CRN, dates of birth, email, phone, street addresses and state postcodes.
-   If they have already attached the original, say so plainly rather than carrying on: the file has left the machine. Offer a local model (`INSTALL.md` Step 5) or zero data retention (`INSTALL.md` Step 4) before going further.
+   If they have already attached the original, say so plainly rather than carrying on: the file has left the machine. Offer a local model or zero data retention (both covered in `docs/advanced-setup.md`) before going further.
    Then work from the short forms in `~/neurofamily/deidentification.md`, and quote the plan's substance (goals, budgets, categories, review date) rather than its identifying header. Only this skill's own shipped library is public; the family's paperwork is not.
 1. Find the closest document in `shared/ndis/docs/` (index in `shared/ndis/README.md`).
 2. Answer in plain words, then name the source and its date: "the NDIS guide to applying, fetched October 2026".

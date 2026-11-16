@@ -76,7 +76,8 @@ The reason all four layers exist, in Cheaper Inference's own documentation:
 
 Zero retention stops them keeping it. It cannot stop you sending it. Redaction is the layer that removes the details; zero retention is what stops a copy accumulating afterwards.
 
-If nothing should leave the house at all, use a local model instead: `INSTALL.md` Step 5. No account, no request, no provider.
+If nothing should leave the house at all, use a local model instead: see
+`docs/advanced-setup.md`. No account, no request, no provider.
 
 ### What this does not claim
 
@@ -166,12 +167,19 @@ It writes `<family>/paper/YYYY-MM-DD.html`, a PDF in `paper/editions/`, and `las
 
 ## Install
 
-See `INSTALL.md`. Short version:
+**One command, two questions, under three minutes:**
 
-1. Install Hermes Agent (one command, any laptop).
-2. Add this profile from the install sheet, or copy `skills/` into your Hermes profile and copy the templates from `shared/`.
-3. Have your first conversation with the Family Navigator to build your family profile.
-4. Optionally add the schedules from `schedules/`.
+```bash
+python scripts/quickstart.py
+```
+
+It checks your machine, creates the `neurofamily` profile, copies the sixteen skills in, builds the family folder with its private rooms, and asks only two things: which brain, and how you want to talk to it. Then:
+
+```bash
+hermes -p neurofamily
+```
+
+Full walkthrough for a non-technical parent: `INSTALL.md`. Everything past that - other providers, local models, scheduled jobs, WhatsApp - is in `docs/advanced-setup.md`.
 
 ---
 
@@ -226,14 +234,14 @@ shared/            the shared brain: family folder templates, regional resources
 schedules/         ready-to-install check-ins, nudges and the Morning Edition paper
 SOUL.md            the principles every skill lives by
 AGENTS.md          how the team works together
-INSTALL.md         full setup guide (including fully-offline local models)
+INSTALL.md         the three-minute setup guide for a non-technical parent
 PROFILE_BUILDER.md the guided family onboarding
 config.yaml        example Hermes configuration
 templates/         starter artifacts (food diary, IEP Companion and friends)
-scripts/           setup-family-folder.py (family folder + private partitions),
-                   redact_doc.py (scrub a document before it is attached) and
-                   build_paper.py (the Morning Edition)
-docs/              design document + connections, models and local-models guides
+scripts/           quickstart.py (the one-command wizard), setup-family-folder.py
+                   (family folder + private partitions), redact_doc.py (scrub a
+                   document before it is attached) and build_paper.py (the Morning Edition)
+docs/              advanced-setup, connections, models and local-models guides
 ```
 
 ---

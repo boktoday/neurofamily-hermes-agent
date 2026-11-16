@@ -84,7 +84,7 @@ things worth knowing:
 - **Turn on zero data retention** if the provider offers it. Cheaper Inference keeps a copy
   of request content by default and zero retention is a dashboard toggle; OrcaRouter keeps
   only metadata by default and grants full zero retention on request. Prices, limits and
-  what each keeps are compared in `INSTALL.md` Step 4.
+  what each keeps are compared in `docs/advanced-setup.md`.
 - **A local model stores nothing anywhere.** It is slower and smaller, and for the everyday
   conversations in this folder that trade is usually the right one.
 

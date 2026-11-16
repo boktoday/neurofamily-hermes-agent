@@ -1,5 +1,22 @@
 # Changelog
 
+## One command, two questions, three minutes
+
+The setup was correct and complete, and it assumed the reader was comfortable in a terminal. Cloning, creating a profile by hand, editing a hidden `.env`, comparing three inference routers and buying a SIM card for WhatsApp is a lot to ask of a parent doing this at 11pm after a hard day. `scripts/quickstart.py` replaces all of it with one command and two questions.
+
+- **`scripts/quickstart.py`**, standard library only, Python 3.10+. Five steps: check Python and the Hermes CLI; copy the sixteen skills, `shared/`, `templates/` and the config into a `neurofamily` profile; build the family folder with its private partitions; ask which brain; ask how you want to talk to it.
+- **The profile location is derived the way Hermes derives it**, not guessed: `HERMES_HOME` if set (and unwound correctly when it points at a profile rather than the root), otherwise `LOCALAPPDATA/hermes` on Windows and `~/.hermes` elsewhere, honouring `HERMES_DATA_DIR_SUFFIX`. `--profiles-dir` overrides it.
+- **Two choices, not four.** Cloud means OpenRouter with a key written straight to `.env`; local means Ollama or LM Studio, auto-detected on ports 11434 and 1234 and configured through `custom_providers` with no key at all. If a local engine is already running, it becomes the suggested default and the script says why.
+- **Never destructive.** A first run copies; a second run finds everything identical and copies nothing. `--update` keeps every file the family has edited and writes the repository's version beside it with `.new` on the end. Existing `.env` files are merged, not replaced, and the previous one is kept as `.env.bak`.
+- **`--dry-run` writes nothing, prompts for nothing and makes no network call.** It resolves both paths, plans all 110 file copies, and prints each one with its action, so the copy logic is verifiable on any machine without creating a profile.
+- **`docs/advanced-setup.md`** now carries what used to make `INSTALL.md` long: the full provider comparison and retention table, zero-retention instructions for both OpenRouter and Cheaper Inference, local-model hardware guidance, the models-and-voice mix, cron detail, and the WhatsApp dedicated-number explanation.
+- **`INSTALL.md` rewritten** from 241 lines to a three-minute path for a non-technical parent: get the folder, run one command, say hello. It keeps the two troubleshooting answers people actually hit, and points at `docs/advanced-setup.md` for everything else.
+- **OpenRouter's zero-retention wording was corrected while writing it.** It is not a single toggle, which is how it is usually described: ZDR is enforced per model group in the account privacy settings, with a separate Safety Retention choice, and it is not on by default for self-serve accounts. The wizard and the docs now say that rather than sending someone looking for a switch that does not exist.
+- **Stale step references fixed.** `AGENTS.md`, `README.md`, `skills/ndis-guide/SKILL.md` and `shared/deidentification.template.md` all pointed at `INSTALL.md` Step 4 and Step 5, which no longer exist after the rewrite. All now point at `docs/advanced-setup.md`.
+- Verified: `python scripts/quickstart.py --dry-run` exits 0 and reports 110 planned copies; a real run against a sandbox writes the profile, the family folder, `.env` and `config.yaml` correctly; `--update` preserves an edited `SOUL.md` and saves `SOUL.md.new`; the Telegram and local-engine paths both produce working config; the 30 redaction tests still pass.
+
+---
+
 ## Privacy, written down for the family rather than only for the machine
 
 The de-identification gate, the private partitions and the redaction script were all in place but scattered across `AGENTS.md`, four skills and a script's docstring. A family reading the README would not have found them, and the workbook said nothing about any of it.
