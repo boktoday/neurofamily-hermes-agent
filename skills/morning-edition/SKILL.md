@@ -54,6 +54,27 @@ python scripts/build_paper.py --family ~/neurofamily --date 2026-11-09 --no-prin
 
 It writes `<family>/paper/YYYY-MM-DD.html`, `<family>/paper/editions/YYYY-MM-DD.pdf`, and `last-run.json` with the date, edition, feature, page count and whether the printer accepted the file. The HTML builds with the standard library alone; the PDF step needs Playwright, and printing needs SumatraPDF on Windows. If either is missing the builder says so and still writes the page.
 
+## What it is allowed to read
+
+The paper is the most exposed thing in the ecosystem: it is printed, left on a table, and
+read by everyone in the house without the agent present. So its reading list is fixed and
+short.
+
+It reads only:
+
+- `<family>/paper.json` - the family's own settings
+- `<family>/family-calendar.md` - appointments for the next seven days
+- `<family>/news/*.md` - briefs filed by the news job
+- `shared/local-support/<country>.md` in the repo - crisis lines for the feature
+
+**It must never read `~/neurofamily/private-parent/` or `~/neurofamily/private-yp/`.**
+`scripts/build_paper.py` enforces this: every read goes through `guard_shared()`, which
+exits rather than opening anything inside a private partition, and the run prints which
+partitions it deliberately skipped.
+
+If a feature seems to need private material, that is the signal that it does not belong on
+the kitchen table. Put it in a conversation instead.
+
 ## Rules
 
 - **Black and white only.** Greys, rules and one type family. No colour accents, however tasteful: the paper is printed in ink-saver mode and colour costs the family money.

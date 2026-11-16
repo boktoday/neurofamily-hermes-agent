@@ -1,5 +1,20 @@
 # Changelog
 
+## Private partitions, and a paper.json that actually gets created
+
+Two problems with one shape: the family folder had no notion of privacy, and the Morning Edition could not start on a fresh install.
+
+- **`scripts/setup-family-folder.py` now copies `*.template.json` as well as `*.template.md`.** It only globbed markdown, so `shared/paper.template.json` was skipped and `~/neurofamily/paper.json` never existed. `build_paper.py` silently fell back to the repo defaults, which meant a family's choices never took effect. Now `paper.template.json` lands as `paper.json`. Still never overwrites.
+- **Three partitions are created with the folder:** `shared/`, `private-parent/` and `private-yp/`. The two private ones are mode `0o700` on POSIX, and each carries a `README.md` stating its boundary. On Windows the chmod is skipped, because ACLs are not expressible that way, and the documentation is the control instead.
+- **`scripts/build_paper.py` cannot read a private partition.** Every read goes through a new `guard_shared()` check that exits with a clear message rather than opening the file, and a run prints `private partition present, not read: …` so the skip is visible rather than assumed. Tested three ways: the three reader functions each refuse, pointing `--family` at `private-parent/` refuses, and a normal build prints the skip line and produces its page.
+- **`AGENTS.md` gained a "Privacy partitions" section** naming the three rooms, who may see each, and the rule that what travels from a private note into `shared-notes.md` is the operating conclusion, never the disclosure.
+- **`parent-companion`** writes carer reflections to `~/neurofamily/private-parent/carer-notes.md` and is told directly never to copy them into `shared-notes.md`. **`young-person-coach`** and **`sibling-support`** write to `~/neurofamily/private-yp/` and need that person's explicit consent, in that conversation, before summarising anything for a parent. All three inherit the `hard-moments` safety override and say so out loud rather than letting someone discover it later.
+- **`morning-edition`** now documents its fixed reading list, so a future feature cannot quietly pull private material onto the kitchen table.
+- Three more phantom profile paths went with this: `parent-profile.md`, `young person-profile/<name>.md` and `sibling-profile/<sibling-name>.md` were not files the schema defines.
+- Verified: `setup-family-folder.py --target <tmp>` writes 11 files plus three partitions, and a second run writes 0 and leaves 11 alone. Both scripts compile. Task 1's phantom-path sweep still returns zero.
+
+---
+
 ## Sixteen-skill catalogue unified, license and model drift fixed
 
 `AGENTS.md`, `profile.yaml`, `README.md` and the routing tables disagreed on how many skills exist, and four skills were invisible to the navigator.

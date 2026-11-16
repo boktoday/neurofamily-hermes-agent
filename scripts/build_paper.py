@@ -87,7 +87,27 @@ LEARN_BANK = [
 LOCAL_COUNTRY_NAMES = {"AU": "Australia", "UK": "United Kingdom", "US": "United States"}
 
 
+PRIVATE_PARTITIONS = ("private-parent", "private-yp")
+
+
+def guard_shared(path: pathlib.Path) -> pathlib.Path:
+    """The Morning Edition is a shared, printable artefact.
+
+    The private partitions hold what was said in confidence: a carer's burnout
+    note, a young person's own words. Refuse to read them at all, so that no
+    future call site can quietly start printing one onto the kitchen table.
+    """
+    resolved = pathlib.Path(path).resolve()
+    for part in resolved.parts:
+        if part.lower() in PRIVATE_PARTITIONS:
+            raise SystemExit(
+                "refusing to read %s: %s is a private partition, and the Morning "
+                "Edition is shared" % (resolved, part))
+    return resolved
+
+
 def load_json(path: pathlib.Path, default: dict) -> dict:
+    path = guard_shared(path)
     if path.exists():
         try:
             return json.loads(path.read_text(encoding="utf-8"))
@@ -98,6 +118,7 @@ def load_json(path: pathlib.Path, default: dict) -> dict:
 
 def parse_calendar(path: pathlib.Path) -> list[dict]:
     """Rows of the family calendar table for today onwards."""
+    path = guard_shared(path)
     if not path.exists():
         return []
     rows = []
@@ -132,6 +153,7 @@ def upcoming(rows: list[dict], today: dt.date, days: int = 3) -> list[dict]:
 
 def newest_news(folder: pathlib.Path, today: dt.date) -> tuple[str, str]:
     """Newest news brief filed on or before today, with its date label."""
+    folder = guard_shared(folder)
     if not folder.exists():
         return "", ""
     files = []
@@ -439,6 +461,11 @@ def main() -> int:
     if not family.exists():
         print("family folder not found: %s" % family)
         return 2
+    # The paper is shared. Say so out loud, so a family reading the log knows
+    # the private partitions were deliberately left alone.
+    for name in PRIVATE_PARTITIONS:
+        if (family / name).exists():
+            print("private partition present, not read: %s/" % name)
     today = dt.date.fromisoformat(args.date) if args.date else dt.date.today()
 
     defaults = load_json(REPO / "shared" / "paper.template.json", {})

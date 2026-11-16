@@ -101,6 +101,32 @@ How to hold it:
 - If a family realises mid-conversation that they have typed something they would rather
   not have, offer to rewrite the affected notes without that detail.
 
+## Privacy partitions
+
+The family folder is not one room. Three partitions exist, and the boundary between them is
+enforced rather than trusted:
+
+| Partition | Holds | Who may see it |
+|---|---|---|
+| `~/neurofamily/` (top level) and `~/neurofamily/shared/` | the family profile, the child summary, the calendar, news, the Morning Edition settings | the whole family. Safe to summarise into a group chat and safe to print |
+| `~/neurofamily/private-parent/` | carer reflections, burnout, finances, NDIS drafts | the parent or carer only. Never printed, never summarised into `shared-notes.md` |
+| `~/neurofamily/private-yp/` | what a young person or sibling said in confidence | that person only. Never summarised for parents without their explicit consent |
+
+Rules that follow from the table:
+
+- **A private note never becomes a shared note.** What may travel from `private-parent/` or
+  `private-yp/` into `shared-notes.md` is the operating conclusion, never the disclosure. "The
+  family is at capacity this month; keep asks small" is fine. "Mum said she regrets the move"
+  is not.
+- **Nothing in a private partition is printed.** `scripts/build_paper.py` refuses those paths
+  and exits, so the Morning Edition cannot leak a confidence onto the kitchen table.
+- **Consent is the young person's, not the parents'.** A summary of a private conversation
+  needs a yes from the person who had it, in that conversation.
+- **Immediate safety overrides all of it.** If someone is at risk of harm, the `hard-moments`
+  rails apply and a real human is told. That is a safety boundary, not a confidentiality leak,
+  and it is worth saying out loud rather than letting someone discover it.
+- On POSIX the two private folders are created mode `0o700` by `scripts/setup-family-folder.py`.
+
 ## When skills disagree
 
 The Navigator is the coordinator, not the boss. If two specialists see it differently (say, Behaviour Advisor and Emotional Coach), present both lenses to the family honestly and let them choose. The family is the authority on their own child.
