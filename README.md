@@ -8,13 +8,79 @@ A multi-agent support ecosystem for families raising neurodiverse children. Buil
 
 ## What this is
 
-Fifteen specialist support skills that run on **[Hermes Agent](https://hermes-agent.nousresearch.com/docs)**, your own personal AI assistant. Install it once, and the family has a complete support team through the chat app you already use (Telegram recommended).
+Sixteen specialist support skills that run on **[Hermes Agent](https://hermes-agent.nousresearch.com/docs)**, your own personal AI assistant. Install it once, and the family has a complete support team through the chat app you already use (Telegram recommended).
 
 Think of it as a multidisciplinary team in your pocket: a family coordinator, a school advocate, an OT for sensory and routines, a coach for emotional regulation, a feeding specialist, a carer wellbeing companion, and more, all working together and all sharing one picture of your family.
 
 **Private by design.** Everything runs on your own machine. Your family's information stays with you.
 
 **The Family Navigator** is the front door. It gets to know your family, routes each need to the right specialist, and holds the big picture across everyone.
+
+---
+
+## Privacy first
+
+This is a folder of documents about a child's disability. It is the most sensitive material most families will ever put on a computer, so it is worth being blunt about how it is handled.
+
+**Everything sits on your own machine.** The family folder, the profiles, the notes, the private reflections: all local files under `~/neurofamily/`. Nothing is sent anywhere except the messages you choose to type into the model you chose.
+
+Four layers, in the order they apply.
+
+### 1. De-identification, built into the team
+
+Before onboarding begins, and again before it reads any school, medical or NDIS document, the agent asks one question: *do you want this de-identified?* The answer is written to `~/neurofamily/deidentification.md` and holds for the session. Silence is not consent: unanswered means de-identified. The convention itself lives in `shared/deidentification.template.md`.
+
+Saying no is allowed. If you do, it says once that the model provider will then see the real details, and carries on.
+
+### 2. Private partitions the paper cannot read
+
+`~/neurofamily/` has three rooms:
+
+| Where | Who it is for | Printed or summarised? |
+|---|---|---|
+| `~/neurofamily/` and `shared/` | The whole family | Yes, including the Morning Edition |
+| `~/neurofamily/private-parent/` | The carer only | Never |
+| `~/neurofamily/private-yp/` | That young person only | Never |
+
+A carer's burnout note and a young person's private reflections belong in different rooms from the family calendar. `scripts/setup-family-folder.py` creates all three, with the two private ones mode `0700` on POSIX, and `scripts/build_paper.py` refuses at the code level to read anything inside a private partition. That is deliberate: a rule in a prompt can be argued with by a later edit, and a guard that raises cannot.
+
+What may travel from a private note into shared ground is the *operating conclusion* ("we need to reduce Tuesday mornings"), never the *disclosure* ("dad cried in the car").
+
+### 3. Local redaction, before a document is ever attached
+
+Asking whether to de-identify a document **after** it arrives is too late. Attaching the file is the moment it leaves the machine, and by then the provider already has it.
+
+`scripts/redact_doc.py` runs on your own computer first:
+
+```bash
+python scripts/redact_doc.py NDIS-plan.pdf --names "Sarah Whitmore, Amelia, Reservoir High School"
+```
+
+It writes `NDIS-plan.redacted.md` beside the original. Attach that, never the original.
+
+**It removes:** NDIS participant numbers, Medicare numbers, Centrelink CRNs, labelled dates of birth, email addresses, Australian mobile and landline numbers, street addresses and state postcodes, and every name passed in `--names`. A school becomes `[SCHOOL_A]`, a plain name `[CHILD_A]`, and a titled adult such as `Dr Whitmore` becomes `[PERSON_A]`. A surname shared by two people becomes `[SURNAME_A]` rather than being quietly attributed to one of them.
+
+**It leaves alone, deliberately:** ordinary dates, because review dates are the substance of a plan; and 1300, 1800 and 13 service numbers, because one of them is the NDIS line and redacting it would be worse than useless.
+
+Standard library only. `.txt`, `.md`, `.csv` and `.html` work out of the box; `.pdf` needs `pypdf`, `PyPDF2` or the `pdftotext` binary, and the script names which is missing rather than pretending it redacted something it never read. It prints counts and never values, so the terminal stays safe to screenshot.
+
+**It is a pattern matcher, not a guarantee.** A scanned PDF has no text layer, a nickname slips past a supplied name list, and a bare suburb is left alone. Read the output before sending it, and treat `0 items matched` on a real plan as a warning rather than a clean bill of health.
+
+### 4. Zero data retention, at the provider
+
+If you use a hosted model, the provider's retention setting is the last gate. **Cheaper Inference keeps a copy of every request by default.** Turn zero data retention on *before* your first request, in the dashboard under **Data Protection**. It applies from the moment you enable it, it does not delete what was already kept, and it narrows the models available and may change the price.
+
+The reason all four layers exist, in Cheaper Inference's own documentation:
+
+> ZDR does not detect, mask, or anonymize PII; there is no automatic pre-provider PII redaction. Remove sensitive data in your application before sending it, including tool results and attachments.
+
+Zero retention stops them keeping it. It cannot stop you sending it. Redaction is the layer that removes the details; zero retention is what stops a copy accumulating afterwards.
+
+If nothing should leave the house at all, use a local model instead: `INSTALL.md` Step 5. No account, no request, no provider.
+
+### What this does not claim
+
+It lowers exposure. It does not make anyone anonymous. An age, a suburb, a school type and a diagnosis can still point at one young person in a small town. Give only what the task in front of you needs, and if you have already sent something you would rather not have, say so: the agent can help with what it knows, and cannot help with what it does not.
 
 ---
 
@@ -164,7 +230,9 @@ INSTALL.md         full setup guide (including fully-offline local models)
 PROFILE_BUILDER.md the guided family onboarding
 config.yaml        example Hermes configuration
 templates/         starter artifacts (food diary, IEP Companion and friends)
-scripts/           setup-family-folder.py (family folder setup) and build_paper.py (the Morning Edition)
+scripts/           setup-family-folder.py (family folder + private partitions),
+                   redact_doc.py (scrub a document before it is attached) and
+                   build_paper.py (the Morning Edition)
 docs/              design document + connections, models and local-models guides
 ```
 

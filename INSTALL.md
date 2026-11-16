@@ -92,6 +92,10 @@ cp .env.example .env
 
 Two honest cautions. Cheaper Inference does not make a universal zero-retention claim on its enterprise page and says to confirm route and provider coverage before sending production data, so treat the toggle as a strong reduction rather than an absolute guarantee. And zero retention stops the provider storing your words; it does not stop the model seeing them, so the de-identification convention still does the other half of the work.
 
+**Turning it on, on Cheaper Inference.** Sign in, open **Data Protection** in the dashboard (`/dashboard/data-protection`), and switch zero data retention on. Do it *before* the first request that carries anything real: it applies from the moment you enable it and does not delete what was already kept. An individual request can also carry `zdr: true`, which adds to the account setting and cannot switch it off. Expect a narrower model list and a higher price; `GET /v1/models?zdr=true` returns the zero-retention price view, and a model with no zero-retention provider currently serving it fails before it is sent upstream.
+
+The other half happens on your own machine: see Step 5d, which scrubs the document before it is attached at all.
+
 ---
 
 ## Step 5: Optional - fully offline with local models

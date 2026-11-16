@@ -1,5 +1,20 @@
 # Changelog
 
+## Privacy, written down for the family rather than only for the machine
+
+The de-identification gate, the private partitions and the redaction script were all in place but scattered across `AGENTS.md`, four skills and a script's docstring. A family reading the README would not have found them, and the workbook said nothing about any of it.
+
+- **`README.md` gained a "Privacy first" section** with the four layers in the order they apply: the de-identification gate, the private partitions, local redaction, and the provider's retention setting. Each layer says what it does, what it deliberately does not do, and where the code that enforces it lives. The closing subsection, "What this does not claim", states the honest position: it lowers exposure, it does not make anyone anonymous.
+- **The zero-retention instructions are now specific.** The section gives the dashboard route (Data Protection), the timing that actually matters (before the first request, because enabling it later does not delete what was already kept), and the trade (narrower model list, possible price change). It also quotes Cheaper Inference's own documentation: *"ZDR does not detect, mask, or anonymize PII; there is no automatic pre-provider PII redaction."* That sentence is the argument for why local redaction exists at all, and it comes better from the provider than from us.
+- **`INSTALL.md` Step 4** gained the same dashboard path, the `zdr: true` per-request note, the `/v1/models?zdr=true` price view, and a pointer to Step 5d for the machine-side half.
+- **The workbook gained page 12, "Before you attach anything"**, framed as two gates the reader closes: one on their own machine (the redaction script, when to run it, what it removes, what it misses) and one in the provider's dashboard. It carries the same quotation, an "if it has already gone" note for the family who attaches the original by mistake, and a tick box.
+- **A stale cross-reference bug was found and fixed while doing it.** Six references pointed at "page 15" for the crisis lines, which had been right before two pages were inserted ahead of it and had been wrong ever since: page 15 is "What we never ask it to do", and the crisis lines are page 22. One reference to the key sheet pointed at page 15 instead of page 11. All were corrected, and `verify_pages.py` now re-derives the page map from the rendered markup and checks that every reference resolves to a real page.
+- **The recap page counted wrong.** It said "all ten are ticked" over a checklist that the new page would have made eleven. Privacy is now in the closing checklist as two items, the two gates, giving twelve in a balanced six-row grid.
+- **`README.md` said "Fifteen specialist support skills"** while the repo has sixteen and the layout section said sixteen. That was a leftover from the routing unification and is now consistent.
+- Workbook is 31 pages, A4, vector, overflow gate `PASS`, every page number 2..31 in sequence.
+
+---
+
 ## Local PII redaction before a document is ever attached
 
 The de-identification gate asked whether to de-identify a document *after* it arrived. On a hosted provider that is too late: attaching the file is the moment the bytes leave the machine. `scripts/redact_doc.py` moves that step to the family's own computer.
