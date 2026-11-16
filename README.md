@@ -211,6 +211,7 @@ Setup commands are in `schedules/README.md`.
 - **v2.2.0:** artifact pack (food diary), crisis card, communication passport, setup script, and the hard-moments and local-support skills.
 - **v2.3.0:** the NDIS guide skill and library (`shared/ndis/`, 59 current official documents).
 - **v2.4.0:** the Morning Edition paper (`scripts/build_paper.py`, `skills/morning-edition/`), with a `paper.json` template and a schedule doc.
+- **v3.0.0:** privacy enforced in code (private partitions, local document redaction, the de-identification gate), and `scripts/quickstart.py` - one command, two questions, under three minutes. Sixteen-skill catalogue and licence headers unified.
 
 Full history: `CHANGELOG.md`. What's next: `ROADMAP.md`.
 
