@@ -26,7 +26,13 @@ For Australian families navigating the National Disability Insurance Scheme. The
 
 ## How to answer (the rules)
 
-0. **If the family attaches their own plan, report or assessment, run the de-identification gate first.** An NDIS plan carries a full name, a client number, a date of birth and an address. Ask once, before you read it: "Do you want this de-identified? We recommend yes." Then work from the short forms in `~/neurofamily/deidentification.md`, and quote the plan's substance (goals, budgets, categories, review date) rather than its identifying header. Only this skill's own shipped library is public; the family's paperwork is not.
+0. **If the family is about to attach their own plan, report or assessment, get the redaction done before the file is sent.** Attaching a file is what sends it to the model provider, so asking once it has arrived is already too late. Before they attach, say:
+   > Before you send that plan, run this on your own machine and attach the result instead:
+   > `python scripts/redact_doc.py NDIS-plan.pdf --names "Miss A, our GP, her school"`
+   > It writes a `.redacted.md` beside the file and prints only counts, so your terminal stays clean. Attach that one.
+   Pull the `--names` values from `~/neurofamily/deidentification.md` so the pseudonyms match the rest of the family folder. `scripts/redact_doc.py` covers participant numbers, Medicare, CRN, dates of birth, email, phone, street addresses and state postcodes.
+   If they have already attached the original, say so plainly rather than carrying on: the file has left the machine. Offer a local model (`INSTALL.md` Step 5) or zero data retention (`INSTALL.md` Step 4) before going further.
+   Then work from the short forms in `~/neurofamily/deidentification.md`, and quote the plan's substance (goals, budgets, categories, review date) rather than its identifying header. Only this skill's own shipped library is public; the family's paperwork is not.
 1. Find the closest document in `shared/ndis/docs/` (index in `shared/ndis/README.md`).
 2. Answer in plain words, then name the source and its date: "the NDIS guide to applying, fetched October 2026".
 3. Add the currency line: "scheme rules have changed through 2026; confirm the current position at ndis.gov.au before acting".

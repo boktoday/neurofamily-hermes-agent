@@ -1,5 +1,24 @@
 # Changelog
 
+## Local PII redaction before a document is ever attached
+
+The de-identification gate asked whether to de-identify a document *after* it arrived. On a hosted provider that is too late: attaching the file is the moment the bytes leave the machine. `scripts/redact_doc.py` moves that step to the family's own computer.
+
+- **`scripts/redact_doc.py`**, standard library only. Reads `.txt`, `.md`, `.csv` and `.html` natively; `.pdf` through `pypdf`/`PyPDF2` or the `pdftotext` binary, and says so plainly and stops if neither is present rather than pretending it redacted something it never read.
+- **A scanned PDF is not the same problem as a missing reader**, so it no longer gets the same advice. Telling a family to `pip install pypdf` when pypdf is present and the file is a photo of a letter wastes their time and makes the tool look broken; that case now says the PDF had no text layer and points at OCR. pypdf's own recovered-file chatter is silenced too, because this script's stdout is meant to carry counts and nothing else.
+- **Redacts** NDIS participant numbers (keyword-anchored, plus bare 9-digit runs), Medicare numbers, Centrelink CRNs, labelled dates of birth, email addresses, Australian mobile and landline numbers, Australian street addresses and state postcodes, and any name passed with `--names`. Names become stable pseudonyms: `[SCHOOL_A]`, `[CHILD_A]`, `[PERSON_A]` for a titled adult.
+- **Deliberately leaves alone** ordinary dates, because review dates are the substance of a plan, and 1300 / 1800 / 13 service numbers, because one of them is the NDIS line.
+- **Three leaks closed during development**, each caught by a test that now guards it:
+  - Name substitution ran first and chewed emails into `[CHILD_A].[CHILD_A]@example.com`. Structured patterns now run before names.
+  - Bare-token name expansion turned the suburb `Reservoir` into `[SCHOOL_A]` inside an address, because the school was called Reservoir High School. Schools no longer get bare-token expansion.
+  - The output file was named after the input, so `Sarah-Whitmore-plan.pdf` produced `Sarah-Whitmore-plan.redacted.md`, and the summary printed the source filename. Both are now scrubbed.
+- **Two attribution bugs found by running a real IEP excerpt.** A father written as `Mr Daniel Whitmore` was labelled `[CHILD_B]`, because the family had typed his name without the title; classification now pre-scans the document for a title before it decides, so he becomes `[PERSON_A]`. And a surname shared by two people was being attributed to whichever name was processed first, so a bare `Whitmore` silently meant the daughter; a shared surname now gets `[SURNAME_A]`, which belongs to neither.
+- **`tests/test_redact_doc.py`**, 30 tests against a fabricated NDIS plan and a fabricated IEP excerpt, including that no identifier survives, that the plan's own review dates and goals do survive, and that the terminal summary contains no values.
+- **`AGENTS.md`** gained "Before a document is attached, not after", **`INSTALL.md`** gained Step 5d, and **`skills/ndis-guide/SKILL.md`** now asks before the attachment rather than after. All three say plainly what to do if a raw file has already been sent: name it, then offer a local model or zero data retention.
+- Verified: `python -m unittest tests/test_redact_doc.py` returns 30 tests, OK, exit code 0.
+
+---
+
 ## Private partitions, and a paper.json that actually gets created
 
 Two problems with one shape: the family folder had no notion of privacy, and the Morning Edition could not start on a fresh install.

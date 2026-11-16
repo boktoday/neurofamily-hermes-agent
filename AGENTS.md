@@ -127,6 +127,36 @@ Rules that follow from the table:
   and it is worth saying out loud rather than letting someone discover it.
 - On POSIX the two private folders are created mode `0o700` by `scripts/setup-family-folder.py`.
 
+### Before a document is attached, not after
+
+The gate runs when a document arrives, but a hosted provider has already seen it by then:
+attaching the file is what sends the bytes. The order therefore matters.
+
+1. **Before they attach anything**, say: *"Before you send that, run one command on your own
+   machine and attach the result instead of the original."*
+
+   ```
+   python scripts/redact_doc.py NDIS-plan.pdf --names "Sarah Whitmore, Amelia, Reservoir High School"
+   ```
+
+   It writes `NDIS-plan.redacted.md` beside the file and prints only counts, never the values.
+2. They attach the `.redacted.md`, not the original.
+3. You read that.
+
+Populate `--names` from `~/neurofamily/deidentification.md`, so the pseudonyms match the ones
+already used everywhere else in the family folder. `[CHILD_A]` here and `Miss A` there should
+be the same person; ask which they prefer and keep one.
+
+**If a family has already attached the raw document**, say so plainly rather than carrying on:
+the file has left the machine, and no amount of subsequent care brings it back. Then offer the
+two real options: switch to a local model (`INSTALL.md` Step 5, nothing leaves the house), or
+turn on zero data retention with the provider (`INSTALL.md` Step 4) before continuing.
+
+`redact_doc.py` covers NDIS participant numbers, Medicare, CRN, dates of birth, email, phone,
+Australian street addresses and postcodes, and any names you pass in. It misses things, so
+read its output before sending it, and treat "0 items matched" on a real plan as a warning
+rather than a clean bill of health.
+
 ## When skills disagree
 
 The Navigator is the coordinator, not the boss. If two specialists see it differently (say, Behaviour Advisor and Emotional Coach), present both lenses to the family honestly and let them choose. The family is the authority on their own child.

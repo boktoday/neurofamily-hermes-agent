@@ -140,6 +140,38 @@ Full detail, including what each tier costs: `docs/models.md`.
 
 ---
 
+## Step 5d: Redact a document before it leaves the house
+
+Attaching an NDIS plan, an IEP or a paediatrician's letter to a chat with a hosted provider
+sends the raw file, including the full name, date of birth, participant number and address. A
+small local script scrubs it first.
+
+```bash
+python scripts/redact_doc.py NDIS-plan.pdf --names "Sarah Whitmore, Amelia, Reservoir High School"
+```
+
+It writes `NDIS-plan.redacted.md` beside the original and prints only counts, so the terminal
+is safe to screenshot. Attach the `.redacted.md`, never the original.
+
+- **Inputs:** `.txt`, `.md`, `.csv`, `.html`. For `.pdf`, install `pypdf`
+  (`pip install pypdf`) or the `pdftotext` binary; without either the script says so and stops
+  rather than pretending it redacted something it never read.
+- **Redacts:** NDIS participant numbers, Medicare numbers, Centrelink CRNs, dates of birth,
+  email addresses, Australian phone numbers, Australian street addresses and state postcodes,
+  plus every name you pass in `--names`.
+- **Leaves alone:** ordinary dates, because review dates are the useful part of a plan, and
+  service numbers like 1300, 1800 and 13, because one of them is the NDIS line.
+- **Names:** a school becomes `[SCHOOL_A]`, a plain name becomes `[CHILD_A]`, and a titled
+  adult such as `Dr Whitmore` becomes `[PERSON_A]`. Each is consistent across the document.
+
+It is a pattern matcher, not a guarantee. Read the output before you send it, and treat
+"0 items matched" on a real plan as a warning rather than a clean bill of health.
+
+If the family would rather nothing left the machine at all, use Step 5 (local models) instead
+of redacting.
+
+---
+
 ## Step 6: First conversation (family onboarding)
 
 Start Hermes and say:
