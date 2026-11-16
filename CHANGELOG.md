@@ -1,5 +1,16 @@
 # Changelog
 
+## canirun.ai/models reaches the two places people look
+
+Local models were offered in three places and explained in `docs/`, but the question a family actually asks first - *will this run on my laptop?* - was only answered in a document they had no reason to open yet.
+
+- **README**, feature 6 ("A model for every job"), now points at [canirun.ai/models](https://canirun.ai/models/) with what it is for: grading 146 open models against your real graphics card or Mac, with the memory each needs.
+- **The workbook, page 27** ("Running it on your own machine") carries the same pointer inside the existing speed-table warning, where the reader is already choosing between Qwen3.6 35B and the 800B models that will not fit. The page was full to within 3pt of the body floor, so the addition was paid for by trimming the Screenshot 14 placeholder caption rather than shrinking type.
+- **`docs/advanced-setup.md`** now names the catalogue path alongside the landing page: the root detects your hardware, `/models/` lets you check a specific model before a multi-gigabyte download.
+- Verified: the URL returns 200 and `/models` redirects to `/models/`, so the trailing slash is the canonical form. The page is titled "Local AI models you can run" and lists 146 models. Workbook still 31 pages, overflow gate `PASS`, page 27 body text ends at 803.0pt against the 806.0pt floor.
+
+---
+
 ## The sketch replaces the old hero image
 
 - `docs/ecosystem-overview.jpg` is gone; `docs/family-agent-sketch.png` takes its place as the README's opening image, with alt text that describes what the sketch actually shows rather than "Ecosystem overview".

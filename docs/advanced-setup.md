@@ -133,7 +133,10 @@ Zero retention stops them keeping it. It cannot stop you sending it. That is why
 [canirun.ai](https://canirun.ai) in a desktop browser. It reads your processor,
 memory and graphics directly, ranks the open models that fit, and gives you the
 exact Ollama or LM Studio command for the one you pick. No account, nothing to
-install. Two more worth knowing:
+install. The full browsable catalogue is at
+[canirun.ai/models](https://canirun.ai/models/) - 146 open models graded by VRAM
+fit, speed and compatibility, so you can check a specific model before
+committing to a multi-gigabyte download. Two more worth knowing:
 [localllm-advisor.com](https://localllm-advisor.com) works in both directions,
 model for your hardware or hardware for a model, and
 [localllm.run](https://localllm.run) walks goal, hardware, model and setup in
