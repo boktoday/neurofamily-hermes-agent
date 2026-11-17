@@ -1,5 +1,29 @@
 # Changelog
 
+## The afternoon that goes wrong at Nan's house
+
+Support rarely fails at home. It fails on a Saturday at a grandparent's, at soccer training, at the Sunday handover. The people involved are not the problem: nobody gave them the three things that would make the afternoon work, and the parent is too tired to keep explaining.
+
+`skills/village-aligner/` is a new specialist skill with three outputs:
+
+- **Zero-jargon cheat sheets**, written for one person and one situation (*"How to have a great Saturday afternoon with Leo, for Nan and Pop"*), with no clinical vocabulary at all. Behaviour first; understanding usually follows.
+- **Boundary and alignment scripts** for punitive discipline, forced affection and food pressure. The shape is fixed: shared goal, the one behaviour, an offer rather than a correction, warmth and an exit. Nothing that scores points or is designed to be read by a third party later.
+- **Co-parent handover summaries**, neutral enough to be read aloud in a courtroom without embarrassment, which is the honest test.
+
+### The guarantee is in the script, not the instructions
+
+A cheat sheet leaves the house. It gets photographed, forwarded and stuck on a fridge, so `scripts/carer_brief.py` decides what may go into it:
+
+- Only `child-summary.md` is read. `private-parent/` and `private-yp/` are refused outright with the same shape of guard that `build_paper.py` uses for the Morning Edition, and any file not on a two-file allowlist is refused too.
+- The clinical fields are **dropped, not summarised**: diagnoses, school setting, supports in place and the parent-facing challenges section. A grandparent does not need the diagnosis line to have a good afternoon, and sharing it is the family's decision, not ours.
+- Clinical shorthand left in the source is reported as a count ("dysregulat x1, pda x1") so the skill knows what to translate before anything reaches the page.
+
+Verified with 17 unit tests, including one that spies on every file open and asserts nothing under `private-` is ever read, plus a real run against a folder built by `setup-family-folder.py` showing both refusals.
+
+Registering it brought the skill count to eighteen and updated the catalogue in all fourteen files that carry one.
+
+---
+
 ## A passport for the appointments nobody prepares for
 
 A GP visit, a dentist, a blood draw, a vaccination, a haircut. Some of the hardest hours a neurodivergent child spends, and almost never because of the medicine. It is the lights, the waiting, and nobody saying what happens next.

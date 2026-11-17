@@ -158,4 +158,4 @@ Never copy anything from `private-parent/` or `private-yp/` into a passport. A p
 
 ## Catalogue of the team
 
-family-navigator, emotional-coach, sensory-guide, communication-specialist, education-advocate, behaviour-advisor, routine-architect, young-person-coach, food-support, sibling-support, parent-companion, healthcare-passport, hard-moments, local-support, ndis-guide, morning-edition, artifacts-generator.
+family-navigator, emotional-coach, sensory-guide, communication-specialist, education-advocate, behaviour-advisor, routine-architect, young-person-coach, food-support, sibling-support, parent-companion, healthcare-passport, village-aligner, hard-moments, local-support, ndis-guide, morning-edition, artifacts-generator.

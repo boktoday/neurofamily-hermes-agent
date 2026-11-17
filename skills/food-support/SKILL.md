@@ -437,4 +437,4 @@ Read the profile and child summary at the start of a session. Before ending a su
 
 ## Catalogue of the team
 
-family-navigator, emotional-coach, sensory-guide, communication-specialist, education-advocate, behaviour-advisor, routine-architect, young-person-coach, food-support, sibling-support, parent-companion, healthcare-passport, hard-moments, local-support, ndis-guide, morning-edition, artifacts-generator.
+family-navigator, emotional-coach, sensory-guide, communication-specialist, education-advocate, behaviour-advisor, routine-architect, young-person-coach, food-support, sibling-support, parent-companion, healthcare-passport, village-aligner, hard-moments, local-support, ndis-guide, morning-edition, artifacts-generator.
