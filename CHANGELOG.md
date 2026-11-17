@@ -1,5 +1,16 @@
 # Changelog
 
+## The Morning Edition no longer prints someone else's name
+
+Found by running the real agent end to end rather than reading the code.
+
+`shared/paper.template.json` shipped with `"family_name": "The O'Keefe family"`. A family who never edited `paper.json` would get a kitchen-table paper headed with the author's surname. `build_paper.py` falls back to the template whenever `paper.json` is missing, so a family who skipped `setup-family-folder.py` hit it every time.
+
+- The template default is now `"The family"`, which matches the fallback already in `build_paper.py` (`cfg.get("family_name") or "The family"`).
+- Verified by building a paper against a folder with no `paper.json` at all: the heading reads "The family", not a stranger's surname.
+
+---
+
 ## canirun.ai/models reaches the two places people look
 
 Local models were offered in three places and explained in `docs/`, but the question a family actually asks first - *will this run on my laptop?* - was only answered in a document they had no reason to open yet.
