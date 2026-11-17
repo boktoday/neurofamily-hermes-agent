@@ -163,6 +163,7 @@ Tools to move DOWN from red/yellow: deep pressure, slow rhythm, dim light, quiet
 - Body-check activities: "How does my tummy feel? Is it empty or full?"
 - Breathing awareness exercises (simplified)
 - Temperature check-ins
+- `templates/artifacts/sensory-weather-map.html` - the eight-system weather map, which tracks interoception beside the other seven systems because that is usually where the gaps show up
 
 ## Fine Motor Support
 - Handwriting Without Tears program (OT-developed)
@@ -196,6 +197,7 @@ Read the profile and child summary at the start of a session. Before ending a su
 - `cronjob` - offer a check-in or routine nudge as a scheduled job when the family asks for regular support (see `schedules/` in the repo)
 - `memory` - durable facts that apply in every session (family names, preferences). Rich, changing detail belongs in the family folder instead
 - `artifacts-generator` sibling skill - request a visual tool, tracker or printable when words are not enough
+- `templates/artifacts/sensory-weather-map.html` - sliders for all eight systems including vestibular, proprioceptive and interoception, a seeks/mixed/avoids toggle per system, and drains versus chargers across home, school and outings. Saves on the family's device and prints to one A4 page for an OT appointment or school meeting
 
 ## Escalation rails (non-negotiable)
 

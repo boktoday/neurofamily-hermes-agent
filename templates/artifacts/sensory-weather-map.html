@@ -1,0 +1,426 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+<title>Sensory Weather Map</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%235a7d5a'/%3E%3Ctext x='16' y='23' font-size='18' text-anchor='middle' fill='%23faf7f2' font-family='sans-serif'%3E%E2%98%81%3C/text%3E%3C/svg%3E">
+<style>
+  :root {
+    --paper:#faf7f2; --card:#ffffff; --ink:#2b2b2b; --soft:#6f675c; --line:#e4ddd2;
+    --accent:#a3542f; --accent-soft:#f6e8dd; --good:#5a7d5a; --warn:#b5852d; --rose:#a3545f;
+    --mint:#e8f0e8; --base-size:16px;
+  }
+  * { box-sizing: border-box; }
+  html { font-size: var(--base-size); }
+  body {
+    margin:0; background:var(--paper); color:var(--ink);
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    line-height:1.5; -webkit-text-size-adjust:100%;
+  }
+  .wrap { max-width: 980px; margin:0 auto; padding:20px 16px 60px; }
+  h1 { font-size:1.6rem; margin:0 0 4px; letter-spacing:-.01em; }
+  .sub { color:var(--soft); font-size:.9rem; margin:0 0 16px; }
+
+  .weather {
+    display:flex; align-items:center; gap:14px; flex-wrap:wrap;
+    background:var(--card); border:1px solid var(--line); border-left:5px solid var(--good);
+    border-radius:10px; padding:14px 18px; margin:0 0 18px;
+  }
+  .weather .big { font-size:1.15rem; font-weight:700; }
+  .weather .note { color:var(--soft); font-size:.88rem; }
+  .weather.warn { border-left-color:var(--warn); }
+  .weather.storm { border-left-color:var(--rose); }
+
+  .toolbar { display:flex; gap:8px; flex-wrap:wrap; margin:0 0 18px; }
+  button {
+    font:inherit; font-size:.9rem; font-weight:600; cursor:pointer; padding:10px 16px;
+    border-radius:8px; border:1px solid var(--ink); background:var(--ink); color:var(--paper);
+  }
+  button.ghost { background:transparent; color:var(--ink); }
+  button.ghost:hover { background:var(--ink); color:var(--paper); }
+  button.danger { background:transparent; color:var(--rose); border-color:var(--rose); }
+  button:focus-visible { outline:3px solid var(--accent); outline-offset:1px; }
+
+  section { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:16px 18px; margin:0 0 14px; }
+  h2 { font-size:1rem; margin:0 0 4px; color:var(--accent); }
+  .sechead { color:var(--soft); font-size:.86rem; margin:0 0 14px; }
+
+  .sys { border-top:1px solid var(--line); padding:13px 0 4px; }
+  .sys:first-of-type { border-top:0; padding-top:0; }
+  .sys-head { display:flex; align-items:baseline; gap:8px; flex-wrap:wrap; }
+  .sys-name { font-weight:700; font-size:.95rem; }
+  .sys-desc { color:var(--soft); font-size:.82rem; }
+  .sys-row { display:flex; align-items:center; gap:12px; margin-top:8px; flex-wrap:wrap; }
+  input[type=range] { flex:1 1 220px; min-width:160px; accent-color: var(--accent); height:26px; }
+  .reading { font-variant-numeric: tabular-nums; font-weight:700; font-size:.88rem; min-width:96px; }
+  .modes { display:flex; gap:6px; }
+  .modes button {
+    padding:6px 11px; font-size:.8rem; font-weight:600; border-radius:20px;
+    background:transparent; color:var(--soft); border:1px solid var(--line);
+  }
+  .modes button[aria-pressed="true"] { background:var(--accent-soft); color:var(--accent); border-color:var(--accent); }
+
+  .cols { display:grid; grid-template-columns: repeat(3, 1fr); gap:14px; }
+  .col { border:1px solid var(--line); border-radius:8px; padding:12px; }
+  .col h3 { margin:0 0 10px; font-size:.92rem; }
+  .lst { margin:0 0 12px; }
+  .lst h4 { margin:0 0 6px; font-size:.75rem; text-transform:uppercase; letter-spacing:.08em; }
+  .lst.drain h4 { color:var(--rose); }
+  .lst.charge h4 { color:var(--good); }
+  .chips { list-style:none; margin:0 0 8px; padding:0; display:flex; flex-wrap:wrap; gap:6px; }
+  .chips li {
+    display:inline-flex; align-items:center; gap:6px; font-size:.82rem;
+    background:var(--paper); border:1px solid var(--line); border-radius:14px; padding:3px 6px 3px 10px;
+  }
+  .chips li button {
+    border:0; background:transparent; color:var(--soft); padding:0; font-size:1rem; line-height:1;
+    cursor:pointer; border-radius:50%; width:18px; height:18px;
+  }
+  .chips li button:hover { color:var(--rose); }
+  .addrow { display:flex; gap:6px; }
+  .addrow input {
+    flex:1; min-width:0; font:inherit; font-size:.85rem; padding:6px 8px;
+    border:1px solid var(--line); border-radius:6px; background:var(--paper); color:var(--ink);
+  }
+  .addrow button { padding:6px 11px; font-size:.82rem; }
+  .empty { color:#b3aaa0; font-size:.8rem; font-style:italic; }
+
+  @media print {
+    @page { size: A4; margin: 12mm; }
+    body { background:#fff; }
+    .wrap { max-width:none; padding:0; }
+    .toolbar, .addrow, .chips li button, .noprint { display:none !important; }
+    section { border:0; padding:0; margin:0 0 10px; }
+    .weather { border:1px solid #999; border-left:4px solid #000; padding:8px 10px; margin-bottom:10px; }
+    .sys { border-top:1px solid #ddd; padding:6px 0 2px; page-break-inside:avoid; }
+    input[type=range] { display:none; }
+    .reading { min-width:0; font-size:8.5pt; }
+    .modes button { border:1px solid #999; color:#000; padding:2px 7px; font-size:7.5pt; }
+    .modes button[aria-pressed="true"] { background:#000; color:#fff; border-color:#000; }
+    .cols { gap:8px; }
+    .col { border:1px solid #bbb; padding:8px; page-break-inside:avoid; }
+    .col h3 { font-size:9pt; margin-bottom:6px; }
+    .lst h4 { font-size:7.5pt; }
+    .chips { display:block; margin-bottom:6px; }
+    .chips li { display:block; border:0; background:transparent; padding:1px 0; font-size:8.5pt; }
+    .chips li::before { content:"• "; }
+    .chips li button { display:none; }
+    h1 { font-size:14pt; }
+    .sub { font-size:8pt; }
+  }
+  @media (max-width: 780px) { .cols { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <h1>Sensory Weather Map</h1>
+  <p class="sub">Part of the NeuroFamily support team. Eight systems, one page, for sharing with an OT or a school. Saves in this browser only; nothing leaves this device.</p>
+
+  <div class="weather" id="weather">
+    <div class="big" id="weatherLabel">Settled</div>
+    <div class="note" id="weatherNote">Nothing much is running hot today.</div>
+  </div>
+
+  <div class="toolbar noprint">
+    <button class="ghost" onclick="exportBackup()">Export backup</button>
+    <button class="ghost" onclick="document.getElementById('importFile').click()">Restore backup</button>
+    <button class="ghost" onclick="window.print()">Print</button>
+    <button class="danger" onclick="reset_all()">Clear</button>
+    <input type="file" id="importFile" accept="application/json" style="display:none" onchange="importBackup(event)">
+  </div>
+
+  <section>
+    <h2>The eight systems</h2>
+    <p class="sechead">Slide each one to how it is running today. 0 is easy, 10 is overload. Then mark whether the person tends to seek it, avoid it, or both.</p>
+    <div id="systems"></div>
+  </section>
+
+  <section>
+    <h2>What drains, what charges</h2>
+    <p class="sechead">One item per line. Keep them concrete: "assembly in the hall" is more useful than "school".</p>
+    <div class="cols" id="cols"></div>
+  </section>
+
+</div>
+
+<script>
+var KEY = "neurofamily-sensory-weather-map-v1";
+
+var SYSTEMS = [
+  { id:"auditory",      name:"Hearing",                 desc:"Noise, voices, echo, sudden sounds" },
+  { id:"visual",        name:"Sight",                   desc:"Bright light, clutter, screens, movement" },
+  { id:"tactile",       name:"Touch",                   desc:"Clothing tags, textures, being touched, mess" },
+  { id:"olfactory",     name:"Smell",                   desc:"Cooking, perfume, cleaning products, bathrooms" },
+  { id:"gustatory",     name:"Taste",                   desc:"Food textures, strong flavours, mixed foods" },
+  { id:"vestibular",    name:"Movement and balance",    desc:"Spinning, swinging, heights, being tipped back" },
+  { id:"proprioceptive",name:"Deep pressure and heavy work", desc:"Pushing, carrying, crashing, tight squeezes" },
+  { id:"interoception", name:"Inside signals",          desc:"Hunger, thirst, temperature, pain, needing the toilet" }
+];
+
+var SETTINGS = [
+  { id:"home",    name:"Home" },
+  { id:"school",  name:"School" },
+  { id:"outings", name:"Outings" }
+];
+
+var MODES = [
+  { id:"seeks",   label:"Seeks" },
+  { id:"mixed",   label:"Mixed" },
+  { id:"avoids",  label:"Avoids" }
+];
+
+function blank() {
+  var s = { systems:{}, lists:{} };
+  SYSTEMS.forEach(function (y) { s.systems[y.id] = { level: 0, mode: "" }; });
+  SETTINGS.forEach(function (set) { s.lists[set.id] = { drains: [], chargers: [] }; });
+  return s;
+}
+
+var state = blank();
+
+function $(id) { return document.getElementById(id); }
+
+function load() {
+  try {
+    var raw = localStorage.getItem(KEY);
+    if (!raw) return;
+    var d = JSON.parse(raw);
+    if (!d || typeof d !== "object") return;
+    SYSTEMS.forEach(function (y) {
+      var v = d.systems && d.systems[y.id];
+      if (v) {
+        var lvl = Number(v.level);
+        state.systems[y.id] = {
+          level: isFinite(lvl) ? Math.max(0, Math.min(10, lvl)) : 0,
+          mode: MODES.some(function (m) { return m.id === v.mode; }) ? v.mode : ""
+        };
+      }
+    });
+    SETTINGS.forEach(function (set) {
+      var v = d.lists && d.lists[set.id];
+      if (v) {
+        state.lists[set.id] = {
+          drains: Array.isArray(v.drains) ? v.drains.filter(function (x) { return typeof x === "string"; }) : [],
+          chargers: Array.isArray(v.chargers) ? v.chargers.filter(function (x) { return typeof x === "string"; }) : []
+        };
+      }
+    });
+  } catch (e) {}
+}
+
+function persist() {
+  try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {}
+}
+
+function esc(s) {
+  return String(s == null ? "" : s)
+    .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+}
+
+var LEVEL_WORDS = ["Easy", "Easy", "Easy", "Manageable", "Manageable", "Noticing it",
+                   "Noticing it", "Hard", "Hard", "Very hard", "Overload"];
+
+function buildSystems() {
+  var host = $("systems");
+  host.innerHTML = "";
+  SYSTEMS.forEach(function (y) {
+    var st = state.systems[y.id];
+    var wrap = document.createElement("div");
+    wrap.className = "sys";
+    wrap.innerHTML =
+      '<div class="sys-head"><span class="sys-name">' + esc(y.name) + '</span>' +
+      '<span class="sys-desc">' + esc(y.desc) + '</span></div>' +
+      '<div class="sys-row">' +
+        '<input type="range" min="0" max="10" step="1" value="' + st.level + '" ' +
+          'aria-label="' + esc(y.name) + ' today" data-sys="' + y.id + '" class="rng">' +
+        '<span class="reading" id="read-' + y.id + '"></span>' +
+        '<div class="modes" role="group" aria-label="' + esc(y.name) + ' tendency">' +
+          MODES.map(function (m) {
+            return '<button data-mode="' + m.id + '" data-sys="' + y.id + '" aria-pressed="' +
+                   (st.mode === m.id ? "true" : "false") + '">' + m.label + '</button>';
+          }).join("") +
+        '</div>' +
+      '</div>';
+    host.appendChild(wrap);
+  });
+
+  host.querySelectorAll("input.rng").forEach(function (el) {
+    el.addEventListener("input", function () {
+      state.systems[el.dataset.sys].level = Number(el.value);
+      persist(); paintReading(el.dataset.sys); paintWeather();
+    });
+  });
+  host.querySelectorAll(".modes button").forEach(function (el) {
+    el.addEventListener("click", function () {
+      var id = el.dataset.sys, m = el.dataset.mode;
+      state.systems[id].mode = (state.systems[id].mode === m) ? "" : m;
+      persist(); paintModes(id); paintWeather();
+    });
+  });
+  SYSTEMS.forEach(function (y) { paintReading(y.id); });
+}
+
+function paintReading(id) {
+  var el = $("read-" + id);
+  if (!el) return;
+  var lvl = state.systems[id].level;
+  el.textContent = lvl + "/10 " + LEVEL_WORDS[lvl];
+}
+
+function paintModes(id) {
+  document.querySelectorAll('.modes button[data-sys="' + id + '"]').forEach(function (b) {
+    b.setAttribute("aria-pressed", String(state.systems[id].mode === b.dataset.mode));
+  });
+}
+
+function paintWeather() {
+  var total = 0, hot = 0;
+  SYSTEMS.forEach(function (y) {
+    total += state.systems[y.id].level;
+    if (state.systems[y.id].level >= 7) hot++;
+  });
+  var avg = total / SYSTEMS.length;
+  var box = $("weather"), label = $("weatherLabel"), note = $("weatherNote");
+  box.className = "weather";
+  if (avg >= 6.5 || hot >= 4) {
+    box.classList.add("storm");
+    label.textContent = "Stormy";
+    note.textContent = hot + " systems are running hot. Keep the day small and predictable.";
+  } else if (avg >= 3 || hot >= 1) {
+    box.classList.add("warn");
+    label.textContent = "Changeable";
+    note.textContent = hot ? hot + " system" + (hot > 1 ? "s" : "") + " running hot. Build in a quiet stretch."
+                           : "Mostly manageable, worth watching through the day.";
+  } else {
+    label.textContent = "Settled";
+    note.textContent = "Nothing much is running hot today.";
+  }
+}
+
+function buildCols() {
+  var host = $("cols");
+  host.innerHTML = "";
+  SETTINGS.forEach(function (set) {
+    var col = document.createElement("div");
+    col.className = "col";
+    var body = '<h3>' + esc(set.name) + '</h3>';
+    [["drains", "Drains"], ["chargers", "Chargers"]].forEach(function (pair) {
+      var kind = pair[0], label = pair[1];
+      body +=
+        '<div class="lst ' + (kind === "drains" ? "drain" : "charge") + '">' +
+          '<h4>' + label + '</h4>' +
+          '<ul class="chips" id="chips-' + set.id + '-' + kind + '"></ul>' +
+          '<div class="addrow noprint">' +
+            '<input type="text" id="in-' + set.id + '-' + kind + '" placeholder="Add an item">' +
+            '<button data-add="' + set.id + '" data-kind="' + kind + '">Add</button>' +
+          '</div>' +
+        '</div>';
+    });
+    col.innerHTML = body;
+    host.appendChild(col);
+  });
+
+  host.querySelectorAll("button[data-add]").forEach(function (b) {
+    b.addEventListener("click", function () {
+      var set = b.dataset.add, kind = b.dataset.kind;
+      var input = $("in-" + set + "-" + kind);
+      addItem(set, kind, input.value);
+      input.value = "";
+      input.focus();
+    });
+  });
+  host.querySelectorAll(".addrow input").forEach(function (el) {
+    el.addEventListener("keydown", function (e) {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        var parts = el.id.split("-");            // in-<setting>-<kind>
+        addItem(parts[1], parts[2], el.value);
+        el.value = "";
+      }
+    });
+  });
+
+  SETTINGS.forEach(function (set) {
+    ["drains", "chargers"].forEach(function (kind) { paintChips(set.id, kind); });
+  });
+}
+
+function addItem(set, kind, raw) {
+  var v = String(raw || "").trim();
+  if (!v) return;
+  if (state.lists[set][kind].indexOf(v) !== -1) return;
+  state.lists[set][kind].push(v);
+  persist(); paintChips(set, kind);
+}
+
+function removeItem(set, kind, index) {
+  state.lists[set][kind].splice(index, 1);
+  persist(); paintChips(set, kind);
+}
+
+function paintChips(set, kind) {
+  var host = $("chips-" + set + "-" + kind);
+  if (!host) return;
+  var items = state.lists[set][kind];
+  if (!items.length) {
+    host.innerHTML = '<li style="border:0;background:transparent;padding:0;"><span class="empty">Nothing added yet</span></li>';
+    return;
+  }
+  host.innerHTML = items.map(function (txt, i) {
+    return '<li>' + esc(txt) +
+           '<button type="button" aria-label="Remove ' + esc(txt) + '" ' +
+           'data-rm="' + set + '" data-kind="' + kind + '" data-i="' + i + '">&times;</button></li>';
+  }).join("");
+  host.querySelectorAll("button[data-rm]").forEach(function (b) {
+    b.addEventListener("click", function () {
+      removeItem(b.dataset.rm, b.dataset.kind, Number(b.dataset.i));
+    });
+  });
+}
+
+/* ---- backup ---- */
+function exportBackup() {
+  var blob = new Blob([JSON.stringify(state, null, 2)], { type: "application/json" });
+  var a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = "sensory-weather-map-backup.json";
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  setTimeout(function () { URL.revokeObjectURL(a.href); }, 2000);
+}
+
+function importBackup(ev) {
+  var file = ev.target.files && ev.target.files[0];
+  if (!file) return;
+  var r = new FileReader();
+  r.onload = function () {
+    try {
+      var d = JSON.parse(r.result);
+      if (!d || typeof d !== "object") throw new Error("bad");
+      try { localStorage.setItem(KEY, JSON.stringify(d)); } catch (e) {}
+      state = blank();
+      load();
+      buildSystems(); buildCols(); paintWeather();
+    } catch (e) { alert("That file could not be read as a backup."); }
+  };
+  r.readAsText(file);
+  ev.target.value = "";
+}
+
+function reset_all() {
+  if (!confirm("Clear everything? The map will be empty again. Export a backup first if unsure.")) return;
+  try { localStorage.removeItem(KEY); } catch (e) {}
+  state = blank();
+  buildSystems(); buildCols(); paintWeather();
+}
+
+/* ---- boot ---- */
+load();
+buildSystems();
+buildCols();
+paintWeather();
+</script>
+</body>
+</html>

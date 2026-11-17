@@ -1,0 +1,416 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+<title>Communication Passport</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23a3542f'/%3E%3Ctext x='16' y='23' font-size='19' text-anchor='middle' fill='%23faf7f2' font-family='sans-serif'%3E%F0%9F%97%A3%3C/text%3E%3C/svg%3E">
+<style>
+  :root {
+    --paper:#faf7f2; --card:#ffffff; --ink:#2b2b2b; --soft:#6f675c; --line:#e4ddd2;
+    --accent:#a3542f; --accent-soft:#f6e8dd; --good:#5a7d5a; --warn:#b5852d; --rose:#a3545f;
+    --mint:#e8f0e8; --base-size:16px;
+  }
+  * { box-sizing: border-box; }
+  html { font-size: var(--base-size); }
+  body {
+    margin:0; background:var(--paper); color:var(--ink);
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    line-height:1.5; -webkit-text-size-adjust:100%;
+  }
+  .wrap { max-width: 900px; margin:0 auto; padding: 20px 16px 60px; }
+  h1 { font-size:1.6rem; margin:0 0 4px; letter-spacing:-.01em; }
+  .sub { color:var(--soft); font-size:.9rem; margin:0 0 18px; }
+
+  section { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:16px 18px; margin:0 0 14px; }
+  h2 { font-size:1rem; margin:0 0 10px; color:var(--accent); letter-spacing:.01em; }
+  label { display:block; font-weight:600; font-size:.88rem; margin:12px 0 5px; }
+  .hint { font-weight:400; color:var(--soft); font-size:.8rem; display:block; margin-top:2px; }
+  input[type=text], input[type=tel], textarea {
+    width:100%; font:inherit; font-size:.92rem; color:var(--ink); background:var(--paper);
+    border:1px solid var(--line); border-radius:8px; padding:9px 11px; resize:vertical;
+  }
+  textarea { min-height:74px; }
+  input:focus, textarea:focus, button:focus-visible { outline:3px solid var(--accent); outline-offset:1px; }
+
+  .row { display:flex; gap:10px; flex-wrap:wrap; }
+  .row > * { flex:1 1 170px; }
+  button {
+    font:inherit; font-size:.9rem; font-weight:600; cursor:pointer; padding:10px 16px;
+    border-radius:8px; border:1px solid var(--ink); background:var(--ink); color:var(--paper);
+  }
+  button.ghost { background:transparent; color:var(--ink); }
+  button.ghost:hover { background:var(--ink); color:var(--paper); }
+  button.danger { background:transparent; color:var(--rose); border-color:var(--rose); }
+  .toolbar { display:flex; gap:8px; flex-wrap:wrap; margin:0 0 16px; }
+  .modebar { display:flex; gap:8px; margin:0 0 16px; }
+  .modebar button { flex:1; }
+  .modebar button[aria-pressed="true"] { background:var(--accent); border-color:var(--accent); color:#fff; }
+
+  /* ---------------- the A4 sheet ---------------- */
+  .sheet { background:#fff; border:1px solid var(--line); border-radius:10px; padding:22px 24px; }
+  .sheet-head { border-bottom:2px solid var(--ink); padding-bottom:9px; margin-bottom:14px; }
+  .sheet-head h3 { margin:0; font-size:1.35rem; letter-spacing:-.01em; }
+  .sheet-head .tagline { color:var(--soft); font-size:.85rem; margin-top:3px; }
+  .sheet-body { display:grid; grid-template-columns: 1fr 1fr; gap:14px 22px; }
+  .block { break-inside:avoid; }
+  .block h4 { margin:0 0 4px; font-size:.82rem; text-transform:uppercase; letter-spacing:.09em; color:var(--accent); }
+  .block p { margin:0; font-size:.9rem; white-space:pre-wrap; }
+  .block.never { grid-column:1 / -1; background:#fdf2f2; border-left:4px solid var(--rose); padding:9px 12px; border-radius:4px; }
+  .block.never h4 { color:var(--rose); }
+  .people { grid-column:1 / -1; display:grid; grid-template-columns: repeat(3, 1fr); gap:10px; }
+  .person { border:1px solid var(--line); border-radius:6px; padding:8px 10px; font-size:.85rem; }
+  .person strong { display:block; font-size:.9rem; }
+  .person .rel { color:var(--soft); font-size:.78rem; }
+  .empty { color:#b3aaa0; font-style:italic; }
+
+  /* ---------------- lock screen card ---------------- */
+  .lockcard-wrap { display:flex; justify-content:center; }
+  .lockcard {
+    width: 340px; max-width:100%; background:#101010; color:#fff; border-radius:22px;
+    padding:26px 22px; box-shadow:0 14px 34px rgba(0,0,0,.28);
+  }
+  .lockcard .lc-name { font-size:1.5rem; font-weight:800; letter-spacing:-.02em; line-height:1.1; margin:0; }
+  .lockcard .lc-line { font-size:.9rem; color:#d8d2c8; margin:6px 0 0; }
+  .lockcard hr { border:0; border-top:1px solid #3a3630; margin:16px 0; }
+  .lockcard .lc-block { margin:0 0 14px; }
+  .lockcard .lc-block h4 {
+    font-size:.72rem; text-transform:uppercase; letter-spacing:.12em; margin:0 0 4px;
+    color:#ffcf9e; font-weight:800;
+  }
+  .lockcard .lc-block p { margin:0; font-size:.92rem; line-height:1.45; white-space:pre-wrap; }
+  .lockcard .lc-never { background:#3a0f14; border-left:4px solid #ff6b7a; padding:9px 11px; border-radius:6px; }
+  .lockcard .lc-never h4 { color:#ff9aa4; }
+  .lockcard .lc-people { font-size:.88rem; }
+  .lockcard .lc-people div { margin:0 0 4px; }
+  .lockcard .lc-people span { color:#a9a29a; }
+  .lockcard .lc-foot { margin-top:16px; font-size:.72rem; color:#8f8880; text-align:center; }
+
+  .viewcard .sheet, .viewcard .editor { display:none; }
+  body:not(.viewcard) .lockcard-wrap { display:none; }
+
+  @media print {
+    @page { size: A4; margin: 12mm; }
+    body { background:#fff; }
+    .wrap { max-width:none; padding:0; }
+    button, .noprint, .toolbar, .modebar, .editor { display:none !important; }
+    .sheet { border:0; border-radius:0; padding:0; }
+    .sheet-body { gap:12px 20px; }
+    .block p { font-size:9.5pt; }
+    .block h4 { font-size:8pt; }
+    .sheet-head h3 { font-size:15pt; }
+  }
+  @media print {
+    body.viewcard .lockcard-wrap { display:flex !important; }
+    body.viewcard .lockcard {
+      box-shadow:none; border-radius:0; width:100%; max-width:none;
+      padding:18mm 16mm; color:#000; background:#fff;
+    }
+    body.viewcard .lockcard hr { border-top:2px solid #000; }
+    body.viewcard .lockcard .lc-line,
+    body.viewcard .lockcard .lc-people span,
+    body.viewcard .lockcard .lc-foot { color:#000; }
+    body.viewcard .lockcard .lc-block h4 { color:#000; }
+    body.viewcard .lockcard .lc-never { background:#fff; border-left:5px solid #000; }
+    body.viewcard .lockcard .lc-never h4 { color:#000; }
+  }
+  @media (max-width: 720px) {
+    .sheet-body { grid-template-columns: 1fr; }
+    .people { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <h1 class="noprint">Communication Passport</h1>
+  <p class="sub noprint">Part of the NeuroFamily support team. Written in your own words, about how you communicate. Saves in this browser only; nothing leaves this device.</p>
+
+  <div class="modebar noprint">
+    <button id="btnSheet" aria-pressed="true" onclick="setMode('sheet')">A4 sheet</button>
+    <button id="btnCard" aria-pressed="false" onclick="setMode('card')">Lock-screen card</button>
+  </div>
+
+  <div class="toolbar noprint">
+    <button class="ghost" onclick="exportBackup()">Export backup</button>
+    <button class="ghost" onclick="document.getElementById('importFile').click()">Restore backup</button>
+    <button class="ghost" onclick="window.print()">Print</button>
+    <button class="danger" onclick="reset_all()">Clear</button>
+    <input type="file" id="importFile" accept="application/json" style="display:none" onchange="importBackup(event)">
+  </div>
+
+  <!-- ============ editor ============ -->
+  <div class="editor">
+    <section>
+      <h2>Who you are</h2>
+      <label for="name">Your name
+        <span class="hint">The name you want people to use, not necessarily your full name.</span>
+      </label>
+      <input type="text" id="name" placeholder="Leo">
+
+      <label for="strength">Something you are great at
+        <span class="hint">Start with this. It is the first thing a new adult should know about you.</span>
+      </label>
+      <input type="text" id="strength" placeholder="Dinosaurs, and knowing every animal fact">
+    </section>
+
+    <section>
+      <h2>How I communicate best</h2>
+      <label for="commBest">In your own words
+        <span class="hint">For example: I need a few seconds to answer. I go quiet when I am thinking, not when I am being rude.</span>
+      </label>
+      <textarea id="commBest" placeholder="Give me time to answer. I usually need about five seconds before I speak. If I go quiet I am not ignoring you, I am working out what to say."></textarea>
+    </section>
+
+    <section>
+      <h2>Signs my battery is getting low</h2>
+      <label for="commLow">What people will notice first
+        <span class="hint">The small signs, before it becomes obvious.</span>
+      </label>
+      <textarea id="commLow" placeholder="I stop answering questions. I start rocking. I say 'I don't know' to everything. I look at the floor instead of your face."></textarea>
+    </section>
+
+    <section>
+      <h2>What helps me regulate</h2>
+      <label for="commHelp">The things that actually work
+        <span class="hint">Be specific. Quiet corner. Headphones. Walking. Water. A warning before anything changes.</span>
+      </label>
+      <textarea id="commHelp" placeholder="Let me go to the quiet corner without asking me why. Five minutes is usually enough. Tell me before the next thing happens, not during it."></textarea>
+    </section>
+
+    <section>
+      <h2>Please do not do this when I am in shutdown or overload</h2>
+      <label for="commNever">The hard noes
+        <span class="hint">This block stays on the sheet and the card, because it is the one people get wrong.</span>
+      </label>
+      <textarea id="commNever" placeholder="Do not touch me without warning. Do not ask me lots of questions. Do not tell me to calm down. Do not stand over me. Do not ask me to look at you."></textarea>
+    </section>
+
+    <section>
+      <h2>Safe people and emergency info</h2>
+      <label>Safe people
+        <span class="hint">Three is usually right. Name, who they are, and a number if you want it there.</span>
+      </label>
+      <div class="row">
+        <input type="text" id="p1name" placeholder="Name">
+        <input type="text" id="p1rel" placeholder="Mum, teacher, aide">
+        <input type="tel" id="p1phone" placeholder="Phone (optional)">
+      </div>
+      <div class="row" style="margin-top:8px;">
+        <input type="text" id="p2name" placeholder="Name">
+        <input type="text" id="p2rel" placeholder="Relationship">
+        <input type="tel" id="p2phone" placeholder="Phone (optional)">
+      </div>
+      <div class="row" style="margin-top:8px;">
+        <input type="text" id="p3name" placeholder="Name">
+        <input type="text" id="p3rel" placeholder="Relationship">
+        <input type="tel" id="p3phone" placeholder="Phone (optional)">
+      </div>
+
+      <label for="emergency">Anything a stranger must know
+        <span class="hint">Optional. Allergy, medical need, or a note about who to call. Leave blank if it does not apply.</span>
+      </label>
+      <textarea id="emergency" placeholder="Allergic to peanuts. My helper is the learning support officer in Room 4."></textarea>
+    </section>
+  </div>
+
+  <!-- ============ A4 sheet ============ -->
+  <div class="sheet" id="sheetOut"></div>
+
+  <!-- ============ lock screen card ============ -->
+  <div class="lockcard-wrap">
+    <div class="lockcard" id="cardOut"></div>
+  </div>
+
+</div>
+
+<script>
+var KEY = "neurofamily-communication-passport-v1";
+
+var state = {
+  name: "", strength: "",
+  commBest: "", commLow: "", commHelp: "", commNever: "",
+  people: [{name:"",rel:"",phone:""},{name:"",rel:"",phone:""},{name:"",rel:"",phone:""}],
+  emergency: ""
+};
+
+function $(id) { return document.getElementById(id); }
+
+function load() {
+  try {
+    var raw = localStorage.getItem(KEY);
+    if (!raw) return;
+    var d = JSON.parse(raw);
+    if (!d || typeof d !== "object") return;
+    for (var k in state) {
+      if (k === "people") {
+        if (Array.isArray(d.people)) {
+          for (var i = 0; i < 3; i++) state.people[i] = d.people[i] || {name:"",rel:"",phone:""};
+        }
+      } else if (typeof d[k] === "string") {
+        state[k] = d[k];
+      }
+    }
+  } catch (e) {}
+}
+
+function persist() {
+  try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {}
+}
+
+function bind() {
+  var ids = ["name","strength","commBest","commLow","commHelp","commNever","emergency"];
+  ids.forEach(function (id) {
+    var el = $(id);
+    el.value = state[id] || "";
+    el.addEventListener("input", function () { state[id] = el.value; persist(); render(); });
+  });
+  for (var i = 0; i < 3; i++) {
+    (function (i) {
+      ["name","rel","phone"].forEach(function (f) {
+        var el = $("p" + (i + 1) + f);
+        el.value = (state.people[i] && state.people[i][f]) || "";
+        el.addEventListener("input", function () {
+          state.people[i][f] = el.value; persist(); render();
+        });
+      });
+    })(i);
+  }
+}
+
+function esc(s) {
+  return String(s == null ? "" : s)
+    .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
+}
+
+function val(s) { return (s || "").trim(); }
+function emptyNote(s) { return '<span class="empty">Not filled in yet</span>'; }
+
+function render() {
+  var who = val(state.name) || "Me";
+  var blocks = [
+    ["How I communicate best", state.commBest, ""],
+    ["Signs my battery is getting low", state.commLow, ""],
+    ["What helps me regulate", state.commHelp, ""]
+  ];
+
+  /* --- A4 sheet --- */
+  var html = '';
+  html += '<div class="sheet-head"><h3>' + esc(who) + "'s communication passport</h3>";
+  html += '<div class="tagline">' + (val(state.strength) ? "Best at: " + esc(val(state.strength)) : "How I communicate, in my own words") + '</div></div>';
+  html += '<div class="sheet-body">';
+  blocks.forEach(function (b) {
+    html += '<div class="block"><h4>' + esc(b[0]) + '</h4><p>' +
+            (val(b[1]) ? esc(val(b[1])) : emptyNote()) + '</p></div>';
+  });
+  html += '<div class="block never"><h4>Please do not do this when I am in shutdown or overload</h4><p>' +
+          (val(state.commNever) ? esc(val(state.commNever)) : emptyNote()) + '</p></div>';
+
+  var people = state.people.filter(function (p) { return val(p.name); });
+  if (people.length) {
+    html += '<div class="people">';
+    people.forEach(function (p) {
+      html += '<div class="person"><strong>' + esc(val(p.name)) + '</strong>' +
+              (val(p.rel) ? '<span class="rel">' + esc(val(p.rel)) + '</span>' : '') +
+              (val(p.phone) ? '<div>' + esc(val(p.phone)) + '</div>' : '') + '</div>';
+    });
+    html += '</div>';
+  }
+  if (val(state.emergency)) {
+    html += '<div class="block" style="grid-column:1 / -1;"><h4>Important</h4><p>' +
+            esc(val(state.emergency)) + '</p></div>';
+  }
+  html += '</div>';
+  $("sheetOut").innerHTML = html;
+
+  /* --- lock screen card --- */
+  var c = '';
+  c += '<p class="lc-name">' + esc(who) + '</p>';
+  if (val(state.strength)) c += '<p class="lc-line">Best at: ' + esc(val(state.strength)) + '</p>';
+  c += '<hr>';
+  if (val(state.commBest)) c += '<div class="lc-block"><h4>How I communicate</h4><p>' + esc(val(state.commBest)) + '</p></div>';
+  if (val(state.commLow)) c += '<div class="lc-block"><h4>Low battery looks like</h4><p>' + esc(val(state.commLow)) + '</p></div>';
+  if (val(state.commHelp)) c += '<div class="lc-block"><h4>What helps</h4><p>' + esc(val(state.commHelp)) + '</p></div>';
+  if (val(state.commNever)) c += '<div class="lc-block lc-never"><h4>Please do not</h4><p>' + esc(val(state.commNever)) + '</p></div>';
+
+  if (people.length || val(state.emergency)) {
+    c += '<hr>';
+    if (people.length) {
+      c += '<div class="lc-block lc-people"><h4>Safe people</h4>';
+      people.forEach(function (p) {
+        var bits = [];
+        if (val(p.rel)) bits.push(esc(val(p.rel)));
+        if (val(p.phone)) bits.push(esc(val(p.phone)));
+        c += '<div><strong>' + esc(val(p.name)) + '</strong>' +
+             (bits.length ? ' <span>' + bits.join(" &middot; ") + '</span>' : '') + '</div>';
+      });
+      c += '</div>';
+    }
+    if (val(state.emergency)) {
+      c += '<div class="lc-block"><h4>Important</h4><p>' + esc(val(state.emergency)) + '</p></div>';
+    }
+  }
+  c += '<div class="lc-foot">Made by me, about me.</div>';
+  $("cardOut").innerHTML = c;
+}
+
+/* ---- modes ---- */
+function setMode(m) {
+  var card = m === "card";
+  document.body.classList.toggle("viewcard", card);
+  $("btnSheet").setAttribute("aria-pressed", String(!card));
+  $("btnCard").setAttribute("aria-pressed", String(card));
+  try { localStorage.setItem(KEY + "-mode", m); } catch (e) {}
+}
+
+/* ---- backup ---- */
+function exportBackup() {
+  var blob = new Blob([JSON.stringify(state, null, 2)], { type: "application/json" });
+  var a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = ((val(state.name) || "passport").replace(/[^a-z0-9]+/gi, "-").toLowerCase()) + "-passport-backup.json";
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  setTimeout(function () { URL.revokeObjectURL(a.href); }, 2000);
+}
+
+function importBackup(ev) {
+  var file = ev.target.files && ev.target.files[0];
+  if (!file) return;
+  var r = new FileReader();
+  r.onload = function () {
+    try {
+      var d = JSON.parse(r.result);
+      if (!d || typeof d !== "object") throw new Error("bad");
+      for (var k in state) {
+        if (k === "people") {
+          for (var i = 0; i < 3; i++) state.people[i] = (d.people && d.people[i]) || {name:"",rel:"",phone:""};
+        } else if (typeof d[k] === "string") { state[k] = d[k]; }
+      }
+      persist(); bind(); render();
+    } catch (e) { alert("That file could not be read as a backup."); }
+  };
+  r.readAsText(file);
+  ev.target.value = "";
+}
+
+function reset_all() {
+  if (!confirm("Clear everything? The passport will be empty again. Export a backup first if unsure.")) return;
+  try { localStorage.removeItem(KEY); } catch (e) {}
+  state = { name:"", strength:"", commBest:"", commLow:"", commHelp:"", commNever:"",
+            people:[{name:"",rel:"",phone:""},{name:"",rel:"",phone:""},{name:"",rel:"",phone:""}],
+            emergency:"" };
+  bind(); render();
+}
+
+/* ---- boot ---- */
+load();
+bind();
+render();
+try {
+  if (localStorage.getItem(KEY + "-mode") === "card") setMode("card");
+} catch (e) {}
+</script>
+</body>
+</html>

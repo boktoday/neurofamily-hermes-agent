@@ -9,6 +9,9 @@ Ready-made tools the Artifacts Generator can personalise and deliver. Family-saf
 | `lesson-chunks.html` | Local-first lesson planner: paste or dictate a lesson, AI breaks it into small sequential steps + a motivating overview. Text-to-speech, mark-complete, rich-text editor per step, AI feedback, saved Q&A history | Autistic young people and executive-function support: turning schoolwork, therapy material or daily tasks into manageable steps |
 | `iep-companion.html` | The school's plan as an interactive companion: goals in plain words, sparks and badges, kid-friendly themes, meeting questions, words to know, attendance check-ins, print view | Every IEP/EHCP family; preparing for reviews; helping the child understand their own plan |
 
+| `communication-passport.html` | First-person communication passport: how I communicate best, early signs of low battery, what helps me regulate, what never to do in shutdown, safe people and emergency info. One page, two layouts: a clean A4 sheet for teachers and carers, and a high-contrast lock-screen card sized for a phone screenshot | Semi-speaking and situative mutism moments, new teachers and aides, sitters, coaches, hospital and dentist visits |
+| `sensory-weather-map.html` | Eight-system sensory map: auditory, visual, tactile, olfactory, gustatory, vestibular, proprioceptive and interoception, each with a 0-10 load slider and a seeks / mixed / avoids toggle, plus drains against chargers across home, school and outings. Local save, JSON backup, one-page print | OT appointments, sensory diet planning, showing a school what a day costs, spotting which system is actually driving a behaviour |
+
 ## How to deliver one
 
 1. Open the file, personalise it for the family (names, colours, the child's own words).

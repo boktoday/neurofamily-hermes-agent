@@ -1,5 +1,25 @@
 # Changelog
 
+## Two more things a family can hand to someone
+
+Two gaps that came up repeatedly in real use: a way to tell a new adult how this young person communicates, and a way to show an OT or a school what eight sensory systems are actually doing.
+
+**`templates/artifacts/communication-passport.html`** is a first-person passport in the young person's own words, covering how I communicate best, what my battery getting low looks like, what helps me regulate, what never to do in shutdown or overload, and who is safe. It produces two things from the same page: a clean one-page A4 sheet for teachers and carers, and a high-contrast lock-screen card sized for a phone screenshot, for the semi-speaking and situative mutism moments when reaching for a document is not realistic.
+
+**`templates/artifacts/sensory-weather-map.html`** covers all eight systems, including the two that are usually left out: vestibular and proprioceptive, and interoception, which is where the hunger, thirst, temperature, pain and toileting cues live. Each system gets a 0 to 10 load slider and a seeks, mixed or avoids toggle, and the page maps drains against chargers across home, school and outings. The weather banner reads Settled, Changeable or Stormy from what is actually set.
+
+Both follow the architecture of the existing artifacts: one file, system fonts, no CDN, no account, `localStorage` with JSON export and import, and a print stylesheet. **Zero external `http` or `https` references** in either file.
+
+### A print bug worth naming
+
+The weather map's first print stylesheet hid every `button`, with `!important`, which silently removed the seeks/mixed/avoids toggle from the printed page. The slider readings survived but the tendencies did not, so the sheet an OT would have received was missing half the information. Caught by extracting the text from the generated PDF and looking for the word "Avoids" rather than by trusting that it looked fine on screen.
+
+Verified with `node --check` on the extracted script blocks, and in a real browser: filling the passport, switching to the card, adding and removing map items, dragging sliders to trip the Stormy state, reloading to confirm persistence. Both pages run with zero console errors and print to exactly one A4 page.
+
+Referenced from `sensory-guide`, `communication-specialist`, `education-advocate`, `artifacts-generator`, `README.md` and `templates/artifacts/README.md`.
+
+---
+
 ## The afternoon that goes wrong at Nan's house
 
 Support rarely fails at home. It fails on a Saturday at a grandparent's, at soccer training, at the Sunday handover. The people involved are not the problem: nobody gave them the three things that would make the afternoon work, and the parent is too tired to keep explaining.

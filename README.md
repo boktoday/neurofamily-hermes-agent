@@ -126,16 +126,18 @@ Every skill is neurodiversity-affirming, strengths-based and trauma-informed. Se
 
 ## Starter artifacts
 
-Beyond the conversations, the team builds things your family can hold onto: single-file tools that open in any browser, save on your own device and never send data anywhere. The Artifacts Generator personalises each one for your family. Four are ready to start from today, and full instructions for each live in `templates/artifacts/README.md`.
+Beyond the conversations, the team builds things your family can hold onto: single-file tools that open in any browser, save on your own device and never send data anywhere. The Artifacts Generator personalises each one for your family. Six are ready to start from today, and full instructions for each live in `templates/artifacts/README.md`.
 
 | Artifact | What it is | Best for |
 |---|---|---|
 | `food-diary.html` | Fillable local diary: safe-food map, meal entries, stress notes, CSV export, print | Food Support families, ARFID tracking, showing patterns to a dietitian |
 | `food-diary-sheets.md` | The same diary as a Google Sheet / Excel workbook (spec + formulas) | Families with connections set up; multi-carer households |
 | `lesson-chunks.html` | Local-first lesson planner: paste or dictate a lesson and the AI breaks it into small sequential steps with a motivating overview. Text-to-speech, mark-complete, an editor and AI feedback on each step | Autistic young people and executive-function support: turning schoolwork, therapy material or daily tasks into manageable steps |
+| `communication-passport.html` | First-person passport in the young person's own words: how I communicate best, what low battery looks like, what helps me regulate, what never to do in shutdown, and safe people. One page, two outputs: an A4 sheet for teachers and a high-contrast lock-screen card for semi-speaking moments | Speech and AAC support, situative mutism, new teachers, aides, sitters and coaches |
+| `sensory-weather-map.html` | Eight sensory systems including interoception, each with a 0 to 10 slider and a seeks, mixed or avoids toggle, plus drains versus chargers across home, school and outings. Prints to one page | OT appointments, sensory diets, showing a school what an environment actually costs |
 | `iep-companion.html` | The school's plan turned into something a child can actually use: goals in plain words, sparks and badges, child-chosen themes, questions for the next review, a words-to-know glossary, attendance check-ins and a print view | Every IEP, EHCP or 504 family; preparing for reviews; helping the child understand their own plan |
 
-Lesson Chunks asks for a free OpenRouter key in its settings once (its only internet call, used only when you chunk a lesson or ask a question). The other three need no accounts at all. Everything saves in the browser on your own device, and the Food Diary and IEP Companion both export files you keep.
+Lesson Chunks asks for a free OpenRouter key in its settings once (its only internet call, used only when you chunk a lesson or ask a question). The other five need no accounts at all. Everything saves in the browser on your own device, and the Food Diary and IEP Companion both export files you keep.
 
 The IEP Companion, in a little more detail: each goal is re-written in plain words ("what this really means"), with how you practise it and who helps. Every practice session earns a spark, sparks earn badges, and the child picks their own theme (dinosaur jungle included). It also holds the questions to ask at the next review, a glossary for plan jargon, day-by-day check-ins against the school term dates and a print view for meetings. The agent fills it in from your family profile, and the child's copy can live on their own phone or tablet.
 

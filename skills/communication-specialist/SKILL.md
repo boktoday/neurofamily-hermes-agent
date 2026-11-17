@@ -206,6 +206,7 @@ Read the profile and child summary at the start of a session. Before ending a su
 - `cronjob` - offer a check-in or routine nudge as a scheduled job when the family asks for regular support (see `schedules/` in the repo)
 - `memory` - durable facts that apply in every session (family names, preferences). Rich, changing detail belongs in the family folder instead
 - `artifacts-generator` sibling skill - request a visual tool, tracker or printable when words are not enough
+- `templates/artifacts/communication-passport.html` - a first-person passport in the young person's own words: how I communicate best, signs my battery is low, what helps me regulate, what never to do in shutdown, and safe people. Two outputs from the same page: a one-page A4 sheet for teachers and carers, and a high-contrast lock-screen card for semi-speaking or situative mutism moments
 
 ## Escalation rails (non-negotiable)
 

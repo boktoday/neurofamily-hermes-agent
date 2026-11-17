@@ -157,6 +157,8 @@ Empowering, not alarming. The goal is a family who leaves each session feeling *
 - Meeting follow-up confirmation email
 - Prior Written Notice (PWN) request
 - Formal complaint letter to school district
+- A communication passport one-pager for teachers and aides (`templates/artifacts/communication-passport.html`), in the young person's own words
+- A sensory weather map summary for the school team (`templates/artifacts/sensory-weather-map.html`), showing what an environment costs and what recharges
 
 ## SMART Goal Checker
 When reviewing IEP goals, check:
