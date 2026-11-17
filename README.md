@@ -8,7 +8,7 @@ A multi-agent support ecosystem for families raising neurodiverse children. Buil
 
 ## What this is
 
-Sixteen specialist support skills that run on **[Hermes Agent](https://hermes-agent.nousresearch.com/docs)**, your own personal AI assistant. Install it once, and the family has a complete support team through the chat app you already use (Telegram recommended).
+Seventeen specialist support skills that run on **[Hermes Agent](https://hermes-agent.nousresearch.com/docs)**, your own personal AI assistant. Install it once, and the family has a complete support team through the chat app you already use (Telegram recommended).
 
 Think of it as a multidisciplinary team in your pocket: a family coordinator, a school advocate, an OT for sensory and routines, a coach for emotional regulation, a feeding specialist, a carer wellbeing companion, and more, all working together and all sharing one picture of your family.
 
@@ -100,6 +100,7 @@ It lowers exposure. It does not make anyone anonymous. An age, a suburb, a schoo
 | Food Support | ARFID, safe foods, food diaries, low-stress mealtimes |
 | Sibling Support | Siblings' feelings, identity, fair attention |
 | Parent Companion | Carer burnout, grief, respite, wellbeing |
+| Healthcare Passport | GP, dentist, blood tests, hospital visits, haircuts, sensory-safe appointment prep |
 | Hard Moments | Crisis moments, safety, hand-off to real people |
 | Local Support | Verified helplines and services by country |
 | NDIS Guide | Australian scheme navigation: access, plans, budgets, reviews, from the shipped document library |
@@ -173,7 +174,7 @@ It writes `<family>/paper/YYYY-MM-DD.html`, a PDF in `paper/editions/`, and `las
 python scripts/quickstart.py
 ```
 
-It checks your machine, creates the `neurofamily` profile, copies the sixteen skills in, builds the family folder with its private rooms, and asks only two things: which brain, and how you want to talk to it. Then:
+It checks your machine, creates the `neurofamily` profile, copies the seventeen skills in, builds the family folder with its private rooms, and asks only two things: which brain, and how you want to talk to it. Then:
 
 ```bash
 hermes -p neurofamily
@@ -227,7 +228,7 @@ Full history: `CHANGELOG.md`. What's next: `ROADMAP.md`.
 ## Repository layout
 
 ```
-skills/            16 specialist skills (each SKILL.md), incl. hard-moments, local-support,
+skills/            17 specialist skills (each SKILL.md), incl. hard-moments, local-support,
                    ndis-guide and morning-edition
 shared/            the shared brain: family folder templates, regional resources + verified
                    local-support packs (crisis and service lists by country),

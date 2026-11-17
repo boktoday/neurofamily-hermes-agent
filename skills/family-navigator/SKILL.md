@@ -263,4 +263,4 @@ If the family has calendar or mail connections set up (see `docs/connections.md`
 
 ## Catalogue of the team
 
-family-navigator, emotional-coach, sensory-guide, communication-specialist, education-advocate, behaviour-advisor, routine-architect, young-person-coach, food-support, sibling-support, parent-companion, hard-moments, local-support, ndis-guide, morning-edition, artifacts-generator.
+family-navigator, emotional-coach, sensory-guide, communication-specialist, education-advocate, behaviour-advisor, routine-architect, young-person-coach, food-support, sibling-support, parent-companion, healthcare-passport, hard-moments, local-support, ndis-guide, morning-edition, artifacts-generator.

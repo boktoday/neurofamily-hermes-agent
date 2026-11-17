@@ -1,5 +1,27 @@
 # Changelog
 
+## A passport for the appointments nobody prepares for
+
+A GP visit, a dentist, a blood draw, a vaccination, a haircut. Some of the hardest hours a neurodivergent child spends, and almost never because of the medicine. It is the lights, the waiting, and nobody saying what happens next.
+
+`skills/healthcare-passport/` is a new specialist skill with three outputs:
+
+- **A one-page clinician sensory passport** the family hands to a nurse, dentist, phlebotomist or barber: what helps, what to avoid, the early warning signs, and the child's own words kept wherever they are stronger than clinical words. Two versions, one warm and one that survives a photocopier.
+- **A no-surprise preview**, car park to car park, naming the smells, sounds and feelings at each step, including the waiting, which is usually the hardest part and almost always left out. Honest about the one thing that genuinely hurts, then what helps.
+- **A fifteen-minute appointment organiser** that turns scattered observations about sleep, interoception, appetite and sensory triggers into four bullet points for a short paediatrician consultation.
+
+The skill is deliberately hedged where it has to be: **not medical advice**, no medication or dosage advice, no diagnosis, and no recommendation to accept or refuse a procedure. Its most useful line is the boundary said out loud: *"I can't tell you whether she needs the blood test. I can make sure the pathology visit doesn't wreck the week."*
+
+Australian context is built in rather than bolted on: GP referrals and care plans, pathology as a separate collection centre with its own waiting room, public hospital sensory rooms and low-sensory hours, and Child Life Therapy, which is probably the highest-value question a parent can ask before a day procedure.
+
+Registered in `AGENTS.md` (routing table and skill count), `profile.yaml`, `README.md` (team table and counts) and `INSTALL.md`.
+
+Registering it exposed a second problem: eleven of the thirteen skill files carried their own copy of the team catalogue, and those copies listed only twelve skills, four behind the repo. All thirteen now list the same seventeen names, so the next skill added only has to be added once.
+
+Verified: the frontmatter parses as YAML, and a throwaway profile built from the repo lists **17 skills** with `healthcare-passport` enabled.
+
+---
+
 ## A one-character brake for the days with no words left
 
 The team answered every message at the same depth, which is the wrong thing to do on a day when a parent is in sensory overload and a paragraph costs more than it gives.

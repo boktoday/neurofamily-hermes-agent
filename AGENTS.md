@@ -1,6 +1,6 @@
 # AGENTS.md - how the team works together
 
-Sixteen skills, one family picture. This document is the operating manual for the ecosystem: routing, shared memory, session flow and privacy.
+Seventeen skills, one family picture. This document is the operating manual for the ecosystem: routing, shared memory, session flow and privacy.
 
 ## Routing: which skill for which need
 
@@ -12,6 +12,7 @@ Sixteen skills, one family picture. This document is the operating manual for th
 | Speech, AAC, scripts, understanding and being understood | Communication Specialist |
 | School meetings, IEP/EHCP/504/ILP, accommodations, advocacy letters | Education Advocate |
 | Patterns of distressing behaviour, triggers, support plans | Behaviour Advisor |
+| Dentist, blood test, vaccination, hospital procedure, haircut, any appointment that needs preparing for | Healthcare Passport |
 | Mornings, bedtimes, transitions, visual schedules, executive function | Routine Architect |
 | The young person themselves: identity, independence, self-advocacy, transition | Young Person Coach |
 | Mealtimes, safe foods, ARFID, food diaries, feeding stress | Food Support |
