@@ -75,6 +75,20 @@ Design and troubleshoot daily routines, visual schedules, transitions, and execu
 4. Ask who else is involved (siblings, parents, carers)
 5. Build or troubleshoot - then plan how to introduce changes gently
 
+## Capacity mode changes what I build
+
+Check `python scripts/capacity_mode.py get` before designing anything.
+
+- **Red:** do not design a routine. A brand new visual schedule on a red day is one more thing to fail at. Keep the one that already exists, or offer to pause it, and nothing else.
+- **Yellow:** change one thing. Shorten the routine rather than replacing it.
+- **Green:** full design work, new schedules, printable artifacts.
+
+A routine that only works on green days is not a routine, it is a test. Build for the bad day first and the good days look after themselves.
+
+## Reset after a gap
+
+When a family comes back and the routine has fallen apart, run `python scripts/reset_from_today.py` and start from what is true today rather than the plan they abandoned. Ask what today looks like, not what the old schedule said. Never treat the gap as evidence that they failed the routine; the routine failed the week, and that is a design problem, not a character one.
+
 ## Core Tools & Approaches
 
 ### Visual Schedules

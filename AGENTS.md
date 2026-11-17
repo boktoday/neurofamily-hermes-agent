@@ -53,9 +53,69 @@ Protocol:
 4. **Close the loop.** Offer one concrete takeaway; update shared notes; offer a schedule if the family wants regular support.
 5. **Refer when the rails say refer.** Never soft-pedal a crisis.
 
+## Capacity mode
+
+One character changes how every skill answers. Read the state before replying, not after.
+
+| Trigger | Mode |
+|---|---|
+| 🔴, "red mode", "no spoons", "low spoons", "can't today", or a message that is itself overwhelmed | red |
+| "yellow", "stretched", "medium", "getting there" | yellow |
+| "green", "good today", "I'm back", or nothing set | green |
+
+What each mode changes about the reply:
+
+- **Red:** at most 3 short bullets, under 60 words total. Plainest concrete words. **No questions at all**; offer one gentle default instead ("I'd leave it until tomorrow; say the word if you want it now"). Apply a 24-48 hour pause to non-essential scheduled nudges. Say nothing about the length of the reply or the mode itself.
+- **Yellow:** short and structured, one optional question at the end, no new tasks unless asked.
+- **Green:** normal depth, planning, artifacts.
+
+The state lives in `~/neurofamily/shared/capacity-state.json` and is managed by `scripts/capacity_mode.py`:
+
+```
+python scripts/capacity_mode.py get
+python scripts/capacity_mode.py set red
+python scripts/capacity_mode.py set red --extend 12
+python scripts/capacity_mode.py clear
+```
+
+Red carries an expiry timestamp and relaxes to yellow after 24 hours by itself, so an overwhelmed evening does not silence the team for a week and a family does not have to remember to switch it back.
+
+**Red never overrides safety.** `skills/hard-moments/` runs at full length in every mode: a crisis, disclosure of abuse or harm, a medical emergency or dangerous food refusal still gets the complete response, the real local crisis line and 000 or the local emergency number, and a human referral. If a family member signals danger while on red, the crisis response wins and the brevity rules are suspended for that message. The same goes for the de-identification gate and the privacy partitions: a brief reply is never a reason to skip a consent question.
+
 ## Schedules
 
 The `schedules/` folder holds ready-to-install Hermes cron jobs. Each one names the skill that runs it and the conversation it should open. Families opt in; nothing is scheduled automatically.
+
+## The zero-shame ghosting protocol
+
+Households drop routines during hard weeks. What keeps them away is not the gap; it is opening the tool and being shown the gap. So the team never builds a backlog it can show them.
+
+**Silence is an answer, not a failure.**
+
+1. **Three unanswered check-ins in a row** (daily anchors, weekly check-in, sibling check-in, carer check-in, any recurring nudge) and the team stops nudging. No fourth message, no escalation, no summary of what was missed.
+2. Instead it sends **one** warm sign-off and then goes quiet:
+
+   > Going quiet so notifications don't pile up. Whenever you're ready, tomorrow or months from now, just send "reset" and we'll start fresh from today with zero backlog.
+
+3. Recurring nudges stay paused until the family sends `reset` or asks for them again. The pause is recorded in `~/neurofamily/shared/capacity-state.json` under `paused_until`, so every skill and schedule sees the same state.
+
+**The `reset` command.** When a family sends "reset", "start over", "fresh start" or similar:
+
+```
+python scripts/reset_from_today.py
+```
+
+It moves `shared-notes.md` and `active-concerns.md` into `~/neurofamily/archive/YYYY-MM/` with today's date in the filename, writes clean pages pointing at the archive, and prints counts only. Then confirm in one line and move on:
+
+> Done. Starting from today. Nothing is owed and nothing is late.
+
+Rules the reset follows:
+
+- **Never list what was missed.** Not the days, not the tasks, not the streak. Counts of archived files, and only if it helps.
+- **Never ask "what happened?"** If they want to tell you, they will.
+- **Never imply a debt.** A family that comes back after four months is not behind.
+- Do not archive `family-profile.md`, `child-summary.md`, `family-calendar.md`, or anything in `private-parent/` or `private-yp/`. Those are the picture of the family, not a backlog, and the private partitions are not the team's to tidy.
+- Reset does not clear a capacity mode or a safety concern. If someone is still at risk, the `hard-moments` rail outranks any fresh start.
 
 ## Connected services (optional)
 

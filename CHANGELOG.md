@@ -1,5 +1,32 @@
 # Changelog
 
+## A one-character brake for the days with no words left
+
+The team answered every message at the same depth, which is the wrong thing to do on a day when a parent is in sensory overload and a paragraph costs more than it gives.
+
+- **SOUL.md and AGENTS.md** now define capacity mode: 🔴 red, 🟡 yellow, 🟢 green. Red means at most three short bullets under 60 words, **no questions at all**, one gentle default instead of a decision, and non-essential nudges paused. Yellow is short and structured with one optional question. Green is the normal collaborative depth.
+- **`scripts/capacity_mode.py`** owns the state in `~/neurofamily/shared/capacity-state.json`: `get`, `set red`, `set red --extend 12`, `pause 168`, `clear`. Red carries an expiry and relaxes to yellow after 24 hours by itself, so a bad evening does not silence the team for a week and nobody has to remember to switch it back.
+- **Red lowers verbosity, never safety.** `skills/hard-moments/` runs at full length in every mode, with the real local crisis line and a human referral. The de-identification gate and the privacy partitions do not move either. Both files say this in as many words, because a brake people are afraid to use is not a brake.
+- **`skills/family-navigator/SKILL.md`** introduces it in one line during onboarding and reads the state as step 0 of every session. **`skills/routine-architect/SKILL.md`** refuses to design a new routine on red: a fresh schedule on a red day is one more thing to fail at.
+- `setup-family-folder.py` seeds `shared/capacity-state.json` so the file exists before anyone needs it.
+
+Verified with 18 unit tests, including that red expires and that the safety rules are byte-identical in all three modes, plus a real run against a folder built by `setup-family-folder.py`.
+
+---
+
+## Nobody is behind, and the audio is optional
+
+Two things kept families away after a hard month: a pile of unanswered nudges waiting to be shown back to them, and voice notes that assumed working ears in a quiet room.
+
+- **The zero-shame ghosting protocol** (`AGENTS.md`, `schedules/README.md`): after three consecutive unanswered check-ins the schedule goes quiet. No fourth attempt, no escalation, no summary of what was missed. One warm sign-off, then silence until the family is ready.
+- **`scripts/reset_from_today.py`** archives `shared-notes.md` and `active-concerns.md` into `~/neurofamily/archive/YYYY-MM/` and starts from today. It prints counts only, never lists what was missed, and never asks what happened. It will not touch `family-profile.md`, `child-summary.md`, the calendar, or either private partition.
+- **Sensory-safe audio** (`SOUL.md`, `config.yaml`): every spoken reply carries a 1-2 line written summary first, so someone in a loud kitchen or in auditory overload can tell whether it matters without pressing play. Voice and rate are recorded per person in `family-profile.md` (1.0x to 1.35x), not as a household default.
+- A second `reset` reports the folder already clean instead of archiving its own fresh page, which would have rebuilt the pile-up it exists to prevent.
+
+Verified with 11 unit tests, plus a real run showing the dry run changes nothing, the private partitions stay put, and none of the output contains the words "missed", "overdue" or "behind".
+
+---
+
 ## The Morning Edition no longer prints someone else's name
 
 Found by running the real agent end to end rather than reading the code.

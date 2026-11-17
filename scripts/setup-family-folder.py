@@ -90,6 +90,24 @@ def main() -> None:
         print("wrote:", dest.name)
         copied += 1
 
+    # Capacity state lives in the shared partition so every skill can read it.
+    # It holds a colour and two timestamps, never a personal detail.
+    shared_dir = target / "shared"
+    shared_dir.mkdir(parents=True, exist_ok=True)
+    state_file = shared_dir / "capacity-state.json"
+    if state_file.exists():
+        print("exists, left alone: shared/capacity-state.json")
+    else:
+        state_file.write_text(
+            '{\n'
+            '  "mode": "green",\n'
+            '  "since": null,\n'
+            '  "expires_at": null,\n'
+            '  "paused_until": null\n'
+            '}\n',
+            encoding="utf-8")
+        print("wrote: shared/capacity-state.json")
+
     # Privacy partitions.
     for name, (title, body) in PARTITIONS.items():
         folder = target / name
