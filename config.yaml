@@ -17,6 +17,22 @@ _config_version: 33
 model:
   default: deepseek/deepseek-v4-flash
   provider: openrouter
+# ---------------------------------------------------------------------------
+# Voice. Every spoken reply also carries a 1-2 line written summary, because
+# someone in a loud kitchen or in auditory overload must not have to press play
+# to find out whether it matters.
+#
+# tts:
+#   provider: piper              # local, so the audio never leaves the machine
+#   voice: en_GB-alba-medium     # steady pitch reads better than a lively one
+#   speed: 1.0                   # 1.0x to 1.35x; slower is not automatically kinder
+#
+# Per-person voices and rates belong in ~/neurofamily/family-profile.md, not
+# here, because they differ per person and a household default is usually wrong
+# for at least one of them. Above roughly 1.35x the words start to blur for
+# people with auditory processing differences; below about 0.9x it starts to
+# sound patronising. Ask once, write the answer down, stop asking.
+# ---------------------------------------------------------------------------
 compression:
   enabled: true
   threshold: 0.85
