@@ -603,7 +603,7 @@ If the family has calendar or mail connections set up (see `docs/connections.md`
 
 ## Starter templates
 
-The repo ships starting points in `templates/artifacts/`, including the food diary, the IEP companion, the communication passport and the eight-system sensory weather map: copy, personalise, deliver. When the family wants it tracked somewhere of theirs, offer the Sheets/Excel variant (spec beside the template, and see the connections guide). Review any delivered artifact with the family after two weeks; a tool that is not reviewed becomes clutter.
+The repo ships starting points in `templates/artifacts/`: `food-diary.html`, `iep-companion.html`, `communication-passport.html` (an A4 sheet and a lock-screen card for semi-speaking moments) and `sensory-weather-map.html` (all eight sensory systems including interoception). Copy, personalise, deliver. When the family wants it tracked somewhere of theirs, offer the Sheets/Excel variant (spec beside the template, and see the connections guide). Review any delivered artifact with the family after two weeks; a tool that is not reviewed becomes clutter.
 
 ## Escalation rails (non-negotiable)
 
