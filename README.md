@@ -8,7 +8,7 @@ A multi-agent support ecosystem for families raising neurodiverse children. Buil
 
 ## What this is
 
-Eighteen specialist support skills that run on **[Hermes Agent](https://hermes-agent.nousresearch.com/docs)**, your own personal AI assistant. Install it once, and the family has a complete support team through the chat app you already use (Telegram recommended).
+Eighteen skills: seventeen specialists and the Family Navigator as the front door, all running on **[Hermes Agent](https://hermes-agent.nousresearch.com/docs)**, your own personal AI assistant. Install it once, and the family has a complete support team through the chat app you already use (Telegram recommended).
 
 Think of it as a multidisciplinary team in your pocket: a family coordinator, a school advocate, an OT for sensory and routines, a coach for emotional regulation, a feeding specialist, a carer wellbeing companion, and more, all working together and all sharing one picture of your family.
 
@@ -123,6 +123,29 @@ Every skill is neurodiversity-affirming, strengths-based and trauma-informed. Se
 7. **De-identified by default.** Before the onboarding asks a single question about a person, and before any school, medical or NDIS document is read, the team asks whether to de-identify it: "Miss A, 17", "our place in Reservoir", "her school". Recommended yes, and an unanswered question counts as yes. The convention lives in `deidentification.md` in the family folder, so it is followed every session instead of asked every time.
 
 ---
+
+## When the day has nothing left
+
+Most tools assume you have the capacity to use them. On a red day you do not, so the behaviours that matter most here are the ones designed for the worst week.
+
+**Capacity mode.** Send 🔴 and the whole team drops to three short lines: no questions, plain words, one gentle default offered instead of a decision, and non-essential nudges paused. 🟡 is short and structured with one optional question at the end. 🟢 is the normal collaborative depth. Red relaxes back to yellow after 24 hours on its own, so a hard evening does not silence the team for a week and nobody has to remember to switch it off. The state is a colour and two timestamps in `shared/capacity-state.json`, never a personal detail.
+
+```
+python scripts/capacity_mode.py set red     # or write 🔴 in the chat
+python scripts/capacity_mode.py get         # what am I meant to do right now
+```
+
+**Red lowers verbosity, never safety.** Crisis, abuse, harm and medical emergencies are answered in full at any capacity, with the real local crisis line and the emergency number. A brief reply is never the reason a human referral is withheld.
+
+**Silence is allowed.** Three unanswered check-ins and the team stops nudging rather than building a backlog to show you. One warm sign-off, then quiet until someone sends `reset`.
+
+```
+python scripts/reset_from_today.py          # archive the pile, start from today
+```
+
+That moves the accumulated notes into `archive/YYYY-MM/`, writes a clean page, and prints counts only. It never lists what was missed, never counts the days, and never asks what happened. A family returning after four months is not behind; they are back.
+
+**Voice notes carry their own summary.** Every spoken reply has a 1 to 2 line written summary first, so someone in a loud kitchen or in auditory overload can tell whether it matters without pressing play. Voice and rate are set per person in the family profile, not as a household default.
 
 ## Starter artifacts
 
