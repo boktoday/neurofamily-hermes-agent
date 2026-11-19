@@ -1,5 +1,18 @@
 # Changelog
 
+## One word instead of a paragraph
+
+Every skill had exactly one way in: describe your problem well enough that the router picks the right one of eighteen. That works on a good day. It fails on the bad day it was designed for, because the parent in sensory overload cannot necessarily compose the paragraph that reaches Behaviour Advisor, and red capacity mode asked someone who cannot string a sentence together to string a sentence together.
+
+**`scripts/setup_commands.py`** installs one slash command per skill as a native Hermes **skill bundle**: `/hard`, `/school`, `/gp`, `/ndis`, `/sensory`, `/feelings`, `/behaviour`, `/talk`, `/routine`, `/village`, `/carer`, `/sibling`, `/food`, `/support`, `/young`, `/morning`, `/make`, `/begin`, plus `/passport`, `/iep` and `/lesson` for the artifacts. `scripts/quickstart.py` installs them as part of setup, so nobody has to know they exist to get them.
+
+The brake is the point: **`/red`, `/yellow` and `/green`** carry an instruction that runs `capacity_mode.py` before the agent replies, so capacity is actually set rather than discussed, and `/red` answers in three lines with no questions. `/state` reports capacity in one line. `/fresh` starts from today.
+
+**Bundles, not a plugin, on purpose.** A command plugin was built first and did not work: a user-source plugin loads fine and `plugins doctor` reports success, but its commands never reach the dispatcher, so every command answered "Unknown command". Bundles are the supported mechanism, need no custom code, and were verified end to end — `/state` returned capacity in one line, and `/red` wrote `capacity-state.json` with a 24-hour expiry and a two-day nudge pause, then replied in three lines.
+
+**`scripts/check_commands.py` and `tests/test_commands.py`** fail if a skill is added without its command, if a bundle names a skill that does not exist, or if a name collides with a Hermes built-in. That failure is otherwise silent: the skill still works through routing, so nothing looks broken until the person who needs it cannot reach it. `AGENTS.md` carries the rule and the full table.
+
+
 ## Two more things a family can hand to someone
 
 Two gaps that came up repeatedly in real use: a way to tell a new adult how this young person communicates, and a way to show an OT or a school what eight sensory systems are actually doing.

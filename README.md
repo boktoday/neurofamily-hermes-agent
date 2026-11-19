@@ -124,6 +124,24 @@ Every skill is neurodiversity-affirming, strengths-based and trauma-informed. Se
 
 ---
 
+## Slash commands
+
+Every skill has one, so you can start the right flow with a word instead of explaining your day well enough for the team to guess. That matters most on the days it is hardest to explain anything.
+
+| Command | Does |
+|---|---|
+| `/red` `/yellow` `/green` | The brake. One word sets capacity mode, and `/red` really does set it: the state is written first, then the reply is three lines with no questions |
+| `/hard` | A crisis or a very bad moment, now |
+| `/state` | How much room you have, and whether the family folder is there |
+| `/fresh` | Start from today: archive the pile, zero backlog, no shame |
+| `/school` `/gp` `/ndis` `/sensory` `/food` `/routine` | Straight to that specialist |
+| `/passport` `/iep` `/lesson` `/make` | One of the local tools, personalised |
+| `/begin` | The front door, and the week ahead |
+
+The full list, one entry per skill, is in `AGENTS.md`. They are native Hermes **skill bundles** rather than a plugin, so there is no custom code to maintain: `scripts/setup_commands.py` writes one small YAML file per command into the profile. `scripts/check_commands.py` fails if a skill is ever added without its command, because that failure is otherwise silent: the skill still works through routing, so nothing looks broken until the person in overload cannot reach it.
+
+---
+
 ## When the day has nothing left
 
 Most tools assume you have the capacity to use them. On a red day you do not, so the behaviours that matter most here are the ones designed for the worst week.

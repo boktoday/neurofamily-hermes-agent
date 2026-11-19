@@ -294,6 +294,33 @@ def do_profile(profiles: Path, update: bool, dry: bool) -> bool:
 # step 3
 # --------------------------------------------------------------------------
 
+def do_commands(pdir: Path, dry: bool) -> None:
+    """Install one slash command per skill, as native Hermes skill bundles.
+
+    Without this a person can only reach a skill by describing their problem
+    well enough for routing to pick it, which is exactly what someone in sensory
+    overload cannot do. Bundles give them /hard, /red, /state and one per skill.
+    """
+    import setup_commands
+
+    commands = setup_commands.all_commands()
+    target = pdir / "skill-bundles"
+    if dry:
+        info("%d slash commands would be installed, one per skill, e.g. /hard, /red, /state"
+             % len(commands))
+        return
+    target.mkdir(parents=True, exist_ok=True)
+    written = 0
+    for name, skills, description, instruction in commands:
+        path = target / ("%s.yaml" % name)
+        if path.exists():
+            continue
+        path.write_text(setup_commands.render_yaml(name, skills, description, instruction),
+                        encoding="utf-8")
+        written += 1
+    ok("%d slash commands in place: /red, /hard, /state, and one per skill" % written)
+
+
 def do_family_folder(dry: bool, override: str = "") -> bool:
     script = REPO / "scripts" / "setup-family-folder.py"
     target = family_folder(override)
@@ -645,6 +672,7 @@ def main(argv=None) -> int:
     step(2, "Copy the family team into place")
     if not do_profile(profiles, args.update, dry):
         return 1
+    do_commands(pdir, dry)
 
     # ---- step 3
     step(3, "Make the family folder")

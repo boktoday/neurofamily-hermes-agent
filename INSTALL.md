@@ -52,6 +52,9 @@ It will:
 - check your Python and your Hermes install, and tell you exactly what is
   missing if either is;
 - copy the eighteen support skills into a `neurofamily` profile;
+- install a slash command for every one of them, so you can start the right
+  flow with one word instead of explaining your day first (`/hard`, `/sensory`,
+  `/school`, `/red` when the day has fallen apart);
 - build your family folder, with private rooms for the carer and for each young
   person;
 - ask you **two** questions, and nothing else.

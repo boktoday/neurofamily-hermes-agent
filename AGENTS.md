@@ -84,6 +84,55 @@ Red carries an expiry timestamp and relaxes to yellow after 24 hours by itself, 
 
 **Red never overrides safety.** `skills/hard-moments/` runs at full length in every mode: a crisis, disclosure of abuse or harm, a medical emergency or dangerous food refusal still gets the complete response, the real local crisis line and 000 or the local emergency number, and a human referral. If a family member signals danger while on red, the crisis response wins and the brevity rules are suspended for that message. The same goes for the de-identification gate and the privacy partitions: a brief reply is never a reason to skip a consent question.
 
+## Slash commands
+
+Every skill has a slash command, so a person can start a flow directly instead of describing their problem well enough for routing to pick the right one of eighteen. On a bad day that difference is the whole thing: the person who most needs Behaviour Advisor cannot necessarily compose the paragraph that routes to it.
+
+These are **native Hermes skill bundles**, not a plugin. `scripts/setup_commands.py` writes one small YAML file per command into the profile's `skill-bundles/` directory, and Hermes invokes them as `/<name>` with no custom code to maintain.
+
+**What a bundle can and cannot do.** It loads the named skills, so `/hard` puts the hard-moments skill in front of the agent and the agent answers. It cannot reply without a model turn, so `/red` is one word and a small turn rather than a free one. That is still the difference between four keystrokes and composing a sentence at the worst moment of the week. The capacity commands and `/state` carry an `instruction` telling the agent to run `capacity_mode.py` before it replies, so the state is set rather than merely discussed.
+
+Everything else injects a prompt written as the person's own request, naming the skill:
+
+| Command | Skill | For |
+|---|---|---|
+| `/begin` | family-navigator | Starting here, or the week ahead |
+| `/hard` | hard-moments | A crisis or a very bad moment, now |
+| `/feelings` | emotional-coach | Big feelings, shutdown, a spiral |
+| `/behaviour` | behaviour-advisor | A behaviour you do not understand |
+| `/talk` | communication-specialist | AAC, semi-speaking, scripts |
+| `/sensory` | sensory-guide | Sensory needs and overload |
+| `/routine` | routine-architect | Mornings, evenings, anchors |
+| `/school` | education-advocate | IEP or EHCP, meetings, reviews |
+| `/gp` | healthcare-passport | GP, dentist, bloods, hospital, haircut |
+| `/ndis` | ndis-guide | Access, plans, budgets, reviews |
+| `/village` | village-aligner | Grandparents, co-parents, coaches |
+| `/carer` | parent-companion | The adult's own load |
+| `/sibling` | sibling-support | Brothers and sisters |
+| `/food` | food-support | Eating, ARFID, safe foods |
+| `/support` | local-support | Helplines and services |
+| `/young` | young-person-coach | Talking to the young person |
+| `/morning` | morning-edition | Today's Morning Edition |
+| `/make` | artifacts-generator | Any of the local tools |
+| `/passport` `/iep` `/lesson` | artifacts-generator | That one, specifically |
+| `/red` `/yellow` `/green` | capacity mode | The brake, one word |
+| `/fresh` | start from today | Archive the pile, zero backlog |
+| `/state` | capacity + folder | How much room you have |
+
+### Adding a skill means adding its command
+
+This is a rule, not a suggestion, because the failure is silent. A skill without a command still works through routing, so nothing appears broken at the time, and the person discovering it later is the one in overload.
+
+Add the skill to `SKILL_COMMANDS` in `scripts/setup_commands.py`, choosing a name that Hermes does not already own, then run:
+
+```
+python scripts/check_commands.py
+```
+
+It fails, naming the skill, until the command exists. It also fails if a bundle points at a skill that does not exist, if a name appears twice, or if a name collides with a built-in (the built-in wins silently, so the command would quietly do the wrong thing). `tests/test_commands.py` runs the same checks, so the suite catches it too.
+
+Then install them into a profile with `python scripts/setup_commands.py --profile <name>`. Re-running leaves existing bundles alone; `--force` overwrites them.
+
 ## Schedules
 
 The `schedules/` folder holds ready-to-install Hermes cron jobs. Each one names the skill that runs it and the conversation it should open. Families opt in; nothing is scheduled automatically.

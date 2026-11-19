@@ -48,6 +48,11 @@ memory:
 onboarding:
   profile_build: ask
   seen: {}
+# ---------------------------------------------------------------------------
+# Slash commands are native Hermes skill bundles, not a plugin: run
+# `python scripts/setup_commands.py` to install one per skill into this
+# profile's skill-bundles/ directory. Nothing needs enabling here.
+# ---------------------------------------------------------------------------
 platforms:
   api_server:
     enabled: false
