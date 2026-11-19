@@ -65,6 +65,21 @@ class CommandSurfaceTests(unittest.TestCase):
     def test_the_check_reports_no_problems(self):
         self.assertEqual([], check_commands.check())
 
+    def test_every_command_is_documented_in_the_readme_and_agents(self):
+        """An undocumented command is nearly as unreachable as a missing one.
+
+        The person would have to discover it by guessing. This also fails on
+        `/routine` being written as `/routines`, because the check requires a
+        word boundary after the name.
+        """
+        self.assertEqual([], check_commands.docs_listing_problems())
+
+    def test_documentation_check_rejects_a_name_with_extra_letters(self):
+        """Guards the boundary rule itself, not just its current output."""
+        import re
+        self.assertIsNotNone(re.search(r"/routine\b", "type /routine today"))
+        self.assertIsNone(re.search(r"/routine\b", "type /routines today"))
+
 
 class BundleFileTests(unittest.TestCase):
     """The written YAML must have the shape Hermes reads back."""

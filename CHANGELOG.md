@@ -10,7 +10,9 @@ The brake is the point: **`/red`, `/yellow` and `/green`** carry an instruction 
 
 **Bundles, not a plugin, on purpose.** A command plugin was built first and did not work: a user-source plugin loads fine and `plugins doctor` reports success, but its commands never reach the dispatcher, so every command answered "Unknown command". Bundles are the supported mechanism, need no custom code, and were verified end to end — `/state` returned capacity in one line, and `/red` wrote `capacity-state.json` with a 24-hour expiry and a two-day nudge pause, then replied in three lines.
 
-**`scripts/check_commands.py` and `tests/test_commands.py`** fail if a skill is added without its command, if a bundle names a skill that does not exist, or if a name collides with a Hermes built-in. That failure is otherwise silent: the skill still works through routing, so nothing looks broken until the person who needs it cannot reach it. `AGENTS.md` carries the rule and the full table.
+**`scripts/check_commands.py` and `tests/test_commands.py`** fail if a skill is added without its command, if a bundle names a skill that does not exist, if a name collides with a Hermes built-in, **or if `README.md` or `AGENTS.md` stops documenting a command**. That last check exists because the documentation drifts the same way the commands do, and it already earned its place: it caught `/routine` written as `/routines` in this very README, which would have sent people to a command that does not exist. The underlying failure is otherwise silent: the skill still works through routing, so nothing looks broken until the person who needs it cannot reach it.
+
+The README now carries all 26 commands in five groups (the brake, hard moments, understanding one person, the week, the local tools), a `tests/` entry in the repository layout, and a Tests section, none of which it had before.
 
 
 ## Two more things a family can hand to someone

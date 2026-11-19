@@ -126,19 +126,64 @@ Every skill is neurodiversity-affirming, strengths-based and trauma-informed. Se
 
 ## Slash commands
 
-Every skill has one, so you can start the right flow with a word instead of explaining your day well enough for the team to guess. That matters most on the days it is hardest to explain anything.
+Every skill has one, so you can start the right flow with a word instead of explaining your day well enough for the team to guess. That matters most on the days it is hardest to explain anything: the person who most needs Behaviour Advisor cannot necessarily compose the paragraph that routes to it.
+
+All 26 commands. Type `/commands` in a session to see them, or `/help`.
+
+**The brake and the state**
 
 | Command | Does |
 |---|---|
-| `/red` `/yellow` `/green` | The brake. One word sets capacity mode, and `/red` really does set it: the state is written first, then the reply is three lines with no questions |
-| `/hard` | A crisis or a very bad moment, now |
+| `/red` | Overwhelmed, low spoons. Writes the capacity state first, then replies in three lines with no questions |
+| `/yellow` | Stretched. Concise, one choice at most |
+| `/green` | Steady. Back to normal depth |
 | `/state` | How much room you have, and whether the family folder is there |
 | `/fresh` | Start from today: archive the pile, zero backlog, no shame |
-| `/school` `/gp` `/ndis` `/sensory` `/food` `/routine` | Straight to that specialist |
-| `/passport` `/iep` `/lesson` `/make` | One of the local tools, personalised |
-| `/begin` | The front door, and the week ahead |
 
-The full list, one entry per skill, is in `AGENTS.md`. They are native Hermes **skill bundles** rather than a plugin, so there is no custom code to maintain: `scripts/setup_commands.py` writes one small YAML file per command into the profile. `scripts/check_commands.py` fails if a skill is ever added without its command, because that failure is otherwise silent: the skill still works through routing, so nothing looks broken until the person in overload cannot reach it.
+**When it is hard right now**
+
+| Command | Does |
+|---|---|
+| `/hard` | A crisis or a very bad moment, now |
+| `/feelings` | Big feelings, a meltdown, shutdown, or a spiral |
+| `/carer` | The adult's own load: burnout, guilt, being a person too |
+| `/support` | Helplines, services, and who to call (Australia) |
+
+**Understanding one person**
+
+| Command | Does |
+|---|---|
+| `/behaviour` | A behaviour you do not understand, and what it might be saying |
+| `/sensory` | Sensory needs, overload, and what helps |
+| `/talk` | Communication support: AAC, semi-speaking, scripts |
+| `/young` | Talk to the young person directly, in their own words |
+| `/sibling` | Brothers and sisters: their needs, their resentment, their turn |
+
+**The week, and the systems around you**
+
+| Command | Does |
+|---|---|
+| `/begin` | The front door: your profile, routing, the weekly check-in |
+| `/routine` | Routines, anchors, mornings and evenings |
+| `/school` | School: IEP or EHCP, meetings, emails, reviews |
+| `/gp` | GP, dentist, blood test, hospital, haircut prep |
+| `/ndis` | NDIS access, plans, budgets, reviews (Australia) |
+| `/village` | Grandparents, co-parents, coaches, babysitters |
+| `/food` | Eating, ARFID, safe foods, mealtime pressure |
+| `/morning` | Today's Morning Edition, as a printable page |
+
+**The local tools**
+
+| Command | Does |
+|---|---|
+| `/make` | Any of the starter artifacts, personalised |
+| `/passport` | The communication passport: phone lock-screen card and A4 sheet |
+| `/iep` | The IEP or EHCP companion, in the young person's own words |
+| `/lesson` | Break a lesson or task into small steps |
+
+They are native Hermes **skill bundles**, not a plugin, so there is no custom code to maintain: `scripts/setup_commands.py` writes one small YAML file per command into the profile, and `scripts/quickstart.py` runs it during setup. A bundle loads its skill and carries an instruction, which is how `/red` manages to set capacity mode before it answers.
+
+**A skill cannot be added without its command.** `scripts/check_commands.py` fails, naming the skill, and also fails if a bundle points at a skill that does not exist, if a name is used twice, if a name collides with a Hermes built-in, or if this README stops listing a command. That last one matters because the failure is otherwise silent: the skill still works through routing, so nothing looks broken until the person in overload cannot reach it.
 
 ---
 
@@ -285,9 +330,31 @@ PROFILE_BUILDER.md the guided family onboarding
 config.yaml        example Hermes configuration
 templates/         starter artifacts (food diary, IEP Companion and friends)
 scripts/           quickstart.py (the one-command wizard), setup-family-folder.py
-                   (family folder + private partitions), redact_doc.py (scrub a
-                   document before it is attached) and build_paper.py (the Morning Edition)
+                   (family folder + private partitions), setup_commands.py (one
+                   slash command per skill), check_commands.py (fails if a skill
+                   has no command), redact_doc.py (scrub a document before it is
+                   attached) and build_paper.py (the Morning Edition)
+tests/             unittest suite: capacity mode, the reset, redaction, the carer
+                   brief and the command surface
 docs/              advanced-setup, connections, models and local-models guides
+```
+
+---
+
+## Tests
+
+No dependencies beyond a bare Python 3, and nothing to install:
+
+```
+python -m unittest discover -s tests
+```
+
+89 tests over the parts where a quiet failure would reach a family: capacity mode relaxing on its own but never overriding a crisis, the zero-shame reset not rebuilding the pile it clears, redaction keeping the amount and the due date while stripping the person, and the command surface staying in step with the skills.
+
+`scripts/check_commands.py` is the same command check on its own, and prints what is wrong in a sentence rather than a traceback:
+
+```
+python scripts/check_commands.py
 ```
 
 ---

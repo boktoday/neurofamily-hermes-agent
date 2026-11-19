@@ -18,6 +18,7 @@ Run it directly, or let tests/test_commands.py run it:
     python -m unittest tests/test_commands.py -v
 """
 import pathlib
+import re
 import sys
 
 REPO = pathlib.Path(__file__).resolve().parent.parent
@@ -66,6 +67,31 @@ def command_surface():
             for name, skills, description, _instruction in setup_commands.all_commands()]
 
 
+def docs_listing_problems():
+    """Every command must be listed in the README and in AGENTS.md.
+
+    A command that exists but is undocumented is nearly as unreachable as one
+    that does not exist: the person has to discover it by guessing. This also
+    catches the specific typo class of `/routine` documented as `/routines`,
+    because the boundary match rejects a name with extra characters after it.
+    """
+    names = [name for name, _skills, _desc in command_surface()]
+    problems = []
+    for doc in ("README.md", "AGENTS.md"):
+        path = REPO / doc
+        if not path.is_file():
+            problems.append("%s is missing" % doc)
+            continue
+        text = path.read_text(encoding="utf-8", errors="replace")
+        missing = [name for name in names
+                   if not re.search(r"/%s\b" % re.escape(name), text)]
+        if missing:
+            problems.append(
+                "%s does not document: %s" % (doc, ", ".join("/" + name for name in missing))
+            )
+    return problems
+
+
 def check():
     """Return a list of human-readable problems. Empty means good."""
     problems = []
@@ -106,6 +132,8 @@ def check():
     for name in names:
         if name != name.lower() or " " in name or "/" in name:
             problems.append("command name is not lowercase-kebab: %r" % name)
+
+    problems.extend(docs_listing_problems())
 
     return problems
 
